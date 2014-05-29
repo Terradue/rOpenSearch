@@ -2,14 +2,6 @@
 
 R package for dclite4g 
 
-## Resources
-
-**Open Geospatial Consortium**
-
-[OpenSearch Geo and Time Extensions](http://www.opengeospatial.org/standards/opensearchgeo)
-
-[EO Product Metadata and OpenSearch SWG](http://www.opengeospatial.org/projects/groups/eopmosswg)
-
 ## Installing the package
 
 __Development version__  
