@@ -25,9 +25,9 @@ install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSear
 
 ## Getting Started 
 
-Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
+#### Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
 
-### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series
+###### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series
 
 Return three datasets from the time interval 2010-01-10 to 2010-01-31
 
