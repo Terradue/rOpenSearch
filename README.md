@@ -2,11 +2,12 @@
 
 R package for OpenSearch 
 
-__Resources__
+## Resources
 
 **Open Geospatial Consortium**
 
 [OpenSearch Geo and Time Extensions](http://www.opengeospatial.org/standards/opensearchgeo)
+
 [EO Product Metadata and OpenSearch SWG](http://www.opengeospatial.org/projects/groups/eopmosswg)
 
 ## Installing the package
