@@ -8,7 +8,8 @@ GetOSTemplate <- function(opensearch.description, response.type) {
   
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
-  xslt.expression <- paste0("/*[local-name()='OpenSearchDescription']/*[local-name()='Url' and @type='", response.type ,"']/@template")
+  xslt.expression <- paste0("/*[local-name()='OpenSearchDescription']/*[local-name()='Url' and @type='", 
+      response.type ,"']/@template")
   
   res <- as.character(xpathApply(doc=osd.xml, xslt.expression))
   
@@ -49,7 +50,9 @@ Query <- function(opensearch.description, df.params) {
   df.template <- CastCharacter(df.template)
   
   # remove the {, }, ? from the type
-  df.template <- as.data.frame(sapply(df.template, function(x) x <- str_replace_all(x, "([\\{\\}\\?])", "")))
+  df.template <- as.data.frame(sapply(df.template, function(x) {
+          x <- str_replace_all(x, "([\\{\\}\\?])", "")
+        }))
   
   df.params <- CastCharacter(df.params)
   
@@ -66,8 +69,13 @@ Query <- function(opensearch.description, df.params) {
   # submit the form
   response <- xmlParse(getForm(access.point, .params=params))
   
-  dataset <- xmlToDataFrame(nodes = getNodeSet(response, "//dclite4g:DataSet"), stringsAsFactors = FALSE)
-  series <- xmlToDataFrame(nodes = getNodeSet(response, "//dclite4g:Series"), stringsAsFactors = FALSE)
+  series <- xmlToDataFrame(nodes = getNodeSet(response,
+      "//dclite4g:Series"), stringsAsFactors = FALSE)
+      
+  dataset <- xmlToDataFrame(nodes = getNodeSet(response,
+      "//dclite4g:DataSet"), stringsAsFactors = FALSE)
+  
+
   
   res <- list(series, dataset)
   names(res) <- c("series", "dataset")
