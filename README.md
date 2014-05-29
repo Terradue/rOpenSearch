@@ -1,4 +1,4 @@
-# rOpenSearch
+# Rdclite4g
 
 R package for dclite4g 
 
@@ -20,7 +20,7 @@ __Development version__
 # unlike most packages, devtools requires additional non-R dependencies depending on your OS. 
 # See → https://github.com/ropensci/rOpenSci/wiki/Installing-devtools
 library(devtools)
-install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSearch")
+install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
 ```
 
 ## Getting Started 
@@ -33,7 +33,7 @@ Return three datasets from the time interval 2010-01-10 to 2010-01-31
 
 ```coffee
 # load the library
-library(rOpenSearch)
+library(Rdclite4g)
 # define the OpenSearch description URL
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 # define the query terms as a data frame
