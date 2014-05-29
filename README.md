@@ -47,7 +47,7 @@ df.series <- results$series
 df.dataset <- results$dataset
 ```
 
-## Know issues
+## Known issues
 
 **Series**
  
