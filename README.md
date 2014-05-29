@@ -1,6 +1,6 @@
 # rOpenSearch
 
-R package for OpenSearch 
+R package for dclite4g 
 
 ## Resources
 
