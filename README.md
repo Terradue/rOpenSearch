@@ -19,7 +19,9 @@ install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSear
 
 Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
 
-### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series to return three datasets from the time interval 2010-01-10 to 2010-01-31
+### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series
+
+Return three datasets from the time interval 2010-01-10 to 2010-01-31
 
 ```coffee
 # load the library
@@ -31,7 +33,7 @@ value <- c(3, "2010-01-10", "2010-01-31")
 type <- c("count", "time:start", "time:end")
 df.params <- data.frame(type, value)
 # query the OpenSearch catalogue
-resutls <- Query(osd.url, df.params)
+results <- Query(osd.url, df.params)
 # access the series (as data frame)
 df.series <- results$series
 # access the dataset (as data frame)
