@@ -21,7 +21,7 @@ install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
 
 ###### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series
 
-Return three datasets from the time interval 2010-01-10 to 2010-01-31
+Return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31
 
 ```coffee
 # load the library
@@ -29,7 +29,7 @@ library(Rdclite4g)
 # define the OpenSearch description URL
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 # define the query terms as a data frame
-value <- c(3, "2010-01-10", "2010-01-31")
+value <- c(3, "2010-01-01", "2010-01-31")
 type <- c("count", "time:start", "time:end")
 df.params <- data.frame(type, value)
 # query the OpenSearch catalogue
@@ -40,7 +40,7 @@ df.series <- res$series
 df.dataset <- res$dataset
 ```
 
-Save the dataset as GeoJson
+Save the dataset as GeoJSON
 
 ```coffee
 # create a SpatialPolygonsDataFrame with the first element of res$dataset
@@ -58,6 +58,9 @@ library(rgdal)
 # write the geojson file
 writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 ```
+
+The GeoJSON file can be see here:
+https://github.com/Terradue/Rdclite4g/blob/master/src/main/R/examples/example1.geojson
 
 ## Known issues
 
