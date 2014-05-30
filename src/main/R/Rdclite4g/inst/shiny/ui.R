@@ -11,7 +11,9 @@ shinyUI(fluidPage(
     sidebarPanel(
       textInput("osd", label = h3("OpenSearch description URL"), 
         value = "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"), 
-        dateRangeInput("dates", label = h3("Date range"))
+        dateRangeInput("dates", label = h3("Date range")),
+        br(), 
+        submitButton("Submit")
 
     ),
 
