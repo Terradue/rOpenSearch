@@ -10,7 +10,7 @@ shinyServer(function(input, output) {
   #     when inputs change
   #  2) Its output type is a plot
 
-  output$distPlot <- renderText({
+  output$osd.url <- renderText({
      paste("You have queried ", input$osd)
   })
 
