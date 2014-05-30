@@ -11,6 +11,9 @@ shinyServer(function(input, output) {
   #  2) Its output type is a plot
 
   output$osd.url <- renderText({
+  
+     if(input$get == 0) return(NULL)
+  
      paste("You have queried ", input$osd)
   })
 
