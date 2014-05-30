@@ -7,3 +7,13 @@ Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
+Depends:
+    RCurl,
+    XML,
+    R (>= 2.15.0)
+Suggests:
+    shiny
+Date: 2014-05-30
+Collate:
+    'dclite4g.R'
+    'dclite4gShinyDemo.R'
