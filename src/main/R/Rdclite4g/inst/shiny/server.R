@@ -19,7 +19,7 @@ shinyServer(function(input, output) {
     value <- c(100, input$dates[1], input$dates[2])
     type <- c("count", "time:start", "time:end")
     df.params <- data.frame(type, value)
-  
+    return(df.params)
   })
 
   output$osd.url <- renderText({
@@ -33,8 +33,8 @@ shinyServer(function(input, output) {
   
        if(input$get == 0) return(NULL)
     
-      dataInput()
-      res <- Query(input$osd, df.params)
+      
+      res <- Query(input$osd, dataInput())
       
       res$dataset
   })
