@@ -11,7 +11,7 @@ shinyServer(function(input, output) {
   #  2) Its output type is a plot
 
   output$distPlot <- renderText({
-    input$osd
+     paste("You have queried ", input$osd)
   })
 
 #  output$distPlot <- renderPlot({
