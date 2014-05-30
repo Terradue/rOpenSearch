@@ -13,7 +13,7 @@ shinyUI(fluidPage(
         value = "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"), 
         dateRangeInput("dates", label = h3("Date range")),
         br(), 
-        actionButton("get", "Get Stock")
+        actionButton("get", "Query")
 
     ),
 
