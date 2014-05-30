@@ -17,6 +17,12 @@ shinyServer(function(input, output) {
      paste("You have queried ", input$osd)
   })
 
+  output$mytable = renderDataTable({
+  
+       if(input$get == 0) return(NULL)
+    
+      mtcars
+  })
 #  output$distPlot <- renderPlot({
 #    x    <- faithful[, 2]  # Old Faithful Geyser data
 #    bins <- seq(min(x), max(x), length.out = input$bins + 1)
