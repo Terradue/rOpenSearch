@@ -10,7 +10,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       textInput("text", label = h3("OpenSearch description URL"), 
-        value = "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description")), 
+        value = "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"), 
       sliderInput("bins",
                   "Number of bins:",
                   min = 1,
