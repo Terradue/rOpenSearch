@@ -33,6 +33,7 @@ shinyServer(function(input, output) {
   
        if(input$get == 0) return(NULL)
     
+      dataInput()
       res <- Query(input$osd, df.params)
       
       res$dataset
