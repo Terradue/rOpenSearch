@@ -62,6 +62,8 @@ writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 The GeoJSON file can be see here:
 https://github.com/Terradue/Rdclite4g/blob/master/src/main/R/examples/example1.geojson
 
+<script src="https://gist.github.com/fabricebrito/acb58b600ee474b03893.js"></script>
+
 ## Known issues
 
 **Series**
