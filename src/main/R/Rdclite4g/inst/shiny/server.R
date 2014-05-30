@@ -26,7 +26,7 @@ shinyServer(function(input, output) {
   
      if(input$get == 0) return(NULL)
   
-     paste("You have queried ", input$osd, "from", input.dates[1], "to", input.dates[2])
+     paste("You have queried ", input$osd, "from", input$dates[1], "to", input$dates[2])
   })
 
   output$mytable = renderDataTable({
