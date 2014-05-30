@@ -69,15 +69,17 @@ Query <- function(opensearch.description, df.params) {
   # submit the form
   response <- xmlParse(getForm(access.point, .params=params))
   
+  description <- xmlToDataFrame(nodes = getNodeSet(response, 
+    "//rdf:Description"), stringsAsFactors = FALSE)
+  
   series <- xmlToDataFrame(nodes = getNodeSet(response,
-      "//dclite4g:Series"), stringsAsFactors = FALSE)
-      
-  dataset <- xmlToDataFrame(nodes = getNodeSet(response,
-      "//dclite4g:DataSet"), stringsAsFactors = FALSE)
+    "//dclite4g:Series"), stringsAsFactors = FALSE)
   
-
+  dataset <- xmlToDataFrame(nodes = getNodeSet(response, 
+    "//dclite4g:DataSet"), stringsAsFactors = FALSE)
   
-  res <- list(series, dataset)
-  names(res) <- c("series", "dataset")
+  res <- list(description, series, dataset)
+  names(res) <- c("description", "series", "dataset")
   return(res)
+
 }
