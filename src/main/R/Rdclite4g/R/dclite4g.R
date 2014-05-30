@@ -41,13 +41,13 @@ Query <- function(opensearch.description, df.params) {
 
   # create a data.frame of with the template
   l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
-  df.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T))
+  df.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
 
   # set the column names
   colnames(df.template) <- c("param", "type")
  
   # from Factor to Character
-  df.template <- CastCharacter(df.template)
+  ##df.template <- CastCharacter(df.template)
   
   # remove the {, }, ? from the type
   df.template <- as.data.frame(sapply(df.template, function(x) {
@@ -60,7 +60,7 @@ Query <- function(opensearch.description, df.params) {
   df.query <- merge(df.template, df.params, by.y=c("type"), all.y=TRUE)[,2-3]
   
   # from Factor to Character
-  CastCharacter(df.query)
+  ##CastCharacter(df.query)
   
   # create a named list
   params <- as.list(df.query$value)
