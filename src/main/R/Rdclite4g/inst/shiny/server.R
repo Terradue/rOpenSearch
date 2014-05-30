@@ -9,11 +9,15 @@ shinyServer(function(input, output) {
   #  1) It is "reactive" and therefore should re-execute automatically
   #     when inputs change
   #  2) Its output type is a plot
-  if(input$get != 0) {
+  dataInput <- reactive({ 
+  
+    if(input$get == 0) return(NULL)
+    
     value <- c(100, "2010-01-10", "2010-01-31")
     type <- c("count", "time:start", "time:end")
     df.params <- data.frame(type, value)
-  }
+  
+  })
 
   output$osd.url <- renderText({
   
