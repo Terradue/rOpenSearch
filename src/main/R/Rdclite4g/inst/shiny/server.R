@@ -9,6 +9,11 @@ shinyServer(function(input, output) {
   #  1) It is "reactive" and therefore should re-execute automatically
   #     when inputs change
   #  2) Its output type is a plot
+  if(input$get != 0) {
+    value <- c(100, "2010-01-10", "2010-01-31")
+    type <- c("count", "time:start", "time:end")
+    df.params <- data.frame(type, value)
+  }
 
   output$osd.url <- renderText({
   
@@ -21,7 +26,7 @@ shinyServer(function(input, output) {
   
        if(input$get == 0) return(NULL)
     
-      mtcars
+      df.params
   })
 #  output$distPlot <- renderPlot({
 #    x    <- faithful[, 2]  # Old Faithful Geyser data
