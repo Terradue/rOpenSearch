@@ -33,11 +33,30 @@ value <- c(3, "2010-01-10", "2010-01-31")
 type <- c("count", "time:start", "time:end")
 df.params <- data.frame(type, value)
 # query the OpenSearch catalogue
-results <- Query(osd.url, df.params)
+res <- Query(osd.url, df.params)
 # access the series (as data frame)
-df.series <- results$series
+df.series <- res$series
 # access the dataset (as data frame)
-df.dataset <- results$dataset
+df.dataset <- res$dataset
+```
+
+Save the dataset as GeoJson
+
+```coffee
+# create a SpatialPolygonsDataFrame with the first element of res$dataset
+poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(res$dataset$spatial)[1,]), res$dataset[1,])
+
+# iterate through the remaining dataset
+for (n in 2:nrow(res$dataset)) {
+  poly.sp <- rbind(poly.sp,
+    SpatialPolygonsDataFrame(readWKT(data.frame(res$dataset$spatial)[n,],id=n), res$dataset[n,]))
+}
+
+# load rgdal for OGR
+library(rgdal)
+
+# write the geojson file
+writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 ```
 
 ## Known issues
