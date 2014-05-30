@@ -30,7 +30,9 @@ shinyServer(function(input, output) {
   
        if(input$get == 0) return(NULL)
     
-      df.params
+      res <- Query(input$osd, df.params)
+      
+      res$series
   })
 #  output$distPlot <- renderPlot({
 #    x    <- faithful[, 2]  # Old Faithful Geyser data
