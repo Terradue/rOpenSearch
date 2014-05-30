@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
   
     if(input$get == 0) return(NULL)
     
-    value <- c(100, input$dates[1], input$dates[2])
+    value <- c(100, as.Date(input$dates[1]), input$dates[2])
     type <- c("count", "time:start", "time:end")
     df.params <- data.frame(type, value)
     return(df.params)
