@@ -35,7 +35,7 @@ shinyServer(function(input, output) {
     
       res <- Query(input$osd, df.params)
       
-      res$series
+      res$dataset
   })
 #  output$distPlot <- renderPlot({
 #    x    <- faithful[, 2]  # Old Faithful Geyser data
