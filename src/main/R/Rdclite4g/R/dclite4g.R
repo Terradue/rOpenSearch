@@ -81,7 +81,7 @@ GetOSQueriables <- function(opensearch.description) {
 Query <- function(opensearch.description, df.params) {
 
   # get the queryables template, strip the value ([,2]) column 
-  df.template <- GetOSQueriables(opensearch.description)[,1]
+  df.template <- data.frame(GetOSQueriables(opensearch.description)[,1], stringsAsFactors=FALSE)
   cat(df.template)
     # use the RDF response type 
   response.type <- "application/rdf+xml"
