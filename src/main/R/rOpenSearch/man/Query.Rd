@@ -22,7 +22,7 @@ removed)
 }
 \examples{
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
-df.params <- GetOSQueryables(osd.url)
+df.params <- GetOSQueryables(osd.url, "application/rdf+xml")
 df.params$value[df.params$type == "count"] <- 30
 df.params$value[df.params$type == "time:start"] <- "2010-01-10"
 df.params$value[df.params$type == "time:end"] <- "2010-01-31"
