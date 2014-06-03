@@ -65,6 +65,11 @@ GetOSQueriables <- function(opensearch.description) {
   df.template <- data.frame(df.full.template[,2], stringsAsFactors=FALSE)
   df.template[, 2] <- NA
 
+  # remove the {, }, ? from the type
+  df.template <- as.data.frame(sapply(df.template, function(x) {
+    x <- str_replace_all(x, "([\\{\\}\\?])", "")
+  }))
+
   # set the column names to type/value, it will be very useful for the Query function params argument 
   colnames(df.template) <- c("type", "value")
 
@@ -74,33 +79,36 @@ GetOSQueriables <- function(opensearch.description) {
 
 
 Query <- function(opensearch.description, df.params) {
+
+  df.template <- GetOSQueriables(opensearch.description)
+  
   
   # use the RDF response type 
   response.type <- "application/rdf+xml"
   
   # get the OpenSearch template
-  os.template <- GetOSTemplate(opensearch.description, response.type)
+  #os.template <- GetOSTemplate(opensearch.description, response.type)
   
   
   access.point <- GetOSAccessPoint(opensearch.description, response.type)
   
   # get the QueryString template
-  template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
+  #template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
 
   # create a data.frame of with the template
-  l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
-  df.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
+  #l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
+  #df.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
 
   # set the column names
-  colnames(df.template) <- c("param", "type")
+  #colnames(df.template) <- c("param", "type")
  
   # from Factor to Character
   ##df.template <- CastCharacter(df.template)
   
   # remove the {, }, ? from the type
-  df.template <- as.data.frame(sapply(df.template, function(x) {
-          x <- str_replace_all(x, "([\\{\\}\\?])", "")
-        }))
+  #df.template <- as.data.frame(sapply(df.template, function(x) {
+  #        x <- str_replace_all(x, "([\\{\\}\\?])", "")
+  #      }))
   
   df.params <- CastCharacter(df.params)
   
