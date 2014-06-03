@@ -25,6 +25,15 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
   
 }
 
+GetOSResponseFormats <- function(opensearch.description) {
+
+}
+
+GetOSQueriables <- function(opensearch.description) {
+
+}
+
+
 Query <- function(opensearch.description, df.params) {
   
   # use the RDF response type 
