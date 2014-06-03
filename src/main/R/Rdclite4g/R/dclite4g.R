@@ -66,6 +66,7 @@ GetOSQueriables <- function(opensearch.description) {
     x <- str_replace_all(x, "([\\{\\}\\?])", "")
   }))
 
+  # add a third column with NAs, this column can be filled with query values 
   df.template[, 3] <- NA
 
   # set the column names to type/value, it will be very useful for the Query function params argument 
@@ -80,8 +81,7 @@ Query <- function(opensearch.description, df.params) {
 
   # get the queryables template, strip the value ([,2]) column 
   df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
-print("#1")
-print(df.template)
+
   # use the RDF response type 
   response.type <- "application/rdf+xml"
   
@@ -110,16 +110,11 @@ print(df.template)
   #      }))
   
   df.params <- CastCharacter(df.params)
-print("#2")
-  print(df.params)
+
   
   # merge the template and the parameters
   df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value")) #, all.y=TRUE) #[,2-3]
 
-print("#3")  
-  print(df.query)
-  return(df.query)
-  
   # from Factor to Character
   ##CastCharacter(df.query)
   
