@@ -105,7 +105,7 @@ GetOSQueryables <- function(opensearch.description) {
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
   # use the template from the first reponse format of the OpenSearch description document
-  response.type <- GetOSResponseFormats(opensearch.description)[1]
+  response.type <- GetOSResponseFormats(opensearch.description)[3]
   
   os.template <- GetOSTemplate(osd.url, response.type)
   
