@@ -17,9 +17,7 @@ GetOSTemplate <- function(opensearch.description, response.type) {
   xslt.expression <- paste0("/*[local-name()='OpenSearchDescription']/*[local-name()='Url' and @type='", 
       response.type ,"']/@template")
   
-  res <- as.character(xpathApply(doc=osd.xml, xslt.expression))
-  
-  return(res)
+  return(as.character(xpathApply(doc=osd.xml, xslt.expression)))
   
 }
 
@@ -40,7 +38,11 @@ GetOSResponseFormats <- function(opensearch.description) {
   
   # this function lists the response formats exposed in the OpenSearch description document
   
-  return(c("application/rdf+xml"))
+  osd.xml <- xmlInternalTreeParse(opensearch.description)
+  
+  xslt.expression <- "//*[local-name()='Url']/@type" 
+
+  return(as.character(xpathApply(doc=osd.xml, xslt.expression)))
 
 }
 
