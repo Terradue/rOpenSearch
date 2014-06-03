@@ -54,8 +54,8 @@ GetOSQueriables <- function(opensearch.description) {
   
   os.template <- GetOSTemplate(osd.url, response.type)
   
-  # strip the OpenSearch access point ad transform it to a data frame
-  
+  # strip the OpenSearch access point and transform it to a data frame
+  access.point <- GetOSAccessPoint(opensearch.description, response.type)
   template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
 
   l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
