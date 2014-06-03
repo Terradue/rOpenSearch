@@ -6,6 +6,8 @@ CastCharacter <- function(d) {
 
 GetOSTemplate <- function(opensearch.description, response.type) {
   
+  
+  
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
   xslt.expression <- paste0("/*[local-name()='OpenSearchDescription']/*[local-name()='Url' and @type='", 
@@ -19,6 +21,9 @@ GetOSTemplate <- function(opensearch.description, response.type) {
 
 GetOSAccessPoint <- function(opensearch.description, response.type) {
   
+  # this function returns the OpenSearch access point  
+  # for a given response type (e.g. application/rdf+xml)
+  
   os.template <- GetOSTemplate(opensearch.description, response.type)
   
   return(strsplit(os.template,"?", fixed=TRUE)[[1]][1])
@@ -26,15 +31,16 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
 }
 
 GetOSResponseFormats <- function(opensearch.description) {
+  
   # this function lists the response formats exposed in the OpenSearch description document
   
 
 }
 
 GetOSQueriables <- function(opensearch.description) {
+  
   # this function returns the OpenSearch description document queriables as a data frame
   # the data.frame can later be filled and used as input in the Query function
-  
   
 
 }
