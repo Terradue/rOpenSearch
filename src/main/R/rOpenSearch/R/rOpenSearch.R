@@ -114,8 +114,9 @@ GetOSQueryables <- function(opensearch.description, response.type) {
   df.full.template <- do.call(rbind.data.frame,l)
   #l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
   #df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
-
-
+  df.full.template$param <- rownames(df.full.template)
+  rownames(df.full.template) <- NULL
+  df.full.template <- df.full.template[!(is.na(df.full.template[,1]) | df.full.template[,1]==""), ]
 
   # remove the {, }, ? from the type
   df.template <- as.data.frame(sapply(df.full.template, function(x) {
