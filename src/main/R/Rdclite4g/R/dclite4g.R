@@ -1,16 +1,27 @@
+#' A function to cast factors to strings in a data frame
+#'
+#' @param d data frame
+#' @return a data frame with columns as character 
+#' @keywords utilities
 CastCharacter <- function(d) {
-  
-  # this function casts factors to strings, useful 
-  # when you don't know what comes in  
   
   return(data.frame(lapply(d, as.character), stringsAsFactors=FALSE))
   
 }
 
+#' A function to returns the full OpenSearch template made of the 
+#  access point and queryables URL template for a given response type
+#'
+#' @param opensearch.description URL pointing to the OpenSearch decription document
+#' @param response.type OpenSearch response type 
+#' @return the OpenSearch URL template
+#' @keywords utilities
+#' @examples
+#' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+#' GetOSTemplate(osd.url, "application/rdf+xml")
+#'
+#' @export
 GetOSTemplate <- function(opensearch.description, response.type) {
-  
-  # this function returns the full OpenSearch template made of the 
-  # acces point and queryables template for a given response type
   
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
@@ -21,6 +32,18 @@ GetOSTemplate <- function(opensearch.description, response.type) {
   
 }
 
+#' A function to returns the full OpenSearch template made of the 
+#  access point and queryables URL template for a given response type
+#'
+#' @param opensearch.description URL pointing to the OpenSearch decription document
+#' @param response.type OpenSearch response type 
+#' @return the OpenSearch URL template
+#' @keywords utilities
+#' @examples
+#' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+#' GetOSTemplate(osd.url, "application/rdf+xml")
+#'
+#' @export
 GetOSAccessPoint <- function(opensearch.description, response.type) {
   
   # this function returns the OpenSearch access point  
