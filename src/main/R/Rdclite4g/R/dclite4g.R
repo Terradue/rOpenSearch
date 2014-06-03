@@ -111,12 +111,12 @@ Query <- function(opensearch.description, df.params) {
   #      }))
   
   df.params <- CastCharacter(df.params)
-  cat(df.params)
+  print(df.params)
   
   # merge the template and the parameters
   df.query <- merge(df.template, df.params, by=c("type")) #, all.y=TRUE) #[,2-3]
   
-  cat(df.query)
+  print(df.query)
   return(df.query)
   
   # from Factor to Character
