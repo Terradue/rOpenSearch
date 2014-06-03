@@ -25,35 +25,35 @@ Return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31
 
 ```coffee
 # load the library
+install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
 library(Rdclite4g)
+
 # define the OpenSearch description URL
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
-# define the query terms as a data frame
-value <- c(3, "2010-01-01", "2010-01-31")
-type <- c("count", "time:start", "time:end")
-df.params <- data.frame(type, value)
-# query the OpenSearch catalogue
-res <- Query(osd.url, df.params)
-# access the series (as data frame)
-df.series <- res$series
-# access the dataset (as data frame)
-df.dataset <- res$dataset
-```
 
-Save the dataset as GeoJSON
+# get the queryables dataframe from the OpenSearch description URL
+df.params <- GetOSQueryables(osd.url)
 
-```coffee
+# define the values for the queryables
+df.params$value[df.params$type == "count"] <- 30 
+df.params$value[df.params$type == "time:start"] <- "2010-01-10"
+df.params$value[df.params$type == "time:end"] <- "2010-01-31"
+
+# submit the query
+res <- Query(osd.url, "application/rdf+xml", df.params)
+
+# get the dataset
+dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
+  "//dclite4g:DataSet"), stringsAsFactors = FALSE)
+
 # create a SpatialPolygonsDataFrame with the first element of res$dataset
-poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(res$dataset$spatial)[1,]), res$dataset[1,])
+poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])
 
 # iterate through the remaining dataset
-for (n in 2:nrow(res$dataset)) {
+for (n in 2:nrow(dataset)) {
   poly.sp <- rbind(poly.sp,
-    SpatialPolygonsDataFrame(readWKT(data.frame(res$dataset$spatial)[n,],id=n), res$dataset[n,]))
+    SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
 }
-
-# load rgdal for OGR
-library(rgdal)
 
 # write the geojson file
 writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
@@ -61,16 +61,6 @@ writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 
 The GeoJSON file can be see here:
 https://github.com/Terradue/Rdclite4g/blob/master/src/main/R/examples/example1.geojson
-
-## Known issues
-
-**Series**
- 
-The field values for description and link are not returned
-
-**Dataset**
-
-The field values for series, relation and onlineResource are not returned
 
 ## Questions, bugs, and suggestions
 
