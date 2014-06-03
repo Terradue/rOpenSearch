@@ -81,6 +81,9 @@ GetOSQueriables <- function(opensearch.description) {
 
 Query <- function(opensearch.description, response.type, df.params) {
 
+  # remove the NAs if any
+  df.params[complete.cases(df.params),]
+
   # avoid factors
   # TODO: is this really needed after all? 
   df.params <- CastCharacter(df.params)
@@ -88,9 +91,6 @@ Query <- function(opensearch.description, response.type, df.params) {
   # get the queryables template, drop the value column 
   # since the value column will come from the df.params when doing the merge 
   df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
-
-  # remove the NAs if any
-  df.params[complete.cases(df.params),]
 
   # merge the template and the parameters
   df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value"))
