@@ -26,12 +26,19 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
 }
 
 GetOSResponseFormats <- function(opensearch.description) {
+  # this function lists the response formats exposed in the OpenSearch description document
+  
 
 }
 
 GetOSQueriables <- function(opensearch.description) {
+  # this function returns the OpenSearch description document queriables as a data frame
+  # the data.frame can later be filled and used as input in the Query function
+  
+  
 
 }
+
 
 
 Query <- function(opensearch.description, df.params) {
