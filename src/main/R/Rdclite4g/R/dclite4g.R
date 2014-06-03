@@ -89,6 +89,9 @@ Query <- function(opensearch.description, response.type, df.params) {
   # since the value column will come from the df.params when doing the merge 
   df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
 
+  # remove the NAs if any
+  df.params[complete.cases(df.params),]
+
   # merge the template and the parameters
   df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value"))
   print(df.query)
