@@ -98,20 +98,7 @@ Query <- function(opensearch.description, response.type, df.params) {
   
   # get the access point and submit the form with curl
   access.point <- GetOSAccessPoint(opensearch.description, response.type)
-  response <- xmlParse(getForm(access.point, .params=params))
 
-  # TODO: what happens if the response type is not "application/rdf+xml"
-  description <- xmlToDataFrame(nodes = getNodeSet(response, 
-    "//rdf:Description"), stringsAsFactors = FALSE)
-  
-  series <- xmlToDataFrame(nodes = getNodeSet(response,
-    "//dclite4g:Series"), stringsAsFactors = FALSE)
-  
-  dataset <- xmlToDataFrame(nodes = getNodeSet(response, 
-    "//dclite4g:DataSet"), stringsAsFactors = FALSE)
-  
-  res <- list(description, series, dataset)
-  names(res) <- c("description", "series", "dataset")
-  return(res)
+  return(xmlParse(getForm(access.point, .params=params)))
 
 }
