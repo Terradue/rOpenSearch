@@ -104,14 +104,24 @@ GetOSQueryables <- function(opensearch.description, response.type) {
   
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
-  os.template <- GetOSTemplate(osd.url, response.type)
+  #os.template <- GetOSTemplate(opensearch.description, response.type)
   
   # strip the OpenSearch access point and transform it to a data frame
-  access.point <- GetOSAccessPoint(opensearch.description, response.type)
-  template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
+  #access.point <- GetOSAccessPoint(opensearch.description, response.type)
+  #template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
 
-  l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
-  df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
+  l <- parse_url(GetOSTemplate(opensearch.description, response.type=response.type))$query
+  df.full.template <- do.call(rbind.data.frame,l)
+
+  # get a column with the named list name
+  df.full.template$param <- rownames(df.full.template)
+  
+  # cleanup the rownames
+  rownames(df.full.template) <- NULL
+  
+  # there are invalid templates out there!
+  # e.g. ?}&loc={geo:name&}&startdate={time:start?}&
+  df.full.template <- df.full.template[!(is.na(df.full.template[,1]) | df.full.template[,1]==""), ]
 
   # remove the {, }, ? from the type
   df.template <- as.data.frame(sapply(df.full.template, function(x) {
