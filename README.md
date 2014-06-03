@@ -1,6 +1,6 @@
-# Rdclite4g
+# rOpenSearch
 
-R package for dclite4g 
+R interface to OpenSearch
 
 ## Installing the package
 
@@ -12,7 +12,7 @@ __Development version__
 # unlike most packages, devtools requires additional non-R dependencies depending on your OS. 
 # See → https://github.com/ropensci/rOpenSci/wiki/Installing-devtools
 library(devtools)
-install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
+install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/rOpenSearch")
 ```
 
 ## Getting Started 
@@ -29,14 +29,15 @@ library(devtools)
 library(rgdal)
 library(rgeos)
 
-install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
-library(Rdclite4g)
+install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSearch")
+library(rOpenSearch)
 
 # define the OpenSearch description URL
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+response.type <- "application/rdf+xml"
 
 # get the queryables dataframe from the OpenSearch description URL
-df.params <- GetOSQueryables(osd.url)
+df.params <- GetOSQueryables(osd.url, response.type)
 
 # define the values for the queryables
 df.params$value[df.params$type == "count"] <- 30 
@@ -44,7 +45,7 @@ df.params$value[df.params$type == "time:start"] <- "2010-01-10"
 df.params$value[df.params$type == "time:end"] <- "2010-01-31"
 
 # submit the query
-res <- Query(osd.url, "application/rdf+xml", df.params)
+res <- Query(osd.url, response.type, df.params)
 
 # get the dataset
 dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
@@ -64,7 +65,7 @@ writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 ```
 
 The GeoJSON file can be see here:
-https://github.com/Terradue/Rdclite4g/blob/master/src/main/R/examples/example1.geojson
+https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson
 
 ## Questions, bugs, and suggestions
 
