@@ -100,13 +100,10 @@ GetOSResponseFormats <- function(opensearch.description) {
 #' GetOSQueryables(osd.url)
 #'
 #' @export
-GetOSQueryables <- function(opensearch.description) {
+GetOSQueryables <- function(opensearch.description, response.type) {
   
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
-  # use the template from the first reponse format of the OpenSearch description document
-  response.type <- GetOSResponseFormats(opensearch.description)[3]
-  
   os.template <- GetOSTemplate(osd.url, response.type)
   
   # strip the OpenSearch access point and transform it to a data frame
