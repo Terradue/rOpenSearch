@@ -81,8 +81,8 @@ GetOSQueriables <- function(opensearch.description) {
 
 Query <- function(opensearch.description, response.type, df.params) {
 
-  # remove the NAs if any
-  df.params <- df.params[complete.cases(df.params),]
+  # remove the NAs if any and keep columns type and value
+  df.params <-  subset(df.params[complete.cases(df.params),], select=c("type", "value"))
 
   # avoid factors
   # TODO: is this really needed after all? 
