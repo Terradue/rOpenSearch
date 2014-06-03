@@ -97,7 +97,7 @@ GetOSResponseFormats <- function(opensearch.description) {
 #' @keywords utilities
 #' @examples
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
-#' GetOSQueryables(osd.url)
+#' GetOSQueryables(osd.url, "application/rdf+xml")
 #'
 #' @export
 GetOSQueryables <- function(opensearch.description, response.type) {
