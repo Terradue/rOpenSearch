@@ -6,7 +6,8 @@ CastCharacter <- function(d) {
 
 GetOSTemplate <- function(opensearch.description, response.type) {
   
-  
+  # this function returns the full OpenSearch template 
+  # for a given response type
   
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
@@ -23,6 +24,8 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
   
   # this function returns the OpenSearch access point  
   # for a given response type (e.g. application/rdf+xml)
+  # this function basically removes from full the OpenSearch template everything after '?' 
+  # this function is usefull for the curl GET request
   
   os.template <- GetOSTemplate(opensearch.description, response.type)
   
