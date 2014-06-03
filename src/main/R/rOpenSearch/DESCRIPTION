@@ -19,5 +19,5 @@ Suggests:
     shiny
 Date: 2014-05-30
 Collate:
-    'dclite4g.R'
-    'dclite4gShinyDemo.R'
+    'rOpenSearch.R'
+    'rOpenSearchShinyDemo.R'
