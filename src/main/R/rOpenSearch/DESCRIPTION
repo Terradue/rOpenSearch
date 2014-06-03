@@ -5,8 +5,6 @@ Version: 0.1
 Date: 2014
 Author: c( person("Fabrice", "Brito", role = c("aut", "cre"), email =
     "fabrice.brito@terradue.com"))
-Maintainer: c( person("Fabrice", "Brito", role = c("aut", "cre"), email =
-    "fabrice.brito@terradue.com"))
 Description: R interface to OpenSearch 
 BugReports: https://github.com/Terradue/rOpenSearch/issues
 License: Apache License Version 2.0
