@@ -20,7 +20,7 @@ df.params$value[df.params$type == "time:end"] <- "2010-01-31"
 res <- Query(osd.url, "application/rdf+xml", df.params)
 
 # get the dataset
-dataset <- xmlToDataFrame(nodes = getNodeSet(res, 
+dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
   "//dclite4g:DataSet"), stringsAsFactors = FALSE)
 
 # create a SpatialPolygonsDataFrame with the first element of res$dataset
