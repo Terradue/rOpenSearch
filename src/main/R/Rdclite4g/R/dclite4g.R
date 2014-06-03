@@ -82,7 +82,7 @@ GetOSQueriables <- function(opensearch.description) {
 Query <- function(opensearch.description, response.type, df.params) {
 
   # remove the NAs if any
-  df.params[complete.cases(df.params),]
+  df.params <- df.params[complete.cases(df.params),]
 
   # avoid factors
   # TODO: is this really needed after all? 
