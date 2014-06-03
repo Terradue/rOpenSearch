@@ -77,54 +77,28 @@ GetOSQueriables <- function(opensearch.description) {
 }
 
 
-Query <- function(opensearch.description, df.params) {
+Query <- function(opensearch.description, response.type, df.params) {
 
-  # get the queryables template, strip the value ([,2]) column 
-  df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
-
-  # use the RDF response type 
-  response.type <- "application/rdf+xml"
-  
-  # get the OpenSearch template
-  #os.template <- GetOSTemplate(opensearch.description, response.type)
-  
-  
-  access.point <- GetOSAccessPoint(opensearch.description, response.type)
-  
-  # get the QueryString template
-  #template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
-
-  # create a data.frame of with the template
-  #l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
-  #df.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
-
-  # set the column names
-  #colnames(df.template) <- c("param", "type")
- 
-  # from Factor to Character
-  ##df.template <- CastCharacter(df.template)
-  
-  # remove the {, }, ? from the type
-  #df.template <- as.data.frame(sapply(df.template, function(x) {
-  #        x <- str_replace_all(x, "([\\{\\}\\?])", "")
-  #      }))
-  
+  # avoid factors
+  # TODO: is this really needed after all? 
   df.params <- CastCharacter(df.params)
 
-  
-  # merge the template and the parameters
-  df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value")) #, all.y=TRUE) #[,2-3]
+  # get the queryables template, drop the value column 
+  # since the value column will come from the df.params when doing the merge 
+  df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
 
-  # from Factor to Character
-  ##CastCharacter(df.query)
+  # merge the template and the parameters
+  df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value"))
   
   # create a named list
   params <- as.list(df.query$value)
   names(params) <- df.query$param
   
-  # submit the form
+  # get the access point and submit the form with curl
+  access.point <- GetOSAccessPoint(opensearch.description, response.type)
   response <- xmlParse(getForm(access.point, .params=params))
-  
+
+  # TODO: what happens if the response type is not "application/rdf+xml"
   description <- xmlToDataFrame(nodes = getNodeSet(response, 
     "//rdf:Description"), stringsAsFactors = FALSE)
   
