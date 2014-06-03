@@ -32,24 +32,18 @@ GetOSTemplate <- function(opensearch.description, response.type) {
   
 }
 
-#' A function to returns the full OpenSearch template made of the 
-#  access point and queryables URL template for a given response type
+#' A function to return the OpenSearch access point
 #'
 #' @param opensearch.description URL pointing to the OpenSearch decription document
 #' @param response.type OpenSearch response type 
-#' @return the OpenSearch URL template
+#' @return the OpenSearch access point for the provided response type 
 #' @keywords utilities
 #' @examples
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
-#' GetOSTemplate(osd.url, "application/rdf+xml")
+#' GetOSAccessPoint(osd.url, "application/rdf+xml")
 #'
 #' @export
 GetOSAccessPoint <- function(opensearch.description, response.type) {
-  
-  # this function returns the OpenSearch access point  
-  # for a given response type (e.g. application/rdf+xml)
-  # this function basically removes from full the OpenSearch template everything after '?' 
-  # this function is useful for the curl GET request
   
   os.template <- GetOSTemplate(opensearch.description, response.type)
   
@@ -57,10 +51,18 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
   
 }
 
+#' A function to return the OpenSearch response formats
+#'
+#' @param opensearch.description URL pointing to the OpenSearch decription document
+#' @return the list of OpenSearch response types 
+#' @keywords utilities
+#' @examples
+#' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+#' GetOSResponseFormats(osd.url)
+#'
+#' @export
 GetOSResponseFormats <- function(opensearch.description) {
-  
-  # this function lists the response formats exposed in the OpenSearch description document
-  
+ 
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
   xslt.expression <- "//*[local-name()='Url']/@type" 
@@ -69,10 +71,17 @@ GetOSResponseFormats <- function(opensearch.description) {
 
 }
 
-GetOSQueriables <- function(opensearch.description) {
-  
-  # this function returns the OpenSearch description document queriables as a data frame
-  # the data.frame can later be filled and used as input in the Query function
+#' A function to return the OpenSearch queryables as a data frame 
+#'
+#' @param opensearch.description URL pointing to the OpenSearch decription document
+#' @return a data frame with three columns: param, type, value (NAs) containing the queryables 
+#' @keywords utilities
+#' @examples
+#' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+#' GetOSQueryables(osd.url)
+#'
+#' @export
+GetOSQueryables <- function(opensearch.description) {
   
   # use the template from the first reponse format of the OpenSearch description document
   response.type <- GetOSResponseFormats(opensearch.description)[1]
@@ -101,7 +110,21 @@ GetOSQueriables <- function(opensearch.description) {
 
 }
 
-
+#' A function to query an OpenSearch search engine using the OpenSearch description document URL, 
+#' a response type and a data frame with queryables' type and values (NAs are be removed) 
+#'
+#' @param opensearch.description URL pointing to the OpenSearch decription document
+#' @param response.type OpenSearch response type 
+#' @return the OpenSearch response
+#' @keywords utilities
+#' @examples
+#' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+#' df.params <- GetOSQueriables(osd.url)
+#' df.params$value[df.params$type == "count"] <- 30 
+#' df.params$value[df.params$type == "time:start"] <- "2010-01-10"
+#' df.params$value[df.params$type == "time:end"] <- "2010-01-31"
+#' res <- Query(osd.url, "application/rdf+xml", df.params)
+#' @export
 Query <- function(opensearch.description, response.type, df.params) {
 
   # remove the NAs if any and keep columns type and value
@@ -126,6 +149,6 @@ Query <- function(opensearch.description, response.type, df.params) {
   # get the access point and submit the form with curl
   access.point <- GetOSAccessPoint(opensearch.description, response.type)
 
-  return(xmlParse(getForm(access.point, .params=params)))
+  return(getForm(access.point, .params=params))
 
 }
