@@ -24,7 +24,11 @@ install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
 Return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31
 
 ```coffee
-# load the library
+# load the libraries
+library(devtools)
+library(rgdal)
+library(rgeos)
+
 install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
 library(Rdclite4g)
 
