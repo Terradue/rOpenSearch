@@ -62,7 +62,7 @@ GetOSQueriables <- function(opensearch.description) {
   df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
 
   # remove the {, }, ? from the type
-  df.template <- as.data.frame(sapply(df.template, function(x) {
+  df.template <- as.data.frame(sapply(df.full.template, function(x) {
     x <- str_replace_all(x, "([\\{\\}\\?])", "")
   }))
 
