@@ -10,7 +10,7 @@ __Development version__
 # If you don't already have the devtools package installed, run
 # install.packages("devtools")
 # unlike most packages, devtools requires additional non-R dependencies depending on your OS. 
-# See → https://github.com/ropensci/rOpenSci/wiki/Installing-devtools
+# See → http://www.rstudio.com/products/rpackages/devtools/
 library(devtools)
 install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/rOpenSearch")
 ```
