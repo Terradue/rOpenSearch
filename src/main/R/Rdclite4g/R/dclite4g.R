@@ -82,7 +82,7 @@ Query <- function(opensearch.description, df.params) {
 
   # get the queryables template, strip the value ([,2]) column 
   df.template <- GetOSQueriables(opensearch.description)[,1]
-  
+  cat(df.template)
     # use the RDF response type 
   response.type <- "application/rdf+xml"
   
@@ -111,9 +111,10 @@ Query <- function(opensearch.description, df.params) {
   #      }))
   
   df.params <- CastCharacter(df.params)
+  cat(df.params)
   
   # merge the template and the parameters
-  df.query <- merge(df.template, df.params, by=c("type"), all.y=TRUE) #[,2-3]
+  df.query <- merge(df.template, df.params, by=c("type")) #, all.y=TRUE) #[,2-3]
   
   cat(df.query)
   return(df.query)
