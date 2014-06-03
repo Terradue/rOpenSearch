@@ -1,6 +1,7 @@
 import(RCurl)
 import(XML)
 import(stringr)
+import(httr)
 export(Query)
 export(rOpenSearchShinyDemo)
 export(GetOSTemplate)
