@@ -62,7 +62,7 @@ GetOSQueriables <- function(opensearch.description) {
   df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
 
   # keep the column with the queryables' type and add a value column with NAs
-  df.template <- df.full.template[,2]
+  df.template <- data.frame(df.full.template[,2], stringsAsFactors=FALSE)
   df.template[, 2] <- NA
 
   # set the column names to type/value, it will be very useful for the Query function params argument 
