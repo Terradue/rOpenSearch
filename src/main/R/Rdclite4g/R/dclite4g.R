@@ -61,9 +61,7 @@ GetOSQueriables <- function(opensearch.description) {
   l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
   df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
 
-  # keep the column with the queryables' type and add a value column with NAs
-  df.template <- data.frame(df.full.template[,2], stringsAsFactors=FALSE)
-  df.template[, 2] <- NA
+  df.template[, 3] <- NA
 
   # remove the {, }, ? from the type
   df.template <- as.data.frame(sapply(df.template, function(x) {
@@ -71,7 +69,7 @@ GetOSQueriables <- function(opensearch.description) {
   }))
 
   # set the column names to type/value, it will be very useful for the Query function params argument 
-  colnames(df.template) <- c("type", "value")
+  colnames(df.template) <- c("param", "type", "value")
 
   return(df.template)
 
@@ -81,7 +79,7 @@ GetOSQueriables <- function(opensearch.description) {
 Query <- function(opensearch.description, df.params) {
 
   # get the queryables template, strip the value ([,2]) column 
-  df.template <- subset(GetOSQueriables(osd.url), select = c("type"))
+  df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
 
   # use the RDF response type 
   response.type <- "application/rdf+xml"
@@ -114,7 +112,7 @@ Query <- function(opensearch.description, df.params) {
   print(df.params)
   
   # merge the template and the parameters
-  df.query <- merge(df.template, df.params, by=c("type")) #, all.y=TRUE) #[,2-3]
+  df.query <- subset(merge(df.template, df.params, by=c("type")), select = c("param", "value")) #, all.y=TRUE) #[,2-3]
   
   print(df.query)
   return(df.query)
