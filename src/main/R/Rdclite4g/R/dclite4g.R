@@ -61,12 +61,12 @@ GetOSQueriables <- function(opensearch.description) {
   l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
   df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
 
-  df.template[, 3] <- NA
-
   # remove the {, }, ? from the type
   df.template <- as.data.frame(sapply(df.template, function(x) {
     x <- str_replace_all(x, "([\\{\\}\\?])", "")
   }))
+
+  df.template[, 3] <- NA
 
   # set the column names to type/value, it will be very useful for the Query function params argument 
   colnames(df.template) <- c("param", "type", "value")
