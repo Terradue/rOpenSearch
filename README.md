@@ -12,7 +12,7 @@ __Development version__
 # unlike most packages, devtools requires additional non-R dependencies depending on your OS. 
 # See → http://www.rstudio.com/products/rpackages/devtools/
 library(devtools)
-install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/rOpenSearch")
+install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSearch")
 ```
 
 ## Getting Started 
