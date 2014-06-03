@@ -91,6 +91,7 @@ Query <- function(opensearch.description, response.type, df.params) {
 
   # merge the template and the parameters
   df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value"))
+  print(df.query)
   
   # create a named list
   params <- as.list(df.query$value)
