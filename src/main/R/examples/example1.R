@@ -2,8 +2,8 @@ library(devtools)
 library(rgdal)
 library(rgeos)
 
-install_github("Rdclite4g", username="Terradue", subdir="/src/main/R/Rdclite4g")
-library(Rdclite4g)
+install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSearch")
+library(rOpenSearch)
 
 # the OpenSearch description document
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
