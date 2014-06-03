@@ -36,6 +36,8 @@ IsURLInvalid <- function(URL) {
 #' @export
 GetOSTemplate <- function(opensearch.description, response.type) {
   
+  if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
+ 
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
   xslt.expression <- paste0("/*[local-name()='OpenSearchDescription']/*[local-name()='Url' and @type='", 
@@ -57,6 +59,8 @@ GetOSTemplate <- function(opensearch.description, response.type) {
 #'
 #' @export
 GetOSAccessPoint <- function(opensearch.description, response.type) {
+  
+  if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
   
   os.template <- GetOSTemplate(opensearch.description, response.type)
   
@@ -98,6 +102,8 @@ GetOSResponseFormats <- function(opensearch.description) {
 #' @export
 GetOSQueryables <- function(opensearch.description) {
   
+  if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
+ 
   # use the template from the first reponse format of the OpenSearch description document
   response.type <- GetOSResponseFormats(opensearch.description)[1]
   
@@ -142,6 +148,8 @@ GetOSQueryables <- function(opensearch.description) {
 #' @export
 Query <- function(opensearch.description, response.type, df.params) {
 
+  if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
+ 
   # remove the NAs if any and keep columns type and value
   df.params <-  subset(df.params[complete.cases(df.params),], select=c("type", "value"))
 
