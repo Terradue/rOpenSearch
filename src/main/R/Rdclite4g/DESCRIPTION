@@ -1,16 +1,20 @@
 Package: Rdclite4g
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2014-05-29
-Author: Who wrote it
+Title: R interface to OpenSearch 
+Version: 0.1
+Date: 2014
+Author: c( person("Fabrice", "Brito", role = c("aut", "cre"), email =
+    "fabrice.brito@terradue.com"))
 Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Description: R interface to OpenSearch 
+BugReports: https://github.com/Terradue/Rdclite4g/issues
+License: Apache License Version 2.0
 Depends:
-    RCurl,
-    XML,
     R (>= 2.15.0)
+Imports:
+    XML,
+    RCurl,
+    stringr
 Suggests:
     shiny
 Date: 2014-05-30
