@@ -7,9 +7,10 @@ library(Rdclite4g)
 
 # the OpenSearch description document
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+response.type <- "application/rdf+xml"
 
 # get the queryables dataframe from the OpenSearch description URL
-df.params <- GetOSQueriables(osd.url)
+df.params <- GetOSQueryables(osd.url, response.type)
 
 # define the values for the queryables
 df.params$value[df.params$type == "count"] <- 30 
@@ -17,7 +18,7 @@ df.params$value[df.params$type == "time:start"] <- "2010-01-10"
 df.params$value[df.params$type == "time:end"] <- "2010-01-31"
 
 # submit the query
-res <- Query(osd.url, "application/rdf+xml", df.params)
+res <- Query(osd.url, response.type, df.params)
 
 # get the dataset
 dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
