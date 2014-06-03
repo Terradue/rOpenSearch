@@ -119,7 +119,7 @@ GetOSQueryables <- function(opensearch.description) {
 #' @keywords utilities
 #' @examples
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
-#' df.params <- GetOSQueriables(osd.url)
+#' df.params <- GetOSQueryables(osd.url)
 #' df.params$value[df.params$type == "count"] <- 30 
 #' df.params$value[df.params$type == "time:start"] <- "2010-01-10"
 #' df.params$value[df.params$type == "time:end"] <- "2010-01-31"
@@ -136,7 +136,7 @@ Query <- function(opensearch.description, response.type, df.params) {
 
   # get the queryables template, drop the value column 
   # since the value column will come from the df.params when doing the merge 
-  df.template <- subset(GetOSQueriables(osd.url), select = c("type", "param"))
+  df.template <- subset(GetOSQueryables(osd.url), select = c("type", "param"))
 
   # merge the template and the parameters
   df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value"))
