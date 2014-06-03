@@ -104,13 +104,13 @@ GetOSQueryables <- function(opensearch.description, response.type) {
   
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
-  os.template <- GetOSTemplate(osd.url, response.type)
+  #os.template <- GetOSTemplate(opensearch.description, response.type)
   
   # strip the OpenSearch access point and transform it to a data frame
   #access.point <- GetOSAccessPoint(opensearch.description, response.type)
   #template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
 
-  l <- parse_url(GetOSTemplate(osd.url, response.type=response.type))$query
+  l <- parse_url(GetOSTemplate(opensearch.description, response.type=response.type))$query
   df.full.template <- do.call(rbind.data.frame,l)
   #l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
   #df.full.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
