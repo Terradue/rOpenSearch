@@ -1,13 +1,16 @@
 CastCharacter <- function(d) {
   
+  # this function casts factors to strings, useful 
+  # when you don't know what comes in  
+  
   return(data.frame(lapply(d, as.character), stringsAsFactors=FALSE))
   
 }
 
 GetOSTemplate <- function(opensearch.description, response.type) {
   
-  # this function returns the full OpenSearch template 
-  # for a given response type
+  # this function returns the full OpenSearch template made of the 
+  # acces point and queryables template for a given response type
   
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
@@ -25,7 +28,7 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
   # this function returns the OpenSearch access point  
   # for a given response type (e.g. application/rdf+xml)
   # this function basically removes from full the OpenSearch template everything after '?' 
-  # this function is usefull for the curl GET request
+  # this function is useful for the curl GET request
   
   os.template <- GetOSTemplate(opensearch.description, response.type)
   
@@ -37,6 +40,7 @@ GetOSResponseFormats <- function(opensearch.description) {
   
   # this function lists the response formats exposed in the OpenSearch description document
   
+  return(c("application/rdf+xml"))
 
 }
 
@@ -45,9 +49,21 @@ GetOSQueriables <- function(opensearch.description) {
   # this function returns the OpenSearch description document queriables as a data frame
   # the data.frame can later be filled and used as input in the Query function
   
+  # use the template from the first reponse format of the OpenSearch description document
+  response.type <- GetOSResponseFormats(opensearch.description)[1]
+  
+  os.template <- GetOSTemplate(osd.url, response.type)
+  
+  # strip the OpenSearch access point ad transform it to a data frame
+  
+  template <- strsplit(os.template, paste0(access.point, "?"), fixed=TRUE)[[1]][2]
+
+  l <- strsplit(strsplit(template, "&", fixed=TRUE)[[1]], "=", fixed=TRUE)
+  df.template <- data.frame(matrix(unlist(l), nrow=length(l), byrow=T), stringsAsFactors=FALSE)
+
+  return(df.template)
 
 }
-
 
 
 Query <- function(opensearch.description, df.params) {
