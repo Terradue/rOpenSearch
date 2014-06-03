@@ -9,6 +9,19 @@ CastCharacter <- function(d) {
   
 }
 
+#' A function to check if URL is invalid
+#'
+#' @param URL URL to be tested
+#' @return boolean 
+#' @keywords utilities
+IsURLInvalid <- function(URL) {
+
+  return(inherits(try(url(URL)), "try-error"))
+  
+}
+
+
+
 #' A function to returns the full OpenSearch template made of the 
 #  access point and queryables URL template for a given response type
 #'
@@ -62,6 +75,8 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
 #'
 #' @export
 GetOSResponseFormats <- function(opensearch.description) {
+ 
+  if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
   osd.xml <- xmlInternalTreeParse(opensearch.description)
   
