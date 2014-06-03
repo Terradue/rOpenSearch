@@ -41,7 +41,7 @@ df.params <- GetOSQueryables(osd.url, response.type)
 
 # define the values for the queryables
 df.params$value[df.params$type == "count"] <- 30 
-df.params$value[df.params$type == "time:start"] <- "2010-01-10"
+df.params$value[df.params$type == "time:start"] <- "2010-01-01"
 df.params$value[df.params$type == "time:end"] <- "2010-01-31"
 
 # submit the query
