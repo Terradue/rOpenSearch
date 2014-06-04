@@ -48,6 +48,6 @@ Query <- function(opensearch.description, response.type, df.params) {
   ###
   #access.point <- GetOSAccessPoint(opensearch.description, response.type)
 
-  return(getURL(build_url(url))
+  return(getURL(build_url(url)))
 
 }
