@@ -36,9 +36,16 @@ Query <- function(opensearch.description, response.type, df.params) {
   params <- as.list(df.query$value)
   names(params) <- df.query$param
   
+  
   # get the access point and submit the form with curl
-  access.point <- GetOSAccessPoint(opensearch.description, response.type)
+  
+  url <- parse_url(GetOSTemplate(opensearch.description, response.type))
+  
+  url$query <- list(query=params)
+  
+  return(build_url(url))
+  #access.point <- GetOSAccessPoint(opensearch.description, response.type)
 
-  return(getForm(access.point, .params=params))
+  #return(getForm(access.point, .params=params))
 
 }
