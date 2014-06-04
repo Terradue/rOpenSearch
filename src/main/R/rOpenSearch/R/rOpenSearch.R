@@ -29,7 +29,7 @@ IsURLInvalid <- function(URL) {
 #' @param response.type OpenSearch response type 
 #' @return the OpenSearch URL template
 #' @keywords utilities
-#' @examples
+#' @examples \dontrun{
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 #' GetOSTemplate(osd.url, "application/rdf+xml")
 #'
@@ -73,7 +73,7 @@ GetOSAccessPoint <- function(opensearch.description, response.type) {
 #' @param opensearch.description URL pointing to the OpenSearch decription document
 #' @return the list of OpenSearch response types 
 #' @keywords utilities
-#' @examples
+#' @examples \dontrun{
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 #' GetOSResponseFormats(osd.url)
 #'
@@ -95,7 +95,7 @@ GetOSResponseFormats <- function(opensearch.description) {
 #' @param opensearch.description URL pointing to the OpenSearch decription document
 #' @return a data frame with three columns: param, type, value (NAs) containing the queryables 
 #' @keywords utilities
-#' @examples
+#' @examples \dontrun{
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 #' GetOSQueryables(osd.url, "application/rdf+xml")
 #'
@@ -145,7 +145,7 @@ GetOSQueryables <- function(opensearch.description, response.type) {
 #' @param response.type OpenSearch response type 
 #' @return the OpenSearch response
 #' @keywords utilities
-#' @examples
+#' @examples \dontrun{
 #' osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 #' df.params <- GetOSQueryables(osd.url, "application/rdf+xml")
 #' df.params$value[df.params$type == "count"] <- 30 
