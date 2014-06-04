@@ -41,7 +41,7 @@ Query <- function(opensearch.description, response.type, df.params) {
   
   url <- parse_url(GetOSTemplate(opensearch.description, response.type))
   
-  url$query <- list(query=params)
+  url$query <- list(params)
   
   return(build_url(url))
   #access.point <- GetOSAccessPoint(opensearch.description, response.type)
