@@ -132,7 +132,7 @@ GetOSQueryables <- function(opensearch.description, response.type) {
   df.template[, 3] <- NA
 
   # set the column names to type/value, it will be very useful for the Query function params argument 
-  colnames(df.template) <- c("param", "type", "value")
+  colnames(df.template) <- c("type", "param", "value")
 
   return(df.template)
 
