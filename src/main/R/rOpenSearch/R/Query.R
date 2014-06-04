@@ -43,11 +43,11 @@ Query <- function(opensearch.description, response.type, df.params) {
   
   url$query <- params
   
-  return(build_url(url))
+  #return(build_url(url))
   
   ###
   #access.point <- GetOSAccessPoint(opensearch.description, response.type)
 
-  #return(getForm(access.point, .params=params))
+  return(getURL(build_url(url))
 
 }
