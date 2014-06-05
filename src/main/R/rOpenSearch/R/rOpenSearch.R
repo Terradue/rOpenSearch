@@ -100,7 +100,7 @@ GetOSResponseFormats <- function(opensearch.description) {
 #' GetOSQueryables(osd.url, "application/rdf+xml")
 #'
 #' @export
-#' @import httr
+#' @import httr XML stringr
 GetOSQueryables <- function(opensearch.description, response.type) {
   
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
