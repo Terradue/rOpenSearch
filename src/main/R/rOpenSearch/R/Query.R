@@ -1,9 +1,9 @@
 
 #' A function to query an OpenSearch search engine using the OpenSearch description document URL,
-#' a response type and a data frame with queryables' type and values (NAs are be removed)
+#' a response type and a data frame with queryables' type and values (NAs are removed)
 #'
-#' @param opensearch.description URL pointing to the OpenSearch decription document
-#' @param response.type OpenSearch response type
+#' @param opensearch.description URL pointing to the OpenSearch description document
+#' @param response.type OpenSearch response type (e.g. application/rdf+xml)
 #' @return the OpenSearch response
 #' @keywords utilities
 #' @examples \dontrun{
@@ -13,12 +13,16 @@
 #' df.params$value[df.params$type == "time:start"] <- "2010-01-10"
 #' df.params$value[df.params$type == "time:end"] <- "2010-01-31"
 #' res <- Query(osd.url, "application/rdf+xml", df.params)
+#' }
+#' 
 #' @export
+#' @import httr RCurl
+
 Query <- function(opensearch.description, response.type, df.params) {
 
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
-  # remove the NAs if any and keep columns type and value
+  # cleanup the params data frame: remove the NAs if any and keep columns type and value
   df.params <- subset(df.params[complete.cases(df.params),], select=c("type", "value"))
 
   # avoid factors
