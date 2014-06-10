@@ -4,8 +4,14 @@
 #' in the \code{\link{Query}} function.
 #'
 #' @export
+#' @import shiny
+
 rOpenSearchShinyDemo <- function() {
-message('Hit <escape> to stop')
-require(shiny)
-shiny::runApp(system.file('shiny', package='Rdclite4g'))
+  
+  message('Hit <escape> to stop')
+
+  require(shiny)
+
+  shiny::runApp(system.file('shiny', package='rOpenSearch'))
+
 }
