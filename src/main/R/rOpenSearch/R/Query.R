@@ -27,7 +27,7 @@ Query <- function(opensearch.description, response.type, df.params) {
 
   # get the queryables template, drop the value column
   # since the value column will come from the df.params when doing the merge
-  df.template <- subset(GetOSQueryables(osd.url, response.type), select = c("type", "param"))
+  df.template <- subset(GetOSQueryables(opensearch.description, response.type), select = c("type", "param"))
 
   # merge the template and the parameters
   df.query <- subset(merge(df.template, df.params, by.y=c("type")), select = c("param", "value"))
