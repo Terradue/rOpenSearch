@@ -1,12 +1,12 @@
 \name{GetOSTemplate}
 \alias{GetOSTemplate}
-\title{A function to returns the full OpenSearch template made of the}
+\title{A function to return the full OpenSearch template made of the}
 \usage{
 GetOSTemplate(opensearch.description, response.type)
 }
 \arguments{
   \item{opensearch.description}{URL pointing to the
-  OpenSearch decription document}
+  OpenSearch description document}
 
   \item{response.type}{OpenSearch response type}
 }
@@ -14,12 +14,14 @@ GetOSTemplate(opensearch.description, response.type)
 the OpenSearch URL template
 }
 \description{
-A function to returns the full OpenSearch template made of
+A function to return the full OpenSearch template made of
 the
 }
 \examples{
+\dontrun{
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 GetOSTemplate(osd.url, "application/rdf+xml")
+}
 }
 \keyword{utilities}
 

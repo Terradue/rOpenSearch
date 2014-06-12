@@ -1,6 +1,6 @@
 \name{rOpenSearchShinyDemo}
 \alias{rOpenSearchShinyDemo}
-\title{Runs a rOpenSearch demo as a Shiny app.}
+\title{Runs an rOpenSearch demo as a Shiny app.}
 \usage{
 rOpenSearchShinyDemo()
 }

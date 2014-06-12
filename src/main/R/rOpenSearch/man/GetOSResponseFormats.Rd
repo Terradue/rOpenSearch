@@ -6,7 +6,7 @@ GetOSResponseFormats(opensearch.description)
 }
 \arguments{
   \item{opensearch.description}{URL pointing to the
-  OpenSearch decription document}
+  OpenSearch description document}
 }
 \value{
 the list of OpenSearch response types
@@ -15,8 +15,10 @@ the list of OpenSearch response types
 A function to return the OpenSearch response formats
 }
 \examples{
+\dontrun{
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 GetOSResponseFormats(osd.url)
+}
 }
 \keyword{utilities}
 

@@ -6,7 +6,7 @@ GetOSAccessPoint(opensearch.description, response.type)
 }
 \arguments{
   \item{opensearch.description}{URL pointing to the
-  OpenSearch decription document}
+  OpenSearch description document}
 
   \item{response.type}{OpenSearch response type}
 }
@@ -17,8 +17,10 @@ the OpenSearch access point for the provided response type
 A function to return the OpenSearch access point
 }
 \examples{
+\dontrun{
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 GetOSAccessPoint(osd.url, "application/rdf+xml")
+}
 }
 \keyword{utilities}
 
