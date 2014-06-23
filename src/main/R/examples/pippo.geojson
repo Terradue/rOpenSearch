@@ -1,0 +1,52 @@
+{
+	"type" : "FeatureCollection",
+	"features" : {
+		"type" : "Feature",
+		"geometry" : {
+			"type" : "Polygon",
+			"coordinates" : [
+				[
+					[
+						-119.4,
+						28.115
+					],
+					[
+						-119.4,
+						34.268
+					],
+					[
+						-114.64,
+						34.268
+					],
+					[
+						-114.64,
+						28.115
+					],
+					[
+						-119.4,
+						28.115
+					]
+				]
+			]
+		},
+		"properties" : {
+			"obsTypeDesc" : "Sea Surface Temperature",
+			"obsType" : "analysed_sst",
+			"uomType" : "kelvin",
+			"time" : [
+				"2014-04-27",
+				"2014-04-26",
+				"2014-04-25",
+				"2014-04-24",
+				"2014-04-23"
+			],
+			"value" : [
+				290.01,
+				289.93,
+				290.15,
+				290.3,
+				290.26
+			]
+		}
+	}
+}
