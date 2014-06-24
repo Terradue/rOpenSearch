@@ -6,9 +6,15 @@ R interface to OpenSearch
 
 ### Documentation
 
-The documentation is live at: http://terradue.github.io/rOpenSearch/
+The rOpenSearch documentation is live at: http://terradue.github.io/rOpenSearch/
 
-The documentation source is available at: https://github.com/Terradue/rOpenSearch/tree/master/src/main/doc
+The rOpenSearch documentation source is available at: https://github.com/Terradue/rOpenSearch/tree/master/src/main/doc
+
+Inside R, use ?_<function name>_ to view the function's help page. Example:
+
+```coffee
+?GetOSQueryables
+```
 
 ### Citing this package
 
