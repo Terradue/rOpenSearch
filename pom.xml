@@ -5,7 +5,7 @@
 
 	<groupId>com.terradue.ciop.app</groupId>
 	<artifactId>rOpenSearch</artifactId>
-	<packaging>rpm</packaging>
+	<packaging>pom</packaging>
 	<name>rOpenSearch</name>
 	<description>R interface to OpenSearch</description>
 	<version>0.1-SNAPSHOT</version>
@@ -245,7 +245,7 @@
 					<autoRequires>true</autoRequires>
 					<release>ciop</release>
 					<mappings>
-						<!--<mapping>
+						<mapping>
 							<directory>/application</directory>
 							<sources>
 								<source>
