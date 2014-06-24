@@ -10,6 +10,7 @@
 #'
 #' @export
 #' @import httr
+#' @import stringr
 
 GetOSQueryables <- function(opensearch.description, response.type) {
   

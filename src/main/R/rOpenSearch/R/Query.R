@@ -16,7 +16,9 @@
 #' }
 #' 
 #' @export
-#' @import httr RCurl
+#' @import httr
+#' @import RCurl
+#' @import XML
 
 Query <- function(opensearch.description, response.type, df.params) {
 

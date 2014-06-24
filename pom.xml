@@ -4,16 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.terradue.ciop.app</groupId>
-	<artifactId>eowb-cckp</artifactId>
+	<artifactId>rOpenSearch</artifactId>
 	<packaging>rpm</packaging>
-	<name>eowb-cckp</name>
-	<description>eowb-cckp</description>
+	<name>rOpenSearch</name>
+	<description>R interface to OpenSearch</description>
 	<version>0.1-SNAPSHOT</version>
 
 	<scm>
 		<connection>scm:git:git@github.com:Terradue/rOpenSearch.git</connection>
 		<developerConnection>scm:git:git@github.com:Terradue/rOpenSearch.git</developerConnection>
-		<url>https://github.com/Terradue/eowb-cckp</url>
+		<url>https://github.com/Terradue/rOpenSearch.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<github.global.server>github</github.global.server>
-		<github.site.repositoryName>eowb-cckp</github.site.repositoryName>
+		<github.site.repositoryName>rOpenSearch</github.site.repositoryName>
 		<github.site.repositoryOwner>Terradue</github.site.repositoryOwner>
 	</properties>
 
@@ -147,7 +147,7 @@
 								<argument>CMD</argument>
 								<argument>build</argument>
 								<argument>--binary</argument>
-								<argument>ReoWBcckp</argument>
+								<argument>rOpenSearch</argument>
 							</arguments>
 						</configuration>
 					</execution>
