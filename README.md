@@ -14,7 +14,7 @@ The releases are available at: https://github.com/Terradue/rOpenSearch/releases
 
 Releases can be installed using [devtools](http://www.rstudio.com/products/rpackages/devtools/)
 
-* Start an R session and run:
+Start an R session and run:
 
 ```coffee
 install_url("https://github.com/Terradue/rOpenSearch/releases/download/v0.1-SNAPSHOT/rOpenSearch_0.1.0.tar.gz")
