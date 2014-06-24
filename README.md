@@ -130,7 +130,7 @@ sp[[index]]$identifier
 
 This returns the image below:
 
-![alt tag](https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/MERIS_white_shark.png)
+![alt tag](src/main/R/examples/MERIS_white_shark.png)
 
 
 ### Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
