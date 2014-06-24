@@ -15,6 +15,8 @@ install.packages("rOpenSearch_x.y.z.tar.gz", repos=NULL, type="source")
 library(rOpenSearch)
 ```
 
+where x.y.z is the release version.
+
 ### Building and installing the development version
 
 The rOpenSearch package is built using maven.
@@ -36,8 +38,10 @@ That generates a compressed archive with the rOpenSearch package in:
 To install the package, start an R session and run:
 
 ```coffee
-install.packages("~/rOpenSearch/target/R/src/rOpenSearch_0.1.0.tar.gz", repos=NULL, type="source")
+install.packages("~/rOpenSearch/target/R/src/rOpenSearch_x.y.z.tar.gz", repos=NULL, type="source")
 ```
+
+where x.y.z is the development version number.
 
 Then load the library:
 
