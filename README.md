@@ -2,6 +2,12 @@
 
 R interface to OpenSearch
 
+### Citing this package
+
+rOpenSearch can be cited using its DOI:
+
+[![DOI](https://zenodo.org/badge/3806/Terradue/rOpenSearch.png)](http://dx.doi.org/10.5281/zenodo.10642)
+
 ### Documentation
 
 The documentation is live at: http://terradue.github.io/rOpenSearch/
