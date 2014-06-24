@@ -2,6 +2,12 @@
 
 R interface to OpenSearch
 
+### Documentation
+
+The documentation is live at: http://terradue.github.io/rOpenSearch/
+
+The documentation source is available at: https://github.com/Terradue/rOpenSearch/tree/master/src/main/doc
+
 ### Installing a release
 
 The releases are available at: https://github.com/Terradue/rOpenSearch/releases
