@@ -50,7 +50,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!--<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
@@ -64,7 +64,7 @@
 						</fileset>
 					</filesets>
 				</configuration>
-			</plugin>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -169,7 +169,7 @@
 							</arguments>
 						</configuration>
 					</execution>
-					<execution>
+					<!--<execution>
 						<id>R install app</id>
 						<phase>install</phase>
 						<goals>
@@ -186,7 +186,7 @@
 								<argument>${project.build.directory}/R/src/rOpenSearch_${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.tar.gz</argument>
 							</arguments>
 						</configuration>
-					</execution>
+					</execution>-->
 					<execution>
 						<id>rgitbook</id>
 						<phase>site</phase>
