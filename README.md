@@ -33,7 +33,7 @@ mvn compile
 That generates a compressed archive with the rOpenSearch package in:
 
 ```
-~/rOpenSearch/target/R/src/rOpenSearch_0.1.0.tar.gz
+~/rOpenSearch/target/R/src/rOpenSearch_x.y.z.tar.gz
 ```
 To install the package, start an R session and run:
 
@@ -41,7 +41,7 @@ To install the package, start an R session and run:
 install.packages("~/rOpenSearch/target/R/src/rOpenSearch_x.y.z.tar.gz", repos=NULL, type="source")
 ```
 
-where x.y.z is the development version number.
+> Note x.y.z is the development version number.
 
 Then load the library:
 
