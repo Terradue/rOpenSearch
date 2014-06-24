@@ -284,7 +284,7 @@
 					</provides>
 					<needarch>noarch</needarch>
 				</configuration>
-			</plugin>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -298,20 +298,6 @@
 							<target>
 								<mkdir dir="${project.build.directory}/R/src" />
 								<mkdir dir="${project.build.directory}/R/lib" />
-								<mkdir dir="/application/share/R/library" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>change perm</id>
-						<phase>install</phase>
-						<configuration>
-							<target>
-								<chmod dir="/application" includes="**/bin/*, **/run*"
-									perm="755" />
 							</target>
 						</configuration>
 						<goals>
@@ -319,7 +305,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
