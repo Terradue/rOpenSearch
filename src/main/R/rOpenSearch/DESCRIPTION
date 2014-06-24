@@ -1,7 +1,7 @@
 Package: rOpenSearch
 Type: Package
 Title: R interface to OpenSearch
-Version: 0.1
+Version: ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
 Date: 2014-05-30
 Author: c( person("Fabrice", "Brito", role = c("aut", "cre"), email =
     "fabrice.brito@terradue.com"))
