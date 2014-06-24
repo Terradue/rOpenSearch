@@ -17,7 +17,16 @@ install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSear
 
 ## Getting Started 
 
-#### Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
+### Get Envisat MERIS Earth Observation data best coverage for the white shark habitat analysis
+
+This example:
+
+* Queries the [Global Biodiversity Information Facility](http://www.gbif.org/dF) using the [rOpenSci](http://ropensci.org/) [rgbif](http://ropensci.org/tutorials/rgbif_tutorial.html) package for the White Shark occurrences
+* Uses the [DBSCAN clustering algorithm](http://en.wikipedia.org/wiki/DBSCAN) to identify geospatial clusters 
+* Uses those clusters to query the [European Space Agency](http://www.esa.int/ESA) Envisat MERIS Full Resolution Level 1 OpenSearch catalogue
+* Selects the best covered cluster
+
+### Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
 
 ###### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series
 
