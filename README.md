@@ -2,17 +2,34 @@
 
 R interface to OpenSearch
 
-## Installing the package
+## Buildind and installing the package
 
-__Development version__  
+The rOpenSearch package is built using maven.
+
+From a terminal: 
+
+```bash
+cd
+git clone git@github.com:Terradue/rOpenSearch.git
+cd rOpenSearch
+mvn compile
+```
+
+That generates a compressed archive with the rOpenSearch package in:
+
+```
+~/rOpenSearch/target/R/src/rOpenSearch_0.1.0.tar.gz
+```
+To install the package, start an R session and run:
 
 ```coffee
-# If you don't already have the devtools package installed, run
-# install.packages("devtools")
-# unlike most packages, devtools requires additional non-R dependencies depending on your OS. 
-# See → http://www.rstudio.com/products/rpackages/devtools/
-library(devtools)
-install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSearch")
+install.packages("~/rOpenSearch/target/R/src/rOpenSearch_0.1.0.tar.gz", repos=NULL, type="source")
+```
+
+Then load the library:
+
+```coffee
+library(rOpenSearch)
 ```
 
 ## Getting Started 
@@ -39,11 +56,9 @@ library("rgeos")
 library("maps") 
 library("RColorBrewer")
 library("rworldmap")
-
-install_github("rOpenSearch", username="Terradue", subdir="/src/main/R/rOpenSearch", ref="master")
-install_github("ropensci/rgbif")
-
 library("rOpenSearch")
+
+install_github("ropensci/rgbif")
 library("rgbif")
 
 # set the catalogue and retrieve the queryables
