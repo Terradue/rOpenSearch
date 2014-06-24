@@ -4,7 +4,7 @@ R interface to OpenSearch
 
 ## Buildind and installing the package
 
-The rOpenSearch package is built using maven:
+The rOpenSearch package is built using maven.
 
 From a terminal: 
 
