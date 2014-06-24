@@ -165,7 +165,7 @@ This returns the image below:
 ![alt tag](src/main/R/examples/MERIS_white_shark.png)
 
 
-### Query the European Space Agency ERS-1/2 SAR and Envisat ASAR [virtual archive](http://eo-virtual-archive4.esa.int/) 
+### Query the European Space Agency [ERS-1/2 SAR and Envisat ASAR virtual archive](http://eo-virtual-archive4.esa.int/) 
 
 ###### Query the Envisat ASAR Image Mode source packets Level 0 (ASA_IM__0P) series
 
