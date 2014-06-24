@@ -4,6 +4,17 @@ R interface to OpenSearch
 
 ### Installing the released package
 
+The releases are available at: https://github.com/Terradue/rOpenSearch/releases
+
+* Download a release (a compressed archive)
+* Change your directory to the where the release was downloaded
+* Start an R session and run:
+
+```coffee
+install.packages("rOpenSearch_x.y.z.tar.gz", repos=NULL, type="source")
+library(rOpenSearch)
+```
+
 ### Building and installing the development version
 
 The rOpenSearch package is built using maven.
