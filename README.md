@@ -6,16 +6,16 @@ R interface to OpenSearch
 
 The releases are available at: https://github.com/Terradue/rOpenSearch/releases
 
-* Download a release (a compressed archive)
-* Change your directory to the where the release was downloaded
+Releases can be installed using [devtools](http://www.rstudio.com/products/rpackages/devtools/)
+
 * Start an R session and run:
 
 ```coffee
-install.packages("rOpenSearch_x.y.z.tar.gz", repos=NULL, type="source")
+install_url("https://github.com/Terradue/rOpenSearch/releases/download/v0.1-SNAPSHOT/rOpenSearch_0.1.0.tar.gz")
 library(rOpenSearch)
 ```
 
-where x.y.z is the release version.
+> Note the example above install the v0.1-SNAPSHOT release, adapt it to the current release
 
 ### Building and installing the development version
 
