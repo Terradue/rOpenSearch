@@ -2,7 +2,7 @@
 
 R interface to OpenSearch
 
-### Installing the released package
+### Installing a release
 
 The releases are available at: https://github.com/Terradue/rOpenSearch/releases
 
