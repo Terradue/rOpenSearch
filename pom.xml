@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<name>rOpenSearch</name>
 	<description>R interface to OpenSearch</description>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<scm>
 		<connection>scm:git:git@github.com:Terradue/rOpenSearch.git</connection>
