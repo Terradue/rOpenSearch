@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403782611135">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403782773875">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -355,36 +355,7 @@
 <p>This virtual archive represents ESA contribution to the supersites initiative. This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection</p>
 <h2 id="use-ropensearch-to-query-the-virtual-archive-envisat-asar-image-mode-level-0-data">Use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data</h2>
 <p>This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31</p>
-<p>Load the package with:</p>
-<pre><code class="lang-r"><span class="hljs-comment"># load the libraries</span>
-<span class="hljs-keyword">library</span>(devtools)
-</code></pre>
-<pre><code>## 
-## Attaching package: &#39;devtools&#39;
-## 
-## The following objects are masked from &#39;package:utils&#39;:
-## 
-##     ?, help
-## 
-## The following object is masked from &#39;package:base&#39;:
-## 
-##     system.file
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(rgdal)
-</code></pre>
-<pre><code>## Loading required package: sp
-## rgdal: version: 0.8-16, (SVN revision 498)
-## Geospatial Data Abstraction Library extensions to R successfully loaded
-## Loaded GDAL runtime: GDAL 1.7.3, released 2010/11/10
-## Path to GDAL shared files: /usr/share/gdal
-## GDAL does not use iconv for recoding strings.
-## Loaded PROJ.4 runtime: Rel. 4.7.1, 23 September 2009, [PJ_VERSION: 470]
-## Path to PROJ.4 shared files: (autodetected)
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(rgeos)
-</code></pre>
-<pre><code>## rgeos version: 0.3-5, (SVN revision 447)
-##  GEOS runtime version: 3.3.9-CAPI-1.7.9 
-##  Polygon checking: TRUE
-</code></pre><p>library(rOpenSearch)</p>
+<p>Load the required packages with:</p>
 <h1 id="define-the-opensearch-description-url">define the OpenSearch description URL</h1>
 <p>osd.url &lt;- &quot;<a href="http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description" target="_blank">http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description</a>&quot;
 response.type &lt;- &quot;application/rdf+xml&quot;</p>

@@ -11,16 +11,17 @@ This virtual archive represents ESA contribution to the supersites initiative. T
 
 This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31
 
-Load the package with:
+Load the required packages with:
 
-```{r}
+```{r echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, results='hide'}
 # load the libraries
 library(devtools)
 library(rgdal)
 library(rgeos)
+library(rOpenSearch)
 ```
 
-library(rOpenSearch)
+
 
 # define the OpenSearch description URL
 osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
