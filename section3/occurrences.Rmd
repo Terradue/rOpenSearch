@@ -152,18 +152,18 @@ res <- Query(osd.description, response.type, q)
 
 From the result, get the Datasets
 
-```{r}
+```{r warning=FALSE}
 dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), "//dclite4g:DataSet"), stringsAsFactors = FALSE)
 ```
 
 Let's inspect the first datasets (showing only the **identifier** column):
 
-```{r results='asis', echo=FALSE}
+```{r results='asis', echo=FALSE, warning=FALSE}
 kable(head(dataset[,1], 5), format = "html")
 ```
 
 We now create a SpatialPolygonsDataFrame:  
-```{r}
+```{r warning=FALSE}
 poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])
 
 for (n in 2:nrow(dataset)) {
@@ -173,7 +173,7 @@ for (n in 2:nrow(dataset)) {
 
 And check the coverage index of the MERIS products wrt the cluster minimum bounding box:
 
-```{r}
+```{r warning=FALSE}
 for (n in 1:nrow(dataset)) {
  poly.sp[n,"coverage_index"] <- gArea(gIntersection(mbr[[1]], poly.sp[n,])) / gArea(mbr[[1]]) 
 }
@@ -181,7 +181,7 @@ for (n in 1:nrow(dataset)) {
 
 Select those with a coverage over 80%:
 
-```{r}
+```{r warning=FALSE}
 sp <- poly.sp[poly.sp$coverage_index > 0.8,]
 ```
 

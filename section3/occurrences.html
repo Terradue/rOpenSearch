@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403796297724">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403796471678">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -646,9 +646,7 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 <p>From the result, get the Datasets</p>
 <pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
 </code></pre>
-<pre><code>## Warning: closing unused connection 5
-## (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-</code></pre><p>Let&#39;s inspect the first datasets (showing only the <strong>identifier</strong> column):</p>
+<p>Let&#39;s inspect the first datasets (showing only the <strong>identifier</strong> column):</p>
 <table>
 <tbody>
   <tr>
