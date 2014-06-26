@@ -53,13 +53,13 @@ df.params$value[df.params$type == "time:end"] <- "2010-01-31"
 
 #### Submit the query
 
-```{r}
+```{r  warning=FALSE}
 res <- Query(osd.url, response.type, df.params)
 ```
 
 #### Get the dataset
 
-```{r}
+```{r warning=FALSE}
 dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
   "//dclite4g:DataSet"), stringsAsFactors = FALSE)
 ```
