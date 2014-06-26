@@ -1,1 +1,62 @@
 # Occurrences
+
+#### Load the required packages with:
+
+```{r warning=FALSE, error=FALSE, message=FALSE, results='hide'}
+
+library("devtools")
+library("rgbif")
+library("fpc")
+library("httr")
+library("stringr")
+library("XML")
+library("RCurl")
+library("sp")
+library("rgeos") 
+library("maps") 
+library("RColorBrewer")
+library("mapdata") 
+library("rOpenSearch")
+library("rgbif")
+library("knitr")
+library("rworldmap")
+```
+
+#### Getting the White Shark occurrences from GBIF wit rgbif
+
+```{r}
+# get the occurrences from GBIF using rgbif
+key <- name_backbone(name='Carcharodon carcharias', kingdom='animalia')$speciesKey
+occ <- occ_search(taxonKey=key, limit=1000, return='data', hasCoordinate=TRUE)
+occ <- occ[complete.cases(occ),]
+```
+
+This create the data frame occ with `r nrow(occ)` entries. The first five entries look like:
+
+```{r results='asis', echo=FALSE}
+kable(head(occ, 5), format = "html")
+```
+
+The occurrences can be plotted to create the map:
+
+```{r results='asis', message=FALSE, echo=FALSE}
+gbifmap(occ)
+```
+
+Apply the DBSCAN clustering algorithm to identify representative occurence clusters.
+
+```{r}
+occ <- cbind(occ$decimalLongitude, occ$decimalLatitude)
+
+eps <- 5
+minpts <- 20
+ds <- dbscan(occ, eps=eps, MinPts=minpts)
+```
+
+The DBSCAN algorithm identified `r max(ds$cluster)`.
+
+The cluster can be plotted using the cluster id color:
+
+```{r}
+plot(occ, col=ds$cluster)
+```
