@@ -47,11 +47,11 @@ gbifmap(occurrences)
 Apply the DBSCAN clustering algorithm to identify representative occurence clusters.
 
 ```{r}
-occ <- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
+occurrences <- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
 
 eps <- 5
 minpts <- 20
-dbscan.res <- dbscan(occ, eps=eps, MinPts=minpts)
+dbscan.res <- dbscan(occurrences, eps=eps, MinPts=minpts)
 ```
 
 The DBSCAN algorithm identified `r max(dbscan.res$cluster)`.
@@ -59,7 +59,7 @@ The DBSCAN algorithm identified `r max(dbscan.res$cluster)`.
 The cluster can be plotted using the cluster id color:
 
 ```{r}
-plot(occ, col=dbscan.res$cluster)
+plot(occurrences, col=dbscan.res$cluster)
 ```
 
 ```{r}
