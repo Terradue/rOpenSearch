@@ -94,5 +94,5 @@ map <- Leaflet$new()
 map$setView(c(51.505, -0.09), zoom = 13)
 map$tileLayer(provider = "Stamen.Watercolor")
 map$marker(c(51.5, -0.09), bindPopup = "Hi. I am a popup")
-map
+cat(map)
 ```
