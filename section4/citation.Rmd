@@ -1,7 +1,7 @@
 # Citation 
 
 
-The rOpenSearch package release have a DOI assigned: http://dx.doi.org/10.5281/zenodo.10642
+The rOpenSearch package releases have a DOI assigned: http://dx.doi.org/10.5281/zenodo.10642
 
 [![DOI](https://zenodo.org/badge/3806/Terradue/rOpenSearch.png)](http://dx.doi.org/10.5281/zenodo.10642)
 
