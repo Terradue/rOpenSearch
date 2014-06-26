@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783439475">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783512668">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -394,12 +394,7 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 <h4 id="submit-the-query">Submit the query</h4>
 <pre><code class="lang-r">res &lt;- Query(osd.url, response.type, df.params)
 </code></pre>
-<pre><code>## Warning: closing unused connection 9 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
-## Warning: closing unused connection 8 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
-## Warning: closing unused connection 7 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
-## Warning: closing unused connection 6 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
-## Warning: closing unused connection 5 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
-</code></pre><h4 id="get-the-dataset">Get the dataset</h4>
+<h4 id="get-the-dataset">Get the dataset</h4>
 <pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
   <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
 </code></pre>
