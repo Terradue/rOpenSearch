@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403792800119">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403792909768">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -355,7 +355,18 @@
 <h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
 <p><code>` </code>{r warning=FALSE, error=FALSE, message=FALSE, results=&#39;hide&#39;}</p>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"devtools"</span>)
-<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
+</code></pre>
+<pre><code>## 
+## Attaching package: &#39;devtools&#39;
+## 
+## The following objects are masked from &#39;package:utils&#39;:
+## 
+##     ?, help
+## 
+## The following object is masked from &#39;package:base&#39;:
+## 
+##     system.file
+</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
 </code></pre>
 <pre><code>## 
 ## New to rgbif? Tutorial at http://ropensci.org/tutorials/rgbif_tutorial_newapi.html 
@@ -377,8 +388,12 @@
 </code></pre>
 <pre><code>## Loading required package: bitops
 </code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"sp"</span>)
-<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>) 
-<span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>)
+</code></pre>
+<pre><code>## rgeos version: 0.3-5, (SVN revision 447)
+##  GEOS runtime version: 3.3.9-CAPI-1.7.9 
+##  Polygon checking: TRUE
+</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>)
 </code></pre>
 <pre><code>## 
 ## Attaching package: &#39;maps&#39;
@@ -402,8 +417,50 @@ occurrences &lt;- occ_search(taxonKey=key, limit=<span class="hljs-number">1000<
 occurrences &lt;- occurrences[complete.cases(occurrences),]
 </code></pre>
 <p>This create the data frame occ with 464 entries. The first five entries look like:</p>
-<pre><code>## Error: object &#39;occ&#39; not found
-</code></pre><p>The occurrences can be plotted to create the map:</p>
+<table>
+ <thead>
+  <tr>
+   <th align="left"> name </th>
+   <th align="right"> key </th>
+   <th align="right"> decimalLatitude </th>
+   <th align="right"> decimalLongitude </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td align="left"> Carcharodon carcharias </td>
+   <td align="right"> 893351764 </td>
+   <td align="right"> -46.87 </td>
+   <td align="right"> 168.1 </td>
+  </tr>
+  <tr>
+   <td align="left"> Carcharodon carcharias </td>
+   <td align="right"> 893351688 </td>
+   <td align="right"> -46.87 </td>
+   <td align="right"> 168.1 </td>
+  </tr>
+  <tr>
+   <td align="left"> Carcharodon carcharias </td>
+   <td align="right"> 899977433 </td>
+   <td align="right"> 28.23 </td>
+   <td align="right"> -114.6 </td>
+  </tr>
+  <tr>
+   <td align="left"> Carcharodon carcharias </td>
+   <td align="right"> 899977433 </td>
+   <td align="right"> 28.23 </td>
+   <td align="right"> -114.6 </td>
+  </tr>
+  <tr>
+   <td align="left"> Carcharodon carcharias </td>
+   <td align="right"> 899977433 </td>
+   <td align="right"> 28.23 </td>
+   <td align="right"> -114.6 </td>
+  </tr>
+</tbody>
+</table>
+
+<p>The occurrences can be plotted to create the map:</p>
 <p><img src="figure/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
 <p>Apply the DBSCAN clustering algorithm to identify representative occurence clusters.</p>
 <pre><code class="lang-r">occurrences &lt;- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
