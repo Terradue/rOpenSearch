@@ -100,7 +100,7 @@ map
 
 ### leaflet
 
-```{r results="asis"}
+```{r}
 library(rCharts)
 json <- read_file("example1.geojson")
 regions=RJSONIO::fromJSON(json)
