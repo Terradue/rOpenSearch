@@ -89,6 +89,7 @@ The GeoJSON file can be see here: https://github.com/Terradue/rOpenSearch/blob/m
 ```{r}
 
 library(rMaps)
+library(knitr)
 map <- Leaflet$new()
 map$setView(c(51.505, -0.09), zoom = 13)
 map$tileLayer(provider = "Stamen.Watercolor")
