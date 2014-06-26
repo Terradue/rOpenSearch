@@ -80,7 +80,7 @@ for (n in 2:nrow(dataset)) {
 
 #### write the geojson file
 
-```{r}
+```coffee
 writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 ```
 
