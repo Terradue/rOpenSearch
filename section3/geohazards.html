@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783512668">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783575623">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -360,6 +360,7 @@
 <span class="hljs-keyword">library</span>(devtools)
 <span class="hljs-keyword">library</span>(rgdal)
 <span class="hljs-keyword">library</span>(rgeos)
+<span class="hljs-keyword">library</span>(XML)
 <span class="hljs-keyword">library</span>(rOpenSearch)
 </code></pre>
 <h4 id="define-the-opensearch-description-url">Define the OpenSearch description URL</h4>
@@ -398,19 +399,16 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 <pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
   <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
 </code></pre>
-<pre><code>## Error: could not find function &quot;xmlToDataFrame&quot;
-</code></pre><h4 id="create-a-spatialpolygonsdataframe-with-the-dataset">Create a SpatialPolygonsDataFrame with the dataset</h4>
+<h4 id="create-a-spatialpolygonsdataframe-with-the-dataset">Create a SpatialPolygonsDataFrame with the dataset</h4>
 <pre><code class="lang-r">poly.sp &lt;- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[<span class="hljs-number">1</span>,]), dataset[<span class="hljs-number">1</span>,])
-</code></pre>
-<pre><code>## Error: object &#39;dataset&#39; not found
-</code></pre><pre><code class="lang-r"><span class="hljs-comment"># iterate through the remaining dataset</span>
+
+<span class="hljs-comment"># iterate through the remaining dataset</span>
 <span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> <span class="hljs-number">2</span>:nrow(dataset)) {
   poly.sp &lt;- rbind(poly.sp,
     SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
 }
 </code></pre>
-<pre><code>## Error: object &#39;dataset&#39; not found
-</code></pre><h4 id="write-the-geojson-file">write the geojson file</h4>
+<h4 id="write-the-geojson-file">write the geojson file</h4>
 <pre><code>writeOGR(poly.sp, &#39;example1.geojson&#39;,&#39;dataMap&#39;, driver=&#39;GeoJSON&#39;)
 </code></pre><p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
 
