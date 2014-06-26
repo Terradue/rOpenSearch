@@ -108,6 +108,6 @@ regions=RJSONIO::fromJSON(json)
 lmap <- Leaflet$new()
 lmap$tileLayer(provide='Stamen.TonerLite')
 lmap$setView(c(-37, 145), zoom = 6)
-lmap$geoJson(regions)
+#lmap$geoJson(regions)
 lmap$print()
 ```
