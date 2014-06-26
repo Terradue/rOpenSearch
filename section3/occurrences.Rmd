@@ -1,4 +1,4 @@
-# Occurrences
+# Earth Observation & GBIF occurrences
 
 This example:
 

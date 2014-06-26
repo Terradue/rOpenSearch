@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403795893739">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403796297724">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -349,12 +349,14 @@
                 
                     <section class="normal" id="section-gitbook_8">
                     
-                        <h1 id="geohazards">Geohazards</h1>
-<h2 id="the-european-space-agency-virtual-archive">The European Space Agency Virtual Archive</h2>
-<p>Virtual Archives are online archives that provide an easy access to EO data by coupling high bandwidth, large storage space and software. The Virtual Archive 4 provides a Cloud based service for storing and providing access to ESA Synthetic Aperture Radar (SAR) data.</p>
-<p>This virtual archive represents ESA contribution to the supersites initiative. This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection</p>
-<h2 id="use-ropensearch-to-query-the-virtual-archive-envisat-asar-image-mode-level-0-data">Use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data</h2>
-<p>This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31</p>
+                        <h1 id="geohazards-and-synthetic-aperture-radar-data">Geohazards and Synthetic Aperture Radar data</h1>
+<h2 id="the-geohazard-supersites-and-natural-laboratories-virtual-archive">The Geohazard Supersites and Natural Laboratories Virtual Archive</h2>
+<p>Virtual Archives are online archives that provide an easy access to EO data by coupling high bandwidth, large storage space and software. 
+European Space Agency&#39;s Virtual Archive 4 provides a Cloud based service for storing and providing access to ESA Synthetic Aperture Radar (SAR) data.
+This virtual archive represents ESA&#39;s contribution to the <a href="http://supersites.earthobservations.org/" target="_blank">Geohazard Supersites and Natural Laboratories initiative</a>. 
+This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection.</p>
+<p>The Virtual Archive&#39;s Web Interface is accessible here: <a href="http://eo-virtual-archive4.esa.int/" target="_blank">http://eo-virtual-archive4.esa.int/</a></p>
+<p>This example use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data for the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31.</p>
 <h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
 <pre><code class="lang-r"><span class="hljs-comment"># load the libraries</span>
 <span class="hljs-keyword">library</span>(devtools)
