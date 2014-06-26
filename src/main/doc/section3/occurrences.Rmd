@@ -21,7 +21,7 @@ library("knitr")
 library("rworldmap")
 ```
 
-#### Getting the White Shark occurrences from GBIF wit rgbif
+#### Getting the White Shark occurrences from GBIF with rgbif
 
 ```{r}
 # get the occurrences from GBIF using rgbif
@@ -54,11 +54,7 @@ dbscan.res <- dbscan(occurrences, eps=eps, MinPts=minpts)
 
 The DBSCAN algorithm identified `r max(dbscan.res$cluster)` geographical clusters.
 
-The cluster can be plotted using the cluster id color:
-
-```{r}
-plot(occurrences, col=dbscan.res$cluster)
-```
+For each cluster the minimum bounding box is identified and plot.
 
 ```{r}
 mbr <- list()
@@ -86,3 +82,102 @@ for(i in 1:max(dbscan.res$cluster)) {
 
 plot(occurrences, add=TRUE, col=dbscan.res$cluster)
 ```
+
+#### Querying Envisat MERIS Level 1 data over a cluster
+
+ESA hosts an OpenSearch catalogue available at: http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/rdf
+
+We will work with Envisat MERIS Full Resolution data and use the catalogue response type "application/rdf+xml".
+
+```{r}
+# set the catalogue and retrieve the queryables
+osd.description <- 'http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description'
+response.type <- "application/rdf+xml"
+q <- GetOSQueryables(osd.description, response.type)
+```
+
+q is a data frame containing:
+
+```{r results='asis', echo=FALSE}
+kable(q, format = "html")
+```
+
+Let's set the **count** field type value to `r count <- 200; count`:
+
+```{r}
+q$value[q$type == "count"] <- count
+```
+
+and set out time of interest by setting the value of the field types **time:start**, **time:end** with:
+
+```{r}
+q$value[q$type == "time:start"] <- "2006-01-01"
+q$value[q$type == "time:end"] <- "2006-12-31"
+```
+
+q is now updated with:
+
+```{r results='asis', echo=FALSE}
+kable(q, format = "html")
+```
+
+```{r}
+q$value[q$type == "geo:geometry"] <- writeWKT(mbr[[1]])
+```
+
+q is now updated with (removing NAs for readability):
+
+```{r results='asis', echo=FALSE}
+kable(q[complete.cases(q),], format = "html")
+```
+
+Let's query the catalogue and apply an xpath expression to retrieve the datasets as a data frame:
+
+```{r}
+res <- Query(osd.description, response.type, q)
+```
+
+From the result, get the Datasets
+
+```{r}
+dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), "//dclite4g:DataSet"), stringsAsFactors = FALSE)
+```
+
+Let's inspect the first datasets:
+
+```{r results='asis', echo=FALSE}
+kable(head(dataset, 5), format = "html")
+```
+
+We now create a SpatialPolygonsDataFrame:  
+```{r}
+poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])
+
+for (n in 2:nrow(dataset)) {
+ poly.sp <- rbind(poly.sp, SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))  
+} 
+```
+
+And check the coverage index of the MERIS products wrt the cluster minimum bounding box:
+
+```{r}
+for (n in 1:nrow(dataset)) {
+ poly.sp[n,"coverage_index"] <- gArea(gIntersection(mbr[[1]], poly.sp[n,])) / gArea(mbr[[1]]) 
+}
+```
+
+Select those with a coverage over 80%:
+
+```{r}
+sp <- poly.sp[poly.sp$coverage_index > 0.8,]
+```
+
+Let's plot it:
+
+```{r}
+plot(getMap())
+plot(sp, add=TRUE, col=brewer.pal( 8 , "RdBu")[1])
+plot(mbr[[1]], add=TRUE, col="blue")
+```
+
+Done!
