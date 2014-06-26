@@ -91,11 +91,10 @@ The GeoJSON file can be see here: https://github.com/Terradue/rOpenSearch/blob/m
 ```{r}
 library(rCharts)
 json <- read_file("example1.geojson")
-head(json)
 regions=RJSONIO::fromJSON(json)
 ```
 
-```{r results="asis", echo=FALSE}
+```{r results="asis"}
 
 lmap <- Leaflet$new()
 lmap$tileLayer(provide='Stamen.TonerLite')
