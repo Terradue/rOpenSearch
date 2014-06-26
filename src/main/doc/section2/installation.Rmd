@@ -1,3 +1,4 @@
 # Installation
 
 This chapter provides a guide to install the rOpenSearch package.
+
