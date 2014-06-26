@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403789948675">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403790042124">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -413,26 +413,21 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 </code></pre>
 <pre><code>## Error: Creation of output file failed
 </code></pre><p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
-<pre><code class="lang-r"><span class="hljs-keyword">library</span>(rMaps)
-<span class="hljs-keyword">library</span>(knitr)
-map &lt;- Leaflet$new()
-map$setView(c(<span class="hljs-number">51.505</span>, -<span class="hljs-number">0.09</span>), zoom = <span class="hljs-number">13</span>)
-map$tileLayer(provider = <span class="hljs-string">"Stamen.Watercolor"</span>)
-map$marker(c(<span class="hljs-number">51.5</span>, -<span class="hljs-number">0.09</span>), bindPopup = <span class="hljs-string">"Hi. I am a popup"</span>)
-map
-</code></pre>
-<p><iframe src=' figure/unnamed-chunk-11.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart7ba93d2704d7 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
+<h1 id="-r-results-asis-">```{r results=&quot;asis&quot;}</h1>
+<p>#</p>
+<h1 id="library-rmaps-">library(rMaps)</h1>
+<h1 id="library-knitr-">library(knitr)</h1>
+<h1 id="map-leaflet-new-">map &lt;- Leaflet$new()</h1>
+<h1 id="map-setview-c-51-505-0-09-zoom-13-">map$setView(c(51.505, -0.09), zoom = 13)</h1>
+<h1 id="map-tilelayer-provider-stamen-watercolor-">map$tileLayer(provider = &quot;Stamen.Watercolor&quot;)</h1>
+<h1 id="map-marker-c-51-5-0-09-bindpopup-hi-i-am-a-popup-">map$marker(c(51.5, -0.09), bindPopup = &quot;Hi. I am a popup&quot;)</h1>
+<h1 id="map">map</h1>
+<h1 id="-">```</h1>
 <h3 id="leaflet">leaflet</h3>
-<pre><code>## 
-## Attaching package: &#39;rCharts&#39;
-## 
-## The following objects are masked from &#39;package:rMaps&#39;:
-## 
-##     Datamaps, Leaflet, makeChoroData, processChoroData, rqMap
-</code></pre><p><div id = 'chart7ba91072363c' class = 'rChart leaflet'></div></p>
+<p><div id = 'chart7bf6571ee60e' class = 'rChart leaflet'></div></p>
 <script>
   var spec = {
- "dom": "chart7ba91072363c",
+ "dom": "chart7bf6571ee60e",
 "width":            800,
 "height":            400,
 "urlTemplate": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -442,7 +437,7 @@ map
 "provider": "Stamen.TonerLite",
 "center": [            -37,            145 ],
 "zoom":              6,
-"id": "chart7ba91072363c" 
+"id": "chart7bf6571ee60e" 
 }
 
   var map = L.map(spec.dom, spec.mapOpts)
