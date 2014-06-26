@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403794637334">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403795195462">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -352,6 +352,13 @@
                     <section class="normal" id="section-gitbook_9">
                     
                         <h1 id="occurrences">Occurrences</h1>
+<p>This example:</p>
+<ul>
+<li>Queries the <a href="http://www.gbif.org/dF" target="_blank">Global Biodiversity Information Facility</a> using the <a href="http://ropensci.org/" target="_blank">rOpenSci</a> <a href="http://ropensci.org/tutorials/rgbif_tutorial.html" target="_blank">rgbif</a> package for the White Shark occurrences</li>
+<li>Uses the <a href="http://en.wikipedia.org/wiki/DBSCAN" target="_blank">DBSCAN clustering algorithm</a> to identify geospatial clusters </li>
+<li>Uses those clusters to query the <a href="http://www.esa.int/ESA" target="_blank">European Space Agency</a> Envisat MERIS Full Resolution Level 1 OpenSearch catalogue</li>
+<li>Selects the MERIS products covering at least 80% of the first identified cluster</li>
+</ul>
 <h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"devtools"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
@@ -364,7 +371,6 @@
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>) 
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>) 
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"RColorBrewer"</span>)
-<span class="hljs-comment">#library("mapdata") </span>
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rOpenSearch"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"knitr"</span>)
@@ -749,122 +755,30 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 <p>Let&#39;s query the catalogue and apply an xpath expression to retrieve the datasets as a data frame:</p>
 <pre><code class="lang-r">res &lt;- Query(osd.description, response.type, q)
 </code></pre>
-<pre><code>## Warning: closing unused connection 9 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-## Warning: closing unused connection 8 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+<p>From the result, get the Datasets</p>
+<pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
+</code></pre>
+<pre><code>## Warning: closing unused connection 8 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
 ## Warning: closing unused connection 7 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
 ## Warning: closing unused connection 6 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
 ## Warning: closing unused connection 5 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-</code></pre><p>From the result, get the Datasets</p>
-<pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
-</code></pre>
-<pre><code>## Warning: closing unused connection 5
-## (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-</code></pre><p>Let&#39;s inspect the first datasets:</p>
+</code></pre><p>Let&#39;s inspect the first datasets (showing only the <strong>identifier</strong> column):</p>
 <table>
- <thead>
-  <tr>
-   <th align="left"> identifier </th>
-   <th align="left"> series </th>
-   <th align="left"> onlineResource </th>
-   <th align="left"> processorVersion </th>
-   <th align="left"> orbitNumber </th>
-   <th align="left"> acquisitionStation </th>
-   <th align="left"> processingCenter </th>
-   <th align="left"> size </th>
-   <th align="left"> trackNumber </th>
-   <th align="left"> dtstart </th>
-   <th align="left"> dtend </th>
-   <th align="left"> processingDate </th>
-   <th align="left"> spatial </th>
-   <th align="left"> modified </th>
-   <th align="left"> created </th>
-  </tr>
- </thead>
 <tbody>
   <tr>
    <td align="left"> MER_FRS_1PPEPA20061230_081147_000003212054_00164_25268_6659.N1 </td>
-   <td align="left">  </td>
-   <td align="left">  </td>
-   <td align="left"> MERIS/6.04 </td>
-   <td align="left"> 25268 </td>
-   <td align="left"> PDHS-K </td>
-   <td align="left"> E-PAC </td>
-   <td align="left"> 1080968778 </td>
-   <td align="left"> 164 </td>
-   <td align="left"> 2006-12-30T08:11:47.000Z </td>
-   <td align="left"> 2006-12-30T08:17:08.000Z </td>
-   <td align="left"> 2013-08-08T07:50:02.000Z </td>
-   <td align="left"> MULTIPOLYGON(((30.0444 -16.5494,19.4531 -14.2528,18.0477 -19.5467,16.6223 -24.494,15.1727 -29.0941,13.8158 -33.0206,26.1201 -35.4757,30.0444 -16.5494))) </td>
-   <td align="left"> 2014-03-16T10:35:51.922Z </td>
-   <td align="left"> 2014-03-16T10:35:51.922Z </td>
   </tr>
   <tr>
    <td align="left"> MER_FRS_1PPEPA20061230_081101_000003662054_00164_25268_6663.N1 </td>
-   <td align="left">  </td>
-   <td align="left">  </td>
-   <td align="left"> MERIS/6.04 </td>
-   <td align="left"> 25268 </td>
-   <td align="left"> PDHS-K </td>
-   <td align="left"> E-PAC </td>
-   <td align="left"> 1232660796 </td>
-   <td align="left"> 164 </td>
-   <td align="left"> 2006-12-30T08:11:01.000Z </td>
-   <td align="left"> 2006-12-30T08:17:08.000Z </td>
-   <td align="left"> 2013-08-08T07:59:09.000Z </td>
-   <td align="left"> MULTIPOLYGON(((30.591 -13.8876,20.1195 -11.6007,18.5871 -17.5634,17.014 -23.1766,15.3878 -28.4383,13.8157 -33.0207,26.12 -35.4758,30.591 -13.8876))) </td>
-   <td align="left"> 2014-03-16T10:35:39.238Z </td>
-   <td align="left"> 2014-03-16T10:35:39.238Z </td>
   </tr>
   <tr>
    <td align="left"> MER_FRS_1PPEPA20061229_084555_000001292054_00150_25254_6620.N1 </td>
-   <td align="left">  </td>
-   <td align="left">  </td>
-   <td align="left"> MERIS/6.04 </td>
-   <td align="left"> 25254 </td>
-   <td align="left"> PDHS-K </td>
-   <td align="left"> E-PAC </td>
-   <td align="left"> 436277685 </td>
-   <td align="left"> 150 </td>
-   <td align="left"> 2006-12-29T08:45:55.000Z </td>
-   <td align="left"> 2006-12-29T08:48:05.000Z </td>
-   <td align="left"> 2013-08-08T05:53:26.000Z </td>
-   <td align="left"> MULTIPOLYGON(((20.3057 -25.5101,9.11382 -23.1617,6.72189 -30.7176,18.715 -33.1416,20.3057 -25.5101))) </td>
-   <td align="left"> 2014-03-16T10:25:09.926Z </td>
-   <td align="left"> 2014-03-16T10:25:09.926Z </td>
   </tr>
   <tr>
    <td align="left"> MER_FRS_1PPEPA20061229_084136_000003882054_00150_25254_6622.N1 </td>
-   <td align="left">  </td>
-   <td align="left">  </td>
-   <td align="left"> MERIS/6.04 </td>
-   <td align="left"> 25254 </td>
-   <td align="left"> PDHS-K </td>
-   <td align="left"> E-PAC </td>
-   <td align="left"> 1308506805 </td>
-   <td align="left"> 150 </td>
-   <td align="left"> 2006-12-29T08:41:36.000Z </td>
-   <td align="left"> 2006-12-29T08:48:05.000Z </td>
-   <td align="left"> 2013-08-08T06:08:24.000Z </td>
-   <td align="left"> MULTIPOLYGON(((23.4465 -10.2163,13.1006 -7.93935,11.4662 -14.5743,9.91623 -20.3627,8.37012 -25.6361,6.72019 -30.7226,18.7139 -33.1467,23.4465 -10.2163))) </td>
-   <td align="left"> 2014-03-16T10:25:03.563Z </td>
-   <td align="left"> 2014-03-16T10:25:03.563Z </td>
   </tr>
   <tr>
    <td align="left"> MER_FRS_1PPEPA20061228_073736_000001092054_00135_25239_6574.N1 </td>
-   <td align="left">  </td>
-   <td align="left">  </td>
-   <td align="left"> MERIS/6.04 </td>
-   <td align="left"> 25239 </td>
-   <td align="left"> PDHS-E </td>
-   <td align="left"> E-PAC </td>
-   <td align="left"> 369912423 </td>
-   <td align="left"> 135 </td>
-   <td align="left"> 2006-12-28T07:37:36.000Z </td>
-   <td align="left"> 2006-12-28T07:39:26.000Z </td>
-   <td align="left"> 2013-08-08T03:34:19.000Z </td>
-   <td align="left"> MULTIPOLYGON(((37.0679 -27.857,25.6615 -25.4893,23.5629 -31.8851,35.7094 -34.3241,37.0679 -27.857))) </td>
-   <td align="left"> 2014-03-16T10:12:33.494Z </td>
-   <td align="left"> 2014-03-16T10:12:33.494Z </td>
   </tr>
 </tbody>
 </table>
@@ -884,13 +798,14 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 <p>Select those with a coverage over 80%:</p>
 <pre><code class="lang-r">sp &lt;- poly.sp[poly.sp$coverage_index &gt; <span class="hljs-number">0.8</span>,]
 </code></pre>
-<p>Let&#39;s plot it:</p>
+<p>Let&#39;s plot the 21 MERIS products that cover for at least 80% of the cluster area:</p>
 <pre><code class="lang-r">plot(getMap())
-plot(sp, add=<span class="hljs-literal">TRUE</span>, col=brewer.pal( <span class="hljs-number">8</span> , <span class="hljs-string">"RdBu"</span>)[<span class="hljs-number">1</span>])
+plot(sp, add=<span class="hljs-literal">TRUE</span>, col=brewer.pal(<span class="hljs-number">8</span> , <span class="hljs-string">"RdBu"</span>)[<span class="hljs-number">1</span>])
 plot(mbr[[<span class="hljs-number">1</span>]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"blue"</span>)
 </code></pre>
 <p><img src="figure/unnamed-chunk-20.png" alt="plot of chunk unnamed-chunk-20"> </p>
-<p>Done!</p>
+<h4 id="going-further">Going further</h4>
+<p>The analysis could be repeated with the other clusters to identify what is the best cluster to work with MERIS data.</p>
 
                     
                     </section>
