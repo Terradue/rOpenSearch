@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403789574969">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403789753878">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -371,12 +371,8 @@
 </ul>
 <pre><code class="lang-r">GetOSResponseFormats(osd.url)
 </code></pre>
-<pre><code>## [1] &quot;application/rdf+xml&quot;                 
-## [2] &quot;text/plain&quot;                          
-## [3] &quot;text/tab-separated-values&quot;           
-## [4] &quot;text/html&quot;                           
-## [5] &quot;application/vnd.google-earth.kml+xml&quot;
-## [6] &quot;application/atom+xml&quot;
+<pre><code>## Operation in progressfailed to load external entity &quot;http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description&quot;
+</code></pre><pre><code>## Error: 1: Operation in progress2: failed to load external entity &quot;http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description&quot;
 </code></pre><ul>
 <li>Set the OpenSearch response type to use:</li>
 </ul>
@@ -421,7 +417,7 @@ map$tileLayer(provider = <span class="hljs-string">"Stamen.Watercolor"</span>)
 map$marker(c(<span class="hljs-number">51.5</span>, -<span class="hljs-number">0.09</span>), bindPopup = <span class="hljs-string">"Hi. I am a popup"</span>)
 map
 </code></pre>
-<p><iframe src=' figure/unnamed-chunk-11.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart7a808612c58 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
+<p><iframe src=' figure/unnamed-chunk-11.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart7acc7e5740b9 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
 <h3 id="leaflet">leaflet</h3>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(rCharts)
 </code></pre>
@@ -438,12 +434,12 @@ lmap &lt;- Leaflet$new()
 lmap$tileLayer(provide=<span class="hljs-string">'Stamen.TonerLite'</span>)
 lmap$setView(c(-<span class="hljs-number">37</span>, <span class="hljs-number">145</span>), zoom = <span class="hljs-number">6</span>)
 lmap$geoJson(regions)
-lmap$print(<span class="hljs-string">'chart7'</span>)
+lmap$print()
 </code></pre>
-<p><div id = 'chart7' class = 'rChart leaflet'></div></p>
+<p><div id = 'chart7acc13c749a5' class = 'rChart leaflet'></div></p>
 <script>
   var spec = {
- "dom": "chart7",
+ "dom": "chart7acc13c749a5",
 "width":            800,
 "height":            400,
 "urlTemplate": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -4658,7 +4654,7 @@ lmap$print(<span class="hljs-string">'chart7'</span>)
 } 
 ] 
 },
-"id": "chart7" 
+"id": "chart7acc13c749a5" 
 }
 
   var map = L.map(spec.dom, spec.mapOpts)
