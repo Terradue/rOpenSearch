@@ -83,5 +83,7 @@ plot(occurrences, col=dbscan.res$cluster)
     if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
 
   }
-  plot(mbr[[1]])
+  
+  plot(getMap())
+  plot(mbr[[1]], add=TRUE)
 ```
