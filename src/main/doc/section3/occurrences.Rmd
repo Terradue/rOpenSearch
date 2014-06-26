@@ -2,9 +2,7 @@
 
 #### Load the required packages with:
 
-`` `{r warning=FALSE, error=FALSE, message=FALSE, results='hide'}
-
-```{r}
+```{r warning=FALSE, error=FALSE, message=FALSE}
 library("devtools")
 library("rgbif")
 library("fpc")
@@ -84,6 +82,7 @@ for(i in 1:max(dbscan.res$cluster)) {
   if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
 
   plot(mbr[[length(mbr)]], add=TRUE, col="red")
- }
- #plot(occurrences, add=TRUE, col=dbscan.res$cluster)
+}
+
+plot(occurrences, add=TRUE, col=dbscan.res$cluster)
 ```
