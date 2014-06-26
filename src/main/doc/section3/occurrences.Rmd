@@ -133,7 +133,7 @@ kable(q[complete.cases(q),], format = "html")
 
 Let's query the catalogue and apply an xpath expression to retrieve the datasets as a data frame:
 
-```{r}
+```{r warning=FALSE}
 res <- Query(osd.description, response.type, q)
 ```
 
@@ -143,10 +143,10 @@ From the result, get the Datasets
 dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), "//dclite4g:DataSet"), stringsAsFactors = FALSE)
 ```
 
-Let's inspect the first datasets:
+Let's inspect the first datasets (showing only the **identifier** column):
 
 ```{r results='asis', echo=FALSE}
-kable(head(dataset, 5), format = "html")
+kable(head(dataset[,1], 5), format = "html")
 ```
 
 We now create a SpatialPolygonsDataFrame:  
@@ -172,12 +172,15 @@ Select those with a coverage over 80%:
 sp <- poly.sp[poly.sp$coverage_index > 0.8,]
 ```
 
-Let's plot it:
+Let's plot the `r nrow(sp)` MERIS products that cover for at least 80% of the cluster area:
 
 ```{r}
 plot(getMap())
-plot(sp, add=TRUE, col=brewer.pal( 8 , "RdBu")[1])
+plot(sp, add=TRUE, col=brewer.pal(8 , "RdBu")[1])
 plot(mbr[[1]], add=TRUE, col="blue")
 ```
 
-Done!
+#### Going further 
+
+The analysis could be repeated with the other clusters to identify what is the best cluster to work with MERIS data.
+
