@@ -80,7 +80,7 @@ for (n in 2:nrow(dataset)) {
 
 #### write the geojson file
 
-```{r}
+```{r warning=FALSE, error=FALSE, message=FALSE}
 writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 ```
 
