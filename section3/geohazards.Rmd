@@ -28,7 +28,7 @@ osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
 3. Get the list of OpenSearch response types:
 
 ```{r}
-GetOSResponseFormats()
+GetOSResponseFormats(osd.url)
 ```
 
 4. Set the OpenSearch response type to use:

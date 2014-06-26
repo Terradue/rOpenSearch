@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783040226">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783168094">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -372,9 +372,14 @@
 <ol>
 <li>Get the list of OpenSearch response types:</li>
 </ol>
-<pre><code class="lang-r">GetOSResponseFormats()
+<pre><code class="lang-r">GetOSResponseFormats(osd.url)
 </code></pre>
-<pre><code>## Error: Invalid OpenSearch description document
+<pre><code>## [1] &quot;application/rdf+xml&quot;                 
+## [2] &quot;text/plain&quot;                          
+## [3] &quot;text/tab-separated-values&quot;           
+## [4] &quot;text/html&quot;                           
+## [5] &quot;application/vnd.google-earth.kml+xml&quot;
+## [6] &quot;application/atom+xml&quot;
 </code></pre><ol>
 <li>Set the OpenSearch response type to use:</li>
 </ol>
