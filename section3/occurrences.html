@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793825445">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793932865">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -353,64 +353,24 @@
                     
                         <h1 id="occurrences">Occurrences</h1>
 <h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
-<p><code>` </code>{r warning=FALSE, error=FALSE, message=FALSE, results=&#39;hide&#39;}</p>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"devtools"</span>)
-</code></pre>
-<pre><code>## 
-## Attaching package: &#39;devtools&#39;
-## 
-## The following objects are masked from &#39;package:utils&#39;:
-## 
-##     ?, help
-## 
-## The following object is masked from &#39;package:base&#39;:
-## 
-##     system.file
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
-</code></pre>
-<pre><code>## 
-## New to rgbif? Tutorial at http://ropensci.org/tutorials/rgbif_tutorial_newapi.html 
-## See http://ropensci.org/tutorials/rgbif_tutorial.html for the old GBIF API 
-## citation(package=&#39;rgbif&#39;) for the citation for this package 
-## Use suppressPackageStartupMessages() to suppress these startup messages in the future
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"fpc"</span>)
-</code></pre>
-<pre><code>## Loading required package: MASS
-## Loading required package: cluster
-## Loading required package: mclust
-## Package &#39;mclust&#39; version 4.3
-## Loading required package: flexmix
-## Loading required package: lattice
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"httr"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"fpc"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"httr"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"stringr"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"XML"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"RCurl"</span>)
-</code></pre>
-<pre><code>## Loading required package: bitops
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"sp"</span>)
-<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>)
-</code></pre>
-<pre><code>## rgeos version: 0.3-5, (SVN revision 447)
-##  GEOS runtime version: 3.3.9-CAPI-1.7.9 
-##  Polygon checking: TRUE
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>)
-</code></pre>
-<pre><code>## 
-## Attaching package: &#39;maps&#39;
-## 
-## The following object is masked from &#39;package:mclust&#39;:
-## 
-##     map
-</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"RColorBrewer"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"sp"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>) 
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>) 
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"RColorBrewer"</span>)
 <span class="hljs-comment">#library("mapdata") </span>
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rOpenSearch"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"knitr"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rworldmap"</span>)
 </code></pre>
-<pre><code>## ### Welcome to rworldmap ###
-## For a short introduction type :      vignette(&#39;rworldmap&#39;)
-</code></pre><h4 id="getting-the-white-shark-occurrences-from-gbif-wit-rgbif">Getting the White Shark occurrences from GBIF wit rgbif</h4>
+<h4 id="getting-the-white-shark-occurrences-from-gbif-wit-rgbif">Getting the White Shark occurrences from GBIF wit rgbif</h4>
 <pre><code class="lang-r"><span class="hljs-comment"># get the occurrences from GBIF using rgbif</span>
 key &lt;- name_backbone(name=<span class="hljs-string">'Carcharodon carcharias'</span>, kingdom=<span class="hljs-string">'animalia'</span>)$speciesKey
 occurrences &lt;- occ_search(taxonKey=key, limit=<span class="hljs-number">1000</span>, <span class="hljs-keyword">return</span>=<span class="hljs-string">'data'</span>, hasCoordinate=<span class="hljs-literal">TRUE</span>)
@@ -495,11 +455,18 @@ plot(getMap())
   <span class="hljs-keyword">if</span> (gArea(gEnvelope(SpatialPoints(coords)))&gt;<span class="hljs-number">0</span>) mbr[[length(mbr)+<span class="hljs-number">1</span>]] &lt;- gEnvelope(SpatialPoints(coords))
 
   plot(mbr[[length(mbr)]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"red"</span>)
- }
+}
 </code></pre>
-<p><img src="figure/unnamed-chunk-7.png" alt="plot of chunk unnamed-chunk-7"> </p>
-<pre><code class="lang-r"> <span class="hljs-comment">#plot(occurrences, add=TRUE, col=dbscan.res$cluster)</span>
+<p><img src="figure/unnamed-chunk-71.png" alt="plot of chunk unnamed-chunk-7"> </p>
+<pre><code class="lang-r">plot(occurrences, add=<span class="hljs-literal">TRUE</span>, col=dbscan.res$cluster)
 </code></pre>
+<pre><code>## Warning: &quot;add&quot; is not a graphical parameter
+## Warning: &quot;add&quot; is not a graphical parameter
+## Warning: &quot;add&quot; is not a graphical parameter
+## Warning: &quot;add&quot; is not a graphical parameter
+## Warning: &quot;add&quot; is not a graphical parameter
+## Warning: &quot;add&quot; is not a graphical parameter
+</code></pre><p><img src="figure/unnamed-chunk-72.png" alt="plot of chunk unnamed-chunk-7"> </p>
 
                     
                     </section>
