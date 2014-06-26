@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403795195462">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403795845532">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -428,7 +428,17 @@ occurrences &lt;- occurrences[complete.cases(occurrences),]
 
 <p>The occurrences can be plotted to create the map:</p>
 <p><img src="figure/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
-<p>Apply the DBSCAN clustering algorithm to identify representative occurence clusters.</p>
+<h4 id="identifying-geographical-cluster-of-the-occurrences">Identifying geographical cluster of the occurrences</h4>
+<p>Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996. It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes. 
+DBSCAN is one of the most common clustering algorithms and also most cited in scientific literature.</p>
+<p>DBSCAN requires two parameters: ε (eps) and the minimum number of points required to form a dense region[a] (minPts). 
+It starts with an arbitrary starting point that has not been visited. 
+This point&#39;s ε-neighborhood is retrieved, and if it contains sufficiently many points, a cluster is started.
+Otherwise, the point is labeled as noise. Note that this point might later be found in a sufficiently sized ε-environment of a different point and hence be made part of a cluster.
+If a point is found to be a dense part of a cluster, its ε-neighborhood is also part of that cluster. 
+Hence, all points that are found within the ε-neighborhood are added, as is their own ε-neighborhood when they are also dense. 
+This process continues until the density-connected cluster is completely found. Then, a new unvisited point is retrieved and processed, leading to the discovery of a further cluster or noise.</p>
+<p>We will apply the DBSCAN clustering algorithm with ε value set to 5 and minPts to 20 to identify representative occurence geospatial clusters.</p>
 <pre><code class="lang-r">occurrences &lt;- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
 
 eps &lt;- <span class="hljs-number">5</span>
@@ -460,25 +470,16 @@ plot(getMap())
   plot(mbr[[length(mbr)]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"red"</span>)
 }
 </code></pre>
-<p><img src="figure/unnamed-chunk-61.png" alt="plot of chunk unnamed-chunk-6"> </p>
-<pre><code class="lang-r">plot(occurrences, add=<span class="hljs-literal">TRUE</span>, col=dbscan.res$cluster)
-</code></pre>
-<pre><code>## Warning: &quot;add&quot; is not a graphical parameter
-## Warning: &quot;add&quot; is not a graphical parameter
-## Warning: &quot;add&quot; is not a graphical parameter
-## Warning: &quot;add&quot; is not a graphical parameter
-## Warning: &quot;add&quot; is not a graphical parameter
-## Warning: &quot;add&quot; is not a graphical parameter
-</code></pre><p><img src="figure/unnamed-chunk-62.png" alt="plot of chunk unnamed-chunk-6"> </p>
+<p><img src="figure/unnamed-chunk-6.png" alt="plot of chunk unnamed-chunk-6"> </p>
 <h4 id="querying-envisat-meris-level-1-data-over-a-cluster">Querying Envisat MERIS Level 1 data over a cluster</h4>
 <p>ESA hosts an OpenSearch catalogue available at: <a href="http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/rdf" target="_blank">http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/rdf</a></p>
-<p>We will work with Envisat MERIS Full Resolution data and use the catalogue response type &quot;application/rdf+xml&quot;.</p>
+<p>The MERIS Level 1 Full Resolution OpenSearch document is available at: <a href="http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description" target="_blank">http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description</a></p>
 <pre><code class="lang-r"><span class="hljs-comment"># set the catalogue and retrieve the queryables</span>
 osd.description &lt;- <span class="hljs-string">'http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description'</span>
 response.type &lt;- <span class="hljs-string">"application/rdf+xml"</span>
 q &lt;- GetOSQueryables(osd.description, response.type)
 </code></pre>
-<p>q is a data frame containing:</p>
+<p>q is a data frame containing all the queryables to specify a query to the catalogue:</p>
 <table>
  <thead>
   <tr>
@@ -594,127 +595,14 @@ q &lt;- GetOSQueryables(osd.description, response.type)
 <p>Let&#39;s set the <strong>count</strong> field type value to 200:</p>
 <pre><code class="lang-r">q$value[q$type == <span class="hljs-string">"count"</span>] &lt;- count
 </code></pre>
-<p>and set out time of interest by setting the value of the field types <strong>time:start</strong>, <strong>time:end</strong> with:</p>
+<p>set out time of interest by setting the value of the field types <strong>time:start</strong>, <strong>time:end</strong> with:</p>
 <pre><code class="lang-r">q$value[q$type == <span class="hljs-string">"time:start"</span>] &lt;- <span class="hljs-string">"2006-01-01"</span>
 q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class="hljs-string">"2006-12-31"</span>
 </code></pre>
-<p>q is now updated with:</p>
-<table>
- <thead>
-  <tr>
-   <th align="left"> type </th>
-   <th align="left"> param </th>
-   <th align="left"> value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td align="left"> ws:type </td>
-   <td align="left"> resourcetype </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> ws:protocol </td>
-   <td align="left"> protocol </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> ws:ce </td>
-   <td align="left"> ce </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> count </td>
-   <td align="left"> count </td>
-   <td align="left"> 200 </td>
-  </tr>
-  <tr>
-   <td align="left"> startPage </td>
-   <td align="left"> startPage </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> startIndex </td>
-   <td align="left"> startIndex </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> sru:sortKeys </td>
-   <td align="left"> sort </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> searchTerms </td>
-   <td align="left"> q </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> time:start </td>
-   <td align="left"> start </td>
-   <td align="left"> 2006-01-01 </td>
-  </tr>
-  <tr>
-   <td align="left"> time:end </td>
-   <td align="left"> stop </td>
-   <td align="left"> 2006-12-31 </td>
-  </tr>
-  <tr>
-   <td align="left"> dct:modified </td>
-   <td align="left"> ingested </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> geo:box </td>
-   <td align="left"> bbox </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> geo:geometry </td>
-   <td align="left"> geometry </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> geo:uid </td>
-   <td align="left"> uid </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> eop:processingCenter </td>
-   <td align="left"> processingCenter </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> eop:processorVersion </td>
-   <td align="left"> processorVersion </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> eop:acquisitionStation </td>
-   <td align="left"> acquisitionStation </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> eop:size </td>
-   <td align="left"> size </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> eop:orbitNumber </td>
-   <td align="left"> orbitNumber </td>
-   <td align="left"> NA </td>
-  </tr>
-  <tr>
-   <td align="left"> eop:trackNumber </td>
-   <td align="left"> trackNumber </td>
-   <td align="left"> NA </td>
-  </tr>
-</tbody>
-</table>
-
-
+<p>and set the geo-spatial queryable to the Well-Known Text value of the first cluster identified:</p>
 <pre><code class="lang-r">q$value[q$type == <span class="hljs-string">"geo:geometry"</span>] &lt;- writeWKT(mbr[[<span class="hljs-number">1</span>]])
 </code></pre>
-<p>q is now updated with (removing NAs for readability):</p>
+<p>Our queryables data frame <em>q</em> is now updated with (removing NAs for readability):</p>
 <table>
  <thead>
   <tr>
@@ -758,11 +646,7 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 <p>From the result, get the Datasets</p>
 <pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
 </code></pre>
-<pre><code>## Warning: closing unused connection 8 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-## Warning: closing unused connection 7 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-## Warning: closing unused connection 6 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-## Warning: closing unused connection 5 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
-</code></pre><p>Let&#39;s inspect the first datasets (showing only the <strong>identifier</strong> column):</p>
+<p>Let&#39;s inspect the first datasets (showing only the <strong>identifier</strong> column):</p>
 <table>
 <tbody>
   <tr>
@@ -803,7 +687,7 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 plot(sp, add=<span class="hljs-literal">TRUE</span>, col=brewer.pal(<span class="hljs-number">8</span> , <span class="hljs-string">"RdBu"</span>)[<span class="hljs-number">1</span>])
 plot(mbr[[<span class="hljs-number">1</span>]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"blue"</span>)
 </code></pre>
-<p><img src="figure/unnamed-chunk-20.png" alt="plot of chunk unnamed-chunk-20"> </p>
+<p><img src="figure/unnamed-chunk-19.png" alt="plot of chunk unnamed-chunk-19"> </p>
 <h4 id="going-further">Going further</h4>
 <p>The analysis could be repeated with the other clusters to identify what is the best cluster to work with MERIS data.</p>
 

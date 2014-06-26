@@ -48,7 +48,20 @@ The occurrences can be plotted to create the map:
 gbifmap(occurrences)
 ```
 
-Apply the DBSCAN clustering algorithm to identify representative occurence clusters.
+#### Identifying geographical cluster of the occurrences
+
+Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996. It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes. 
+DBSCAN is one of the most common clustering algorithms and also most cited in scientific literature.
+
+DBSCAN requires two parameters: ε (eps) and the minimum number of points required to form a dense region[a] (minPts). 
+It starts with an arbitrary starting point that has not been visited. 
+This point's ε-neighborhood is retrieved, and if it contains sufficiently many points, a cluster is started.
+Otherwise, the point is labeled as noise. Note that this point might later be found in a sufficiently sized ε-environment of a different point and hence be made part of a cluster.
+If a point is found to be a dense part of a cluster, its ε-neighborhood is also part of that cluster. 
+Hence, all points that are found within the ε-neighborhood are added, as is their own ε-neighborhood when they are also dense. 
+This process continues until the density-connected cluster is completely found. Then, a new unvisited point is retrieved and processed, leading to the discovery of a further cluster or noise.
+
+We will apply the DBSCAN clustering algorithm with ε value set to 5 and minPts to 20 to identify representative occurence geospatial clusters.
 
 ```{r}
 occurrences <- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
@@ -85,15 +98,13 @@ for(i in 1:max(dbscan.res$cluster)) {
 
   plot(mbr[[length(mbr)]], add=TRUE, col="red")
 }
-
-plot(occurrences, add=TRUE, col=dbscan.res$cluster)
 ```
 
 #### Querying Envisat MERIS Level 1 data over a cluster
 
 ESA hosts an OpenSearch catalogue available at: http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/rdf
 
-We will work with Envisat MERIS Full Resolution data and use the catalogue response type "application/rdf+xml".
+The MERIS Level 1 Full Resolution OpenSearch document is available at: http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description
 
 ```{r}
 # set the catalogue and retrieve the queryables
@@ -102,7 +113,7 @@ response.type <- "application/rdf+xml"
 q <- GetOSQueryables(osd.description, response.type)
 ```
 
-q is a data frame containing:
+q is a data frame containing all the queryables to specify a query to the catalogue:
 
 ```{r results='asis', echo=FALSE}
 kable(q, format = "html")
@@ -114,24 +125,20 @@ Let's set the **count** field type value to `r count <- 200; count`:
 q$value[q$type == "count"] <- count
 ```
 
-and set out time of interest by setting the value of the field types **time:start**, **time:end** with:
+set out time of interest by setting the value of the field types **time:start**, **time:end** with:
 
 ```{r}
 q$value[q$type == "time:start"] <- "2006-01-01"
 q$value[q$type == "time:end"] <- "2006-12-31"
 ```
 
-q is now updated with:
-
-```{r results='asis', echo=FALSE}
-kable(q, format = "html")
-```
+and set the geo-spatial queryable to the Well-Known Text value of the first cluster identified:
 
 ```{r}
 q$value[q$type == "geo:geometry"] <- writeWKT(mbr[[1]])
 ```
 
-q is now updated with (removing NAs for readability):
+Our queryables data frame _q_ is now updated with (removing NAs for readability):
 
 ```{r results='asis', echo=FALSE}
 kable(q[complete.cases(q),], format = "html")
@@ -180,7 +187,7 @@ sp <- poly.sp[poly.sp$coverage_index > 0.8,]
 
 Let's plot the `r nrow(sp)` MERIS products that cover for at least 80% of the cluster area:
 
-```{r}
+```{r warning=FALSE}
 plot(getMap())
 plot(sp, add=TRUE, col=brewer.pal(8 , "RdBu")[1])
 plot(mbr[[1]], add=TRUE, col="blue")
