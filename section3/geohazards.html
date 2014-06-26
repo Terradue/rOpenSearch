@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403781728921">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403782611135">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -349,7 +349,66 @@
                 
                     <section class="normal" id="section-gitbook_8">
                     
-                        <h1 id="geo-hazards">Geo-hazards</h1>
+                        <h1 id="geohazards">Geohazards</h1>
+<h2 id="the-european-space-agency-virtual-archive">The European Space Agency Virtual Archive</h2>
+<p>Virtual Archives are online archives that provide an easy access to EO data by coupling high bandwidth, large storage space and software. The Virtual Archive 4 provides a Cloud based service for storing and providing access to ESA Synthetic Aperture Radar (SAR) data.</p>
+<p>This virtual archive represents ESA contribution to the supersites initiative. This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection</p>
+<h2 id="use-ropensearch-to-query-the-virtual-archive-envisat-asar-image-mode-level-0-data">Use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data</h2>
+<p>This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31</p>
+<p>Load the package with:</p>
+<pre><code class="lang-r"><span class="hljs-comment"># load the libraries</span>
+<span class="hljs-keyword">library</span>(devtools)
+</code></pre>
+<pre><code>## 
+## Attaching package: &#39;devtools&#39;
+## 
+## The following objects are masked from &#39;package:utils&#39;:
+## 
+##     ?, help
+## 
+## The following object is masked from &#39;package:base&#39;:
+## 
+##     system.file
+</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(rgdal)
+</code></pre>
+<pre><code>## Loading required package: sp
+## rgdal: version: 0.8-16, (SVN revision 498)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 1.7.3, released 2010/11/10
+## Path to GDAL shared files: /usr/share/gdal
+## GDAL does not use iconv for recoding strings.
+## Loaded PROJ.4 runtime: Rel. 4.7.1, 23 September 2009, [PJ_VERSION: 470]
+## Path to PROJ.4 shared files: (autodetected)
+</code></pre><pre><code class="lang-r"><span class="hljs-keyword">library</span>(rgeos)
+</code></pre>
+<pre><code>## rgeos version: 0.3-5, (SVN revision 447)
+##  GEOS runtime version: 3.3.9-CAPI-1.7.9 
+##  Polygon checking: TRUE
+</code></pre><p>library(rOpenSearch)</p>
+<h1 id="define-the-opensearch-description-url">define the OpenSearch description URL</h1>
+<p>osd.url &lt;- &quot;<a href="http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description" target="_blank">http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description</a>&quot;
+response.type &lt;- &quot;application/rdf+xml&quot;</p>
+<h1 id="get-the-queryables-dataframe-from-the-opensearch-description-url">get the queryables dataframe from the OpenSearch description URL</h1>
+<p>df.params &lt;- GetOSQueryables(osd.url, response.type)</p>
+<h1 id="define-the-values-for-the-queryables">define the values for the queryables</h1>
+<p>df.params$value[df.params$type == &quot;count&quot;] &lt;- 30 
+df.params$value[df.params$type == &quot;time:start&quot;] &lt;- &quot;2010-01-01&quot;
+df.params$value[df.params$type == &quot;time:end&quot;] &lt;- &quot;2010-01-31&quot;</p>
+<h1 id="submit-the-query">submit the query</h1>
+<p>res &lt;- Query(osd.url, response.type, df.params)</p>
+<h1 id="get-the-dataset">get the dataset</h1>
+<p>dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
+  &quot;//dclite4g:DataSet&quot;), stringsAsFactors = FALSE)</p>
+<h1 id="create-a-spatialpolygonsdataframe-with-the-first-element-of-res-dataset">create a SpatialPolygonsDataFrame with the first element of res$dataset</h1>
+<p>poly.sp &lt;- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])</p>
+<h1 id="iterate-through-the-remaining-dataset">iterate through the remaining dataset</h1>
+<p>for (n in 2:nrow(dataset)) {
+  poly.sp &lt;- rbind(poly.sp,
+    SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
+}</p>
+<h1 id="write-the-geojson-file">write the geojson file</h1>
+<p>writeOGR(poly.sp, &#39;example1.geojson&#39;,&#39;dataMap&#39;, driver=&#39;GeoJSON&#39;)</p>
+<p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
 
                     
                     </section>

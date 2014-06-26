@@ -1,1 +1,56 @@
-# Geo-hazards
+# Geohazards 
+
+## The European Space Agency Virtual Archive
+
+Virtual Archives are online archives that provide an easy access to EO data by coupling high bandwidth, large storage space and software. The Virtual Archive 4 provides a Cloud based service for storing and providing access to ESA Synthetic Aperture Radar (SAR) data.
+
+This virtual archive represents ESA contribution to the supersites initiative. This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection
+
+
+## Use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data
+
+This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31
+
+Load the package with:
+
+```{r}
+# load the libraries
+library(devtools)
+library(rgdal)
+library(rgeos)
+```
+
+library(rOpenSearch)
+
+# define the OpenSearch description URL
+osd.url <- "http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"
+response.type <- "application/rdf+xml"
+
+# get the queryables dataframe from the OpenSearch description URL
+df.params <- GetOSQueryables(osd.url, response.type)
+
+# define the values for the queryables
+df.params$value[df.params$type == "count"] <- 30 
+df.params$value[df.params$type == "time:start"] <- "2010-01-01"
+df.params$value[df.params$type == "time:end"] <- "2010-01-31"
+
+# submit the query
+res <- Query(osd.url, response.type, df.params)
+
+# get the dataset
+dataset <- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
+  "//dclite4g:DataSet"), stringsAsFactors = FALSE)
+
+# create a SpatialPolygonsDataFrame with the first element of res$dataset
+poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])
+
+# iterate through the remaining dataset
+for (n in 2:nrow(dataset)) {
+  poly.sp <- rbind(poly.sp,
+    SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
+}
+
+# write the geojson file
+writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
+
+The GeoJSON file can be see here: https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson

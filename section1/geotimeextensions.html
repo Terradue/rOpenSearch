@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="1.2" data-basepath=".." data-revision="1403781728921">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="1.2" data-basepath=".." data-revision="1403782611135">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -368,15 +368,19 @@
 <p>Below, a sample response to a request for an OpenSearch Description from a repository supporting the Geo Extension. Note that the response type is given in the type attribute and not implicitly on the URL path and the parameter names are not necessarily equal in all access points.</p>
 <pre><code class="lang-xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">OpenSearchDescription</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://a9.com/-/spec/opensearch/1.1/"</span>
-<span class="hljs-attribute">xmlns:geo</span>=<span class="hljs-value">"http://a9.com/-/opensearch/extensions/geo/1.0/"</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">ShortName</span>&gt;</span>Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">ShortName</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Description</span>&gt;</span>Use Example.com to search the Web.<span class="hljs-tag">&lt;/<span class="hljs-title">Description</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">Tags</span>&gt;</span>example web<span class="hljs-tag">&lt;/<span class="hljs-title">Tags</span>&gt;</span>
+<span class="hljs-attribute">xmlns:geo</span>=<span class="hljs-value">"http://a9.com/-/opensearch/extensions/geo/1.0/"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ShortName</span>&gt;</span>Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">ShortName</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Description</span>&gt;</span>Use Example.com to search the Web.<span class="hljs-tag">&lt;/<span class="hljs-title">Description</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Tags</span>&gt;</span>example web<span class="hljs-tag">&lt;/<span class="hljs-title">Tags</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">Contact</span>&gt;</span>admin@example.com<span class="hljs-tag">&lt;/<span class="hljs-title">Contact</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/atom+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myatom/?q= {searchTerms}&amp;amp;pw={startPage?}&amp;amp;box={geo:box?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/rdf+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myrdf/?q= {searchTerms}&amp;amp;pp={startPage?}&amp;amp;bbx={geo:box?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/geojson"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/geojson/? q={searchTerms}&amp;amp;page={startPage?}&amp;amp;b={geo:box?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/html"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/?q={searchTerms} &amp;amp;bbox={geo:box?}&amp;amp;pw={startPage?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/atom+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myatom/?q={searchTerms}&amp;amp;pw={startPage?}&amp;amp;box={geo:box?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/rdf+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myrdf/?q={searchTerms}&amp;amp;pp={startPage?}&amp;amp;bbx={geo:box?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/geojson"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/geojson/?q={searchTerms}&amp;amp;page={startPage?}&amp;amp;b={geo:box?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/html"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/?q={searchTerms}&amp;amp;bbox={geo:box?}&amp;amp;pw={startPage?}"</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">LongName</span>&gt;</span>Example.com Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">LongName</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Query</span> <span class="hljs-attribute">role</span>=<span class="hljs-value">"example"</span> <span class="hljs-attribute">searchTerms</span>=<span class="hljs-value">"cat"</span> <span class="hljs-attribute">geo:box</span>=<span class="hljs-value">"121,12,1,-23"</span>/&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">Attribution</span>&gt;</span>Copyright 2005, Example.com, Inc.<span class="hljs-tag">&lt;/<span class="hljs-title">Attribution</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">SyndicationRight</span>&gt;</span>open<span class="hljs-tag">&lt;/<span class="hljs-title">SyndicationRight</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Query</span> <span class="hljs-attribute">role</span>=<span class="hljs-value">"example"</span> <span class="hljs-attribute">searchTerms</span>=<span class="hljs-value">"cat"</span> <span class="hljs-attribute">geo:box</span>=<span class="hljs-value">"121,12,1,-23"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Attribution</span>&gt;</span>Copyright 2005, Example.com, Inc.<span class="hljs-tag">&lt;/<span class="hljs-title">Attribution</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">SyndicationRight</span>&gt;</span>open<span class="hljs-tag">&lt;/<span class="hljs-title">SyndicationRight</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">OpenSearchDescription</span>&gt;</span>
 </code></pre>
 

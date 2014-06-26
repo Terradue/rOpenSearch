@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="2.2" data-basepath=".." data-revision="1403781728921">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="2.2" data-basepath=".." data-revision="1403782611135">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -351,7 +351,25 @@
                 
                     <section class="normal" id="section-gitbook_5">
                     
-                        <h1 id="development">Development</h1>
+                        <h1 id="building-and-installing-the-development-version">Building and installing the development version</h1>
+<p>The rOpenSearch package is built using maven.</p>
+<p>From a terminal: </p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span>
+git clone git@github.com:Terradue/rOpenSearch.git
+<span class="hljs-built_in">cd</span> rOpenSearch
+mvn compile
+</code></pre>
+<p>That generates a compressed archive with the rOpenSearch package in:</p>
+<pre><code>~/rOpenSearch/target/R/src/rOpenSearch_x.y.z.tar.gz
+</code></pre><p>To install the package, start an R session and run:</p>
+<pre><code class="lang-coffee">install.packages(&quot;~/rOpenSearch/target/R/src/rOpenSearch_x.y.z.tar.gz&quot;, repos=NULL, type=&quot;source&quot;)
+</code></pre>
+<blockquote>
+<p>Note x.y.z is the development version number.</p>
+</blockquote>
+<p>Then load the library:</p>
+<pre><code class="lang-coffee">library(rOpenSearch)
+</code></pre>
 
                     
                     </section>
