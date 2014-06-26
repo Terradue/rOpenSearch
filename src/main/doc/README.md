@@ -1,4 +1,4 @@
-# rOpenSearch
+# rOpenSearch - an R interface to OpenSearch
 
 #### Terradue
 
