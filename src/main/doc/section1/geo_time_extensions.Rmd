@@ -1,0 +1,17 @@
+# OpenSearch Geo and Time Extensions
+
+The Geo and Time Extensions specify a series of parameters that can be used to geographically constrain search results.
+
+In short, provision is made to filter results by:
+
+* A bounding box
+* An arbitrary geometry defined using Well Known Text
+* Within a certain radius from a given latitude-longitude point
+* Having a certain containment relation (intersects, contains, disjoint) with a geographic constraint
+* Matching a geographic name
+* Matching a given unique identifier in the context of the repository
+* A start and end of a temporal extent
+* Having a certain temporal relation (intersects, contains, during, disjoint, equals) with a temporal constraint
+
+All geographic information is assumed to be expressed using the EPSG 4326 ([WGS84 2d](http://spatialreference.org/ref/epsg/4326/)) coordinate reference system (CRS), and any output listing the extents of the original query or containing further geographic information about the search results, will similarly be expressed in EPSG 4326.
+
