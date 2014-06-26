@@ -21,3 +21,19 @@ As BibText Export:
       url           = "{http://dx.doi.org/10.5281/zenodo.10642}",
 }
 ```
+
+As DataCite:
+
+https://zenodo.org/record/10642/export/dcite3?ln=en
+
+As DC:
+
+https://zenodo.org/record/10642/export/xd?ln=ena
+
+As EndNote:
+
+https://zenodo.org/record/10642/export/xe?ln=en
+
+As NLM:
+
+https://zenodo.org/record/10642/export/xn?ln=en
