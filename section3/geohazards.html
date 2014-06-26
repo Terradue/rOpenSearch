@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403790419942">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403791566464">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -412,63 +412,6 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 <pre><code class="lang-r">writeOGR(poly.sp, <span class="hljs-string">'example1.geojson'</span>,<span class="hljs-string">'dataMap'</span>, driver=<span class="hljs-string">'GeoJSON'</span>)
 </code></pre>
 <p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
-<h3 id="leaflet">leaflet</h3>
-<pre><code class="lang-r"><span class="hljs-keyword">library</span>(rCharts)
-json &lt;- read_file(<span class="hljs-string">"example1.geojson"</span>)
-regions=RJSONIO::fromJSON(json)
-</code></pre>
-<pre><code class="lang-r">lmap &lt;- Leaflet$new()
-lmap$tileLayer(provide=<span class="hljs-string">'Stamen.TonerLite'</span>)
-lmap$setView(c(-<span class="hljs-number">37</span>, <span class="hljs-number">145</span>), zoom = <span class="hljs-number">6</span>)
-<span class="hljs-comment">#lmap$geoJson(regions)</span>
-lmap$print()
-</code></pre>
-<p><div id = 'chart7d277c8a178c' class = 'rChart leaflet'></div></p>
-<script>
-  var spec = {
- "dom": "chart7d277c8a178c",
-"width":            800,
-"height":            400,
-"urlTemplate": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-"layerOpts": {
- "attribution": "Map data<a href=\"http://openstreetmap.org\">OpenStreetMap</a>\n         contributors, Imagery<a href=\"http://mapbox.com\">MapBox</a>" 
-},
-"provider": "Stamen.TonerLite",
-"center": [            -37,            145 ],
-"zoom":              6,
-"id": "chart7d277c8a178c" 
-}
-
-  var map = L.map(spec.dom, spec.mapOpts)
-
-    map.setView(spec.center, spec.zoom);
-
-    if (spec.provider){
-      L.tileLayer.provider(spec.provider).addTo(map)    
-    } else {
-          L.tileLayer(spec.urlTemplate, spec.layerOpts).addTo(map)
-    }
-
-
-
-
-
-
-    if (spec.circle2){
-      for (var c in spec.circle2){
-        var circle = L.circle(c.center, c.radius, c.opts)
-         .addTo(map);
-      }
-    }
-
-
-
-
-
-
-
-
-</script>
 
                     
                     </section>

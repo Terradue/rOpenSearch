@@ -84,21 +84,3 @@ writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 ```
 
 The GeoJSON file can be see here: https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson
-
-
-### leaflet
-
-```{r}
-library(rCharts)
-json <- read_file("example1.geojson")
-regions=RJSONIO::fromJSON(json)
-```
-
-```{r results="asis"}
-
-lmap <- Leaflet$new()
-lmap$tileLayer(provide='Stamen.TonerLite')
-lmap$setView(c(-37, 145), zoom = 6)
-#lmap$geoJson(regions)
-lmap$print()
-```
