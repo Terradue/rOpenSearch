@@ -1,1 +1,33 @@
-hi!
+# OpenSearch 
+
+The OpenSearch specification originated in a community effort built around Amazon's A9.com. It was intended to allow syndication of search results that could then be aggregated by one large index. The OpenSearch specification is made available under the Creative Commons Attribution-Sharealike 2.5 license. 
+
+In addition, the OASIS Search Web Services group published an Abstract Protocol Definition of the interface or “binding”, which coincides with the community specification published at http://opensearch.org. 
+
+The basic concept of OpenSearch is to specify how to query a web resource, and additional metadata to support syndicating the results. Search clients can use OpenSearch description documents to learn about the public interface of a search engine. These description documents contain parameterized URL templates that indicate how the search client should make search requests. Search engines can use the OpenSearch response elements to add search metadata to results in a variety of content formats. For example, if a web site allows search by the URL:
+
+*http://www.example.com?q=question*
+
+OpenSearch provides a way to define where that search term goes. Essentially it would look like: http:// www.example.com?q={searchTerms}, where {searchTerms} would be replaced by any general string. Using OpenSearch, aggregators and applications have a way to simply define a search service and let a user just type in their terms, but then search N search engines. For example, the Firefox search bar is powered by OpenSearch and allows the user to add new OpenSearch compliant site.
+
+The Description element provides some basic metadata about the contents of the service and the contact information pertaining to it, along with a set of URL Templates which illustrate the parameters accepted by the service and the variety of output formats in which results can be obtained. The OpenSearch request interface is simple, consisting of a description of a HTTP GET request with a series of optional key-value parameters that can be used to constrain the search.
+
+In 2007, the geo and time extensions were proposed through OpenSearch.org.
+
+## OpenSearch Geo and Time Extensions
+
+The Geo and Time Extensions specify a series of parameters that can be used to geographically constrain search results.
+
+In short, provision is made to filter results by:
+
+* A bounding box
+* An arbitrary geometry defined using Well Known Text
+* Within a certain radius from a given latitude-longitude point
+* Having a certain containment relation (intersects, contains, disjoint) with a geographic constraint
+* Matching a geographic name
+* Matching a given unique identifier in the context of the repository
+* A start and end of a temporal extent
+* Having a certain temporal relation (intersects, contains, during, disjoint, equals) with a temporal constraint
+
+All geographic information is assumed to be expressed using the EPSG 4326 ([WGS84 2d](http://spatialreference.org/ref/epsg/4326/)) coordinate reference system (CRS), and any output listing the extents of the original query or containing further geographic information about the search results, will similarly be expressed in EPSG 4326.
+

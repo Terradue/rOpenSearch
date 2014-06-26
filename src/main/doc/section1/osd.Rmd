@@ -1,0 +1,12 @@
+# OpenSearch Description
+
+The OpenSearch Description Document allows clients to retrieve service metadata from a server. The response to a request for a Description shall be an XML document in the form specified by the SWS OpenSearch bindings published by OASIS. A brief summary of the Description's requirements is offered here.
+
+The service metadata covered by the OpenSearch Description corresponds to the service metadata returned by e.g. a WMS GetCapabilities request. The request is not parameterised, but simply takes the form of an HTTP GET request to a URL (advertised on a web page or obtained from a repository of OpenSearch services which offer syndication of their result sets).
+
+The OpenSearch Description Document contains information on the maintainer of the service and their contact information. It includes a brief title and short abstract describing the contents of the service, along with a list of keywords and optionally a list of languages in which the contents may be returned.
+
+The key feature of the Description document is the URL template, which instructs a client application how to create queries to the service. The URL template represents a parameterized form of the URL by which a search engine is queried. Each response format supported by the service needs its own distinct URL template included in the Description differentiated by a type parameter that identifies the MIME type of response.
+
+The search client must replace every instance of a template parameter with a value before the search request is performed. A parameter name consists of an optional parameter name prefix followed by the local parameter name. If the parameter name prefix is present then it will be separated from the local parameter name with the ":" character. All parameter names are associated with a parameter namespace. In the case of unqualified parameter names, the local parameter name is implicitly associated with the OpenSearch 1.1 namespace. In the case of fully qualified parameter names, the local parameter name is explicitly associated with an external namespace via the parameter name prefix. A service can extend the basic parameters included in the template.
+
