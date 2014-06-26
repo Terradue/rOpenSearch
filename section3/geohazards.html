@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783168094">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783439475">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -355,23 +355,19 @@
 <p>This virtual archive represents ESA contribution to the supersites initiative. This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection</p>
 <h2 id="use-ropensearch-to-query-the-virtual-archive-envisat-asar-image-mode-level-0-data">Use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data</h2>
 <p>This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31</p>
-<ol>
-<li>Load the required packages with:</li>
-</ol>
+<h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
 <pre><code class="lang-r"><span class="hljs-comment"># load the libraries</span>
 <span class="hljs-keyword">library</span>(devtools)
 <span class="hljs-keyword">library</span>(rgdal)
 <span class="hljs-keyword">library</span>(rgeos)
 <span class="hljs-keyword">library</span>(rOpenSearch)
 </code></pre>
-<ol>
-<li>Define the OpenSearch description URL</li>
-</ol>
+<h4 id="define-the-opensearch-description-url">Define the OpenSearch description URL</h4>
 <pre><code class="lang-r">osd.url &lt;- <span class="hljs-string">"http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"</span>
 </code></pre>
-<ol>
+<ul>
 <li>Get the list of OpenSearch response types:</li>
-</ol>
+</ul>
 <pre><code class="lang-r">GetOSResponseFormats(osd.url)
 </code></pre>
 <pre><code>## [1] &quot;application/rdf+xml&quot;                 
@@ -380,34 +376,48 @@
 ## [4] &quot;text/html&quot;                           
 ## [5] &quot;application/vnd.google-earth.kml+xml&quot;
 ## [6] &quot;application/atom+xml&quot;
-</code></pre><ol>
+</code></pre><ul>
 <li>Set the OpenSearch response type to use:</li>
-</ol>
+</ul>
 <pre><code class="lang-r">response.type &lt;- <span class="hljs-string">"application/rdf+xml"</span>
 </code></pre>
-<ol>
-<li>get the queryables dataframe from the OpenSearch description URL
-df.params &lt;- GetOSQueryables(osd.url, response.type)</li>
-</ol>
-<h1 id="define-the-values-for-the-queryables">define the values for the queryables</h1>
-<p>df.params$value[df.params$type == &quot;count&quot;] &lt;- 30 
-df.params$value[df.params$type == &quot;time:start&quot;] &lt;- &quot;2010-01-01&quot;
-df.params$value[df.params$type == &quot;time:end&quot;] &lt;- &quot;2010-01-31&quot;</p>
-<h1 id="submit-the-query">submit the query</h1>
-<p>res &lt;- Query(osd.url, response.type, df.params)</p>
-<h1 id="get-the-dataset">get the dataset</h1>
-<p>dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
-  &quot;//dclite4g:DataSet&quot;), stringsAsFactors = FALSE)</p>
-<h1 id="create-a-spatialpolygonsdataframe-with-the-first-element-of-res-dataset">create a SpatialPolygonsDataFrame with the first element of res$dataset</h1>
-<p>poly.sp &lt;- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])</p>
-<h1 id="iterate-through-the-remaining-dataset">iterate through the remaining dataset</h1>
-<p>for (n in 2:nrow(dataset)) {
+<ul>
+<li>get the queryables dataframe from the OpenSearch description URL</li>
+</ul>
+<pre><code class="lang-r">df.params &lt;- GetOSQueryables(osd.url, response.type)
+</code></pre>
+<h4 id="assign-values-to-the-queryables">Assign values to the queryables</h4>
+<pre><code class="lang-r">df.params$value[df.params$type == <span class="hljs-string">"count"</span>] &lt;- <span class="hljs-number">100</span> 
+df.params$value[df.params$type == <span class="hljs-string">"time:start"</span>] &lt;- <span class="hljs-string">"2010-01-01"</span>
+df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class="hljs-string">"2010-01-31"</span>
+</code></pre>
+<h4 id="submit-the-query">Submit the query</h4>
+<pre><code class="lang-r">res &lt;- Query(osd.url, response.type, df.params)
+</code></pre>
+<pre><code>## Warning: closing unused connection 9 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
+## Warning: closing unused connection 8 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
+## Warning: closing unused connection 7 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
+## Warning: closing unused connection 6 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
+## Warning: closing unused connection 5 (http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description)
+</code></pre><h4 id="get-the-dataset">Get the dataset</h4>
+<pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), 
+  <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
+</code></pre>
+<pre><code>## Error: could not find function &quot;xmlToDataFrame&quot;
+</code></pre><h4 id="create-a-spatialpolygonsdataframe-with-the-dataset">Create a SpatialPolygonsDataFrame with the dataset</h4>
+<pre><code class="lang-r">poly.sp &lt;- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[<span class="hljs-number">1</span>,]), dataset[<span class="hljs-number">1</span>,])
+</code></pre>
+<pre><code>## Error: object &#39;dataset&#39; not found
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># iterate through the remaining dataset</span>
+<span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> <span class="hljs-number">2</span>:nrow(dataset)) {
   poly.sp &lt;- rbind(poly.sp,
     SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
-}</p>
-<h1 id="write-the-geojson-file">write the geojson file</h1>
-<p>writeOGR(poly.sp, &#39;example1.geojson&#39;,&#39;dataMap&#39;, driver=&#39;GeoJSON&#39;)</p>
-<p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
+}
+</code></pre>
+<pre><code>## Error: object &#39;dataset&#39; not found
+</code></pre><h4 id="write-the-geojson-file">write the geojson file</h4>
+<pre><code>writeOGR(poly.sp, &#39;example1.geojson&#39;,&#39;dataMap&#39;, driver=&#39;GeoJSON&#39;)
+</code></pre><p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
 
                     
                     </section>
