@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403788736792">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403789474472">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -411,7 +411,8 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 <h4 id="write-the-geojson-file">write the geojson file</h4>
 <pre><code class="lang-r">writeOGR(poly.sp, <span class="hljs-string">'example1.geojson'</span>,<span class="hljs-string">'dataMap'</span>, driver=<span class="hljs-string">'GeoJSON'</span>)
 </code></pre>
-<p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
+<pre><code>## Error: Creation of output file failed
+</code></pre><p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(rMaps)
 <span class="hljs-keyword">library</span>(knitr)
 map &lt;- Leaflet$new()
@@ -420,28 +421,73 @@ map$tileLayer(provider = <span class="hljs-string">"Stamen.Watercolor"</span>)
 map$marker(c(<span class="hljs-number">51.5</span>, -<span class="hljs-number">0.09</span>), bindPopup = <span class="hljs-string">"Hi. I am a popup"</span>)
 map
 </code></pre>
-<p><iframe src=' figure/unnamed-chunk-11.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart799d6fb9580f ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
+<p><iframe src=' figure/unnamed-chunk-11.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart7a2cd2e57a5 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
 <h3 id="leaflet">leaflet</h3>
-<pre><code class="lang-r"><span class="hljs-keyword">library</span>(leafletR)
+<pre><code class="lang-r">json &lt;- read_file(<span class="hljs-string">"example1.geojson"</span>)
 </code></pre>
-<pre><code>##  
-## This is leafletR 0.2-0
-##  
-## Type changes(&quot;leafletR&quot;) to see changes/bug fixes, help(leafletR) for documentation
-## or citation(&quot;leafletR&quot;) for how to cite leafletR.
-##  
-## 
-## Attaching package: &#39;leafletR&#39;
-## 
-## The following object is masked from &#39;package:methods&#39;:
-## 
-##     getProperties
-</code></pre><pre><code class="lang-r">leafdat&lt;-<span class="hljs-string">"example1.geojson"</span>
-map&lt;-leafletR::leaflet(data=leafdat)
+<pre><code>## Error: could not find function &quot;read_file&quot;
+</code></pre><pre><code class="lang-r">regions=RJSONIO::fromJSON(json)
 </code></pre>
-<pre><code>## 
-## Your leaflet map has been saved under /home/fbrito/rOpenSearch/target/R/src/doc/section3/example1/example1.html
+<pre><code>## Error: error in evaluating the argument &#39;content&#39; in selecting a method for function &#39;fromJSON&#39;: Error: object &#39;json&#39; not found
+</code></pre><pre><code class="lang-r">lmap &lt;- Leaflet$new()
+lmap$tileLayer(provide=<span class="hljs-string">'Stamen.TonerLite'</span>)
+lmap$setView(c(-<span class="hljs-number">37</span>, <span class="hljs-number">145</span>), zoom = <span class="hljs-number">6</span>)
+lmap$geoJson(regions)
 </code></pre>
+<pre><code>## Error: object &#39;regions&#39; not found
+</code></pre><pre><code class="lang-r">lmap$print(<span class="hljs-string">'chart7'</span>)
+</code></pre>
+<p><div id = 'chart7' class = 'rChart leaflet'></div></p>
+<script>
+  var spec = {
+ "dom": "chart7",
+"width":            800,
+"height":            400,
+"urlTemplate": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+"layerOpts": {
+ "attribution": "Map data<a href=\"http://openstreetmap.org\">OpenStreetMap</a>\n         contributors, Imagery<a href=\"http://mapbox.com\">MapBox</a>" 
+},
+"provider": "Stamen.TonerLite",
+"center": [            -37,            145 ],
+"zoom":              6,
+"id": "chart7" 
+}
+
+  var map = L.map(spec.dom, spec.mapOpts)
+
+    map.setView(spec.center, spec.zoom);
+
+    if (spec.provider){
+      L.tileLayer.provider(spec.provider).addTo(map)    
+    } else {
+          L.tileLayer(spec.urlTemplate, spec.layerOpts).addTo(map)
+    }
+
+
+
+
+
+
+    if (spec.circle2){
+      for (var c in spec.circle2){
+        var circle = L.circle(c.center, c.radius, c.opts)
+         .addTo(map);
+      }
+    }
+
+
+
+
+    var geojsonLayer = L.geoJson(spec.features 
+        , 
+         null
+      ).addTo(map)
+
+
+
+
+</script>
+
                     
                     </section>
                 

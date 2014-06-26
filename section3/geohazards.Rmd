@@ -101,7 +101,12 @@ map
 ### leaflet
 
 ```{r results="asis"}
-library(leafletR)
-leafdat<-"example1.geojson"
-map<-leafletR::leaflet(data=leafdat)
+json <- read_file("example1.geojson")
+regions=RJSONIO::fromJSON(json)
+
+lmap <- Leaflet$new()
+lmap$tileLayer(provide='Stamen.TonerLite')
+lmap$setView(c(-37, 145), zoom = 6)
+lmap$geoJson(regions)
+lmap$print('chart7')
 ```
