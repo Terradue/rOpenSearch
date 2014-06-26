@@ -2,8 +2,9 @@
 
 #### Load the required packages with:
 
-```{r warning=FALSE, error=FALSE, message=FALSE, results='hide'}
+`` `{r warning=FALSE, error=FALSE, message=FALSE, results='hide'}
 
+```{r}
 library("devtools")
 library("rgbif")
 library("fpc")
