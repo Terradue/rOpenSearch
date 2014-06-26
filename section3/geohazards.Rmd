@@ -86,7 +86,7 @@ writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 The GeoJSON file can be see here: https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson
 
 
-```{r}
+```{r echo=FALSE}
 
 library(rMaps)
 library(knitr)
