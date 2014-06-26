@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793486206">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793825445">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -474,31 +474,32 @@ dbscan.res &lt;- dbscan(occurrences, eps=eps, MinPts=minpts)
 <pre><code class="lang-r">plot(occurrences, col=dbscan.res$cluster)
 </code></pre>
 <p><img src="figure/unnamed-chunk-6.png" alt="plot of chunk unnamed-chunk-6"> </p>
-<pre><code class="lang-r"> mbr &lt;- list()
+<pre><code class="lang-r">mbr &lt;- list()
+plot(getMap())
 
-  <span class="hljs-comment">#extract the minimum bounding box for each cluster</span>
-  <span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:max(dbscan.res$cluster)) {
+<span class="hljs-comment">#extract the minimum bounding box for each cluster</span>
+<span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:max(dbscan.res$cluster)) {
 
-    <span class="hljs-comment"># get the cluster</span>
-    cl &lt;- (occurrences[dbscan.res$cluster %<span class="hljs-keyword">in</span>% i,])
+ <span class="hljs-comment"># get the cluster</span>
+ cl &lt;- (occurrences[dbscan.res$cluster %<span class="hljs-keyword">in</span>% i,])
 
-    <span class="hljs-comment"># create the matrix with the cluster minimum bounding box</span>
-    coords &lt;- matrix(nrow=<span class="hljs-number">5</span>, ncol=<span class="hljs-number">2</span>, byrow=<span class="hljs-literal">TRUE</span>, data=c(
-      min(cl[,<span class="hljs-number">1</span>]), min(cl[,<span class="hljs-number">2</span>]),
-      max(cl[,<span class="hljs-number">1</span>]), min(cl[,<span class="hljs-number">2</span>]),
-      max(cl[,<span class="hljs-number">1</span>]), max(cl[,<span class="hljs-number">2</span>]),
-      min(cl[,<span class="hljs-number">1</span>]), max(cl[,<span class="hljs-number">2</span>]),
-      min(cl[,<span class="hljs-number">1</span>]), min(cl[,<span class="hljs-number">2</span>])))
+ <span class="hljs-comment"># create the matrix with the cluster minimum bounding box</span>
+ coords &lt;- matrix(nrow=<span class="hljs-number">5</span>, ncol=<span class="hljs-number">2</span>, byrow=<span class="hljs-literal">TRUE</span>, data=c(
+  min(cl[,<span class="hljs-number">1</span>]), min(cl[,<span class="hljs-number">2</span>]),
+  max(cl[,<span class="hljs-number">1</span>]), min(cl[,<span class="hljs-number">2</span>]),
+  max(cl[,<span class="hljs-number">1</span>]), max(cl[,<span class="hljs-number">2</span>]),
+  min(cl[,<span class="hljs-number">1</span>]), max(cl[,<span class="hljs-number">2</span>]),
+  min(cl[,<span class="hljs-number">1</span>]), min(cl[,<span class="hljs-number">2</span>])))
 
-    <span class="hljs-comment"># get the cluster geospatial envelope</span>
-    <span class="hljs-keyword">if</span> (gArea(gEnvelope(SpatialPoints(coords)))&gt;<span class="hljs-number">0</span>) mbr[[length(mbr)+<span class="hljs-number">1</span>]] &lt;- gEnvelope(SpatialPoints(coords))
+  <span class="hljs-comment"># get the cluster geospatial envelope</span>
+  <span class="hljs-keyword">if</span> (gArea(gEnvelope(SpatialPoints(coords)))&gt;<span class="hljs-number">0</span>) mbr[[length(mbr)+<span class="hljs-number">1</span>]] &lt;- gEnvelope(SpatialPoints(coords))
 
-  }
-
-  plot(getMap())
-  plot(mbr[[<span class="hljs-number">1</span>]], add=<span class="hljs-literal">TRUE</span>)
+  plot(mbr[[length(mbr)]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"red"</span>)
+ }
 </code></pre>
 <p><img src="figure/unnamed-chunk-7.png" alt="plot of chunk unnamed-chunk-7"> </p>
+<pre><code class="lang-r"> <span class="hljs-comment">#plot(occurrences, add=TRUE, col=dbscan.res$cluster)</span>
+</code></pre>
 
                     
                     </section>

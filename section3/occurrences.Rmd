@@ -63,27 +63,27 @@ plot(occurrences, col=dbscan.res$cluster)
 ```
 
 ```{r}
- mbr <- list()
-  
-  #extract the minimum bounding box for each cluster
-  for(i in 1:max(dbscan.res$cluster)) {
+mbr <- list()
+plot(getMap())
 
-    # get the cluster
-    cl <- (occurrences[dbscan.res$cluster %in% i,])
-  
-    # create the matrix with the cluster minimum bounding box
-    coords <- matrix(nrow=5, ncol=2, byrow=TRUE, data=c(
-      min(cl[,1]), min(cl[,2]),
-      max(cl[,1]), min(cl[,2]),
-      max(cl[,1]), max(cl[,2]),
-      min(cl[,1]), max(cl[,2]),
-      min(cl[,1]), min(cl[,2])))
-  
-    # get the cluster geospatial envelope
-    if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
+#extract the minimum bounding box for each cluster
+for(i in 1:max(dbscan.res$cluster)) {
 
-  }
+ # get the cluster
+ cl <- (occurrences[dbscan.res$cluster %in% i,])
   
-  plot(getMap())
-  plot(mbr[[1]], add=TRUE)
+ # create the matrix with the cluster minimum bounding box
+ coords <- matrix(nrow=5, ncol=2, byrow=TRUE, data=c(
+  min(cl[,1]), min(cl[,2]),
+  max(cl[,1]), min(cl[,2]),
+  max(cl[,1]), max(cl[,2]),
+  min(cl[,1]), max(cl[,2]),
+  min(cl[,1]), min(cl[,2])))
+  
+  # get the cluster geospatial envelope
+  if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
+
+  plot(mbr[[length(mbr)]], add=TRUE, col="red")
+ }
+ #plot(occurrences, add=TRUE, col=dbscan.res$cluster)
 ```
