@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Installing the development version | rOpenSearch</title>
+        <title>Geo and Time Extensions | rOpenSearch</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.6">
@@ -19,10 +19,10 @@
     <meta name="author" content="Terradue">
     
     
-    <link rel="next" href="../section3/started.html" />
+    <link rel="next" href="../section2/installation.html" />
     
     
-    <link rel="prev" href="../section2/release.html" />
+    <link rel="prev" href="../section1/osd.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="2.2" data-basepath=".." data-revision="1403781728921">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="1.2" data-basepath=".." data-revision="1403781728921">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -118,7 +118,7 @@
         
         
         <li>
-            <a href="https://github.com/Terradue/rOpenSearch/edit/master/section2/development.md" target="blank" class="contribute-link">Edit and Contribute</a>
+            <a href="https://github.com/Terradue/rOpenSearch/edit/master/section1/geotimeextensions.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
 
@@ -320,7 +320,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 66.66666666666667%;min-width: 55.55555555555556%;"></div>
+        <div class="inner" style="width: 33.333333333333336%;min-width: 22.22222222222222%;"></div>
     </div>
     <div class="chapters">
     
@@ -332,11 +332,11 @@
     
         <a href="../section1/geotimeextensions.html" title="Geo and Time Extensions" class="chapter done " data-progress="1.2" style="left: 33.333333333333336%;"></a>
     
-        <a href="../section2/installation.html" title="Installation" class="chapter done new-chapter" data-progress="2" style="left: 44.44444444444444%;"></a>
+        <a href="../section2/installation.html" title="Installation" class="chapter  new-chapter" data-progress="2" style="left: 44.44444444444444%;"></a>
     
-        <a href="../section2/release.html" title="Installing a release" class="chapter done " data-progress="2.1" style="left: 55.55555555555556%;"></a>
+        <a href="../section2/release.html" title="Installing a release" class="chapter  " data-progress="2.1" style="left: 55.55555555555556%;"></a>
     
-        <a href="../section2/development.html" title="Installing the development version" class="chapter done " data-progress="2.2" style="left: 66.66666666666667%;"></a>
+        <a href="../section2/development.html" title="Installing the development version" class="chapter  " data-progress="2.2" style="left: 66.66666666666667%;"></a>
     
         <a href="../section3/started.html" title="Getting started" class="chapter  new-chapter" data-progress="3" style="left: 77.77777777777777%;"></a>
     
@@ -349,9 +349,36 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_5">
+                    <section class="normal" id="section-gitbook_2">
                     
-                        <h1 id="development">Development</h1>
+                        <h1 id="opensearch-geo-and-time-extensions">OpenSearch Geo and Time Extensions</h1>
+<p>The Geo and Time Extensions specify a series of parameters that can be used to geographically constrain search results.</p>
+<p>In short, provision is made to filter results by:</p>
+<ul>
+<li>A bounding box</li>
+<li>An arbitrary geometry defined using Well Known Text</li>
+<li>Within a certain radius from a given latitude-longitude point</li>
+<li>Having a certain containment relation (intersects, contains, disjoint) with a geographic constraint</li>
+<li>Matching a geographic name</li>
+<li>Matching a given unique identifier in the context of the repository</li>
+<li>A start and end of a temporal extent</li>
+<li>Having a certain temporal relation (intersects, contains, during, disjoint, equals) with a temporal constraint</li>
+</ul>
+<p>All geographic information is assumed to be expressed using the EPSG 4326 (<a href="http://spatialreference.org/ref/epsg/4326/" target="_blank">WGS84 2d</a>) coordinate reference system (CRS), and any output listing the extents of the original query or containing further geographic information about the search results, will similarly be expressed in EPSG 4326.</p>
+<p>Below, a sample response to a request for an OpenSearch Description from a repository supporting the Geo Extension. Note that the response type is given in the type attribute and not implicitly on the URL path and the parameter names are not necessarily equal in all access points.</p>
+<pre><code class="lang-xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">OpenSearchDescription</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://a9.com/-/spec/opensearch/1.1/"</span>
+<span class="hljs-attribute">xmlns:geo</span>=<span class="hljs-value">"http://a9.com/-/opensearch/extensions/geo/1.0/"</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">ShortName</span>&gt;</span>Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">ShortName</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Description</span>&gt;</span>Use Example.com to search the Web.<span class="hljs-tag">&lt;/<span class="hljs-title">Description</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">Tags</span>&gt;</span>example web<span class="hljs-tag">&lt;/<span class="hljs-title">Tags</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Contact</span>&gt;</span>admin@example.com<span class="hljs-tag">&lt;/<span class="hljs-title">Contact</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/atom+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myatom/?q= {searchTerms}&amp;amp;pw={startPage?}&amp;amp;box={geo:box?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/rdf+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myrdf/?q= {searchTerms}&amp;amp;pp={startPage?}&amp;amp;bbx={geo:box?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/geojson"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/geojson/? q={searchTerms}&amp;amp;page={startPage?}&amp;amp;b={geo:box?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/html"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/?q={searchTerms} &amp;amp;bbox={geo:box?}&amp;amp;pw={startPage?}"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">LongName</span>&gt;</span>Example.com Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">LongName</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">Query</span> <span class="hljs-attribute">role</span>=<span class="hljs-value">"example"</span> <span class="hljs-attribute">searchTerms</span>=<span class="hljs-value">"cat"</span> <span class="hljs-attribute">geo:box</span>=<span class="hljs-value">"121,12,1,-23"</span>/&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">Attribution</span>&gt;</span>Copyright 2005, Example.com, Inc.<span class="hljs-tag">&lt;/<span class="hljs-title">Attribution</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-title">SyndicationRight</span>&gt;</span>open<span class="hljs-tag">&lt;/<span class="hljs-title">SyndicationRight</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">OpenSearchDescription</span>&gt;</span>
+</code></pre>
 
                     
                     </section>
@@ -361,10 +388,10 @@
         </div>
 
         
-        <a href="../section2/release.html" class="navigation navigation-prev " aria-label="Previous page: Installing a release"><i class="fa fa-angle-left"></i></a>
+        <a href="../section1/osd.html" class="navigation navigation-prev " aria-label="Previous page: OpenSearch Description"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../section3/started.html" class="navigation navigation-next " aria-label="Next page: Getting started"><i class="fa fa-angle-right"></i></a>
+        <a href="../section2/installation.html" class="navigation navigation-next " aria-label="Next page: Installation"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
