@@ -10,3 +10,4 @@ Welcome to rOpenSearch!
 * [Getting started](section3/started.md)
     * [EO & GBIF occurrences](section3/occurrences.md)
     * [Geo-hazards SAR data](section3/geohazards.md)
+* [Citation](section4/citation.md)
