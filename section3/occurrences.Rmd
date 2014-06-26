@@ -16,7 +16,7 @@ library("sp")
 library("rgeos") 
 library("maps") 
 library("RColorBrewer")
-library("mapdata") 
+#library("mapdata") 
 library("rOpenSearch")
 library("rgbif")
 library("knitr")
@@ -28,11 +28,11 @@ library("rworldmap")
 ```{r}
 # get the occurrences from GBIF using rgbif
 key <- name_backbone(name='Carcharodon carcharias', kingdom='animalia')$speciesKey
-occ <- occ_search(taxonKey=key, limit=1000, return='data', hasCoordinate=TRUE)
-occ <- occ[complete.cases(occ),]
+occurrences <- occ_search(taxonKey=key, limit=1000, return='data', hasCoordinate=TRUE)
+occurrences <- occurrences[complete.cases(occurrences),]
 ```
 
-This create the data frame occ with `r nrow(occ)` entries. The first five entries look like:
+This create the data frame occ with `r nrow(occurrences)` entries. The first five entries look like:
 
 ```{r results='asis', echo=FALSE}
 kable(head(occ, 5), format = "html")
@@ -41,23 +41,47 @@ kable(head(occ, 5), format = "html")
 The occurrences can be plotted to create the map:
 
 ```{r results='asis', message=FALSE, echo=FALSE}
-gbifmap(occ)
+gbifmap(occurrences)
 ```
 
 Apply the DBSCAN clustering algorithm to identify representative occurence clusters.
 
 ```{r}
-occ <- cbind(occ$decimalLongitude, occ$decimalLatitude)
+occurrences <- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
 
 eps <- 5
 minpts <- 20
-ds <- dbscan(occ, eps=eps, MinPts=minpts)
+dbscan.res <- dbscan(occurrences, eps=eps, MinPts=minpts)
 ```
 
-The DBSCAN algorithm identified `r max(ds$cluster)`.
+The DBSCAN algorithm identified `r max(dbscan.res$cluster)`.
 
 The cluster can be plotted using the cluster id color:
 
 ```{r}
-plot(occ, col=ds$cluster)
+plot(occurrences, col=dbscan.res$cluster)
+```
+
+```{r}
+ mbr <- list()
+  
+  #extract the minimum bounding box for each cluster
+  for(i in 1:max(dbscan.res$cluster)) {
+
+    # get the cluster
+    cl <- (occurrences[dbscan.res$cluster %in% i,])
+  
+    # create the matrix with the cluster minimum bounding box
+    coords <- matrix(nrow=5, ncol=2, byrow=TRUE, data=c(
+      min(cl[,1]), min(cl[,2]),
+      max(cl[,1]), min(cl[,2]),
+      max(cl[,1]), max(cl[,2]),
+      min(cl[,1]), max(cl[,2]),
+      min(cl[,1]), min(cl[,2])))
+  
+    # get the cluster geospatial envelope
+    if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
+
+  }
+  print(mbr)
 ```
