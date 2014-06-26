@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403782773875">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403783040226">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -355,12 +355,35 @@
 <p>This virtual archive represents ESA contribution to the supersites initiative. This huge amount of SAR data (today nearly ninty thousand products are hosted on Virtual Archive 4) is accessible to science communities dealing with interferometry, landslide and change detection</p>
 <h2 id="use-ropensearch-to-query-the-virtual-archive-envisat-asar-image-mode-level-0-data">Use rOpenSearch to query the Virtual Archive Envisat ASAR Image Mode Level 0 data</h2>
 <p>This example will return the 100 first dataset spanning time interval 2010-01-01 to 2010-01-31</p>
-<p>Load the required packages with:</p>
-<h1 id="define-the-opensearch-description-url">define the OpenSearch description URL</h1>
-<p>osd.url &lt;- &quot;<a href="http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description" target="_blank">http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description</a>&quot;
-response.type &lt;- &quot;application/rdf+xml&quot;</p>
-<h1 id="get-the-queryables-dataframe-from-the-opensearch-description-url">get the queryables dataframe from the OpenSearch description URL</h1>
-<p>df.params &lt;- GetOSQueryables(osd.url, response.type)</p>
+<ol>
+<li>Load the required packages with:</li>
+</ol>
+<pre><code class="lang-r"><span class="hljs-comment"># load the libraries</span>
+<span class="hljs-keyword">library</span>(devtools)
+<span class="hljs-keyword">library</span>(rgdal)
+<span class="hljs-keyword">library</span>(rgeos)
+<span class="hljs-keyword">library</span>(rOpenSearch)
+</code></pre>
+<ol>
+<li>Define the OpenSearch description URL</li>
+</ol>
+<pre><code class="lang-r">osd.url &lt;- <span class="hljs-string">"http://eo-virtual-archive4.esa.int/search/ASA_IM__0P/description"</span>
+</code></pre>
+<ol>
+<li>Get the list of OpenSearch response types:</li>
+</ol>
+<pre><code class="lang-r">GetOSResponseFormats()
+</code></pre>
+<pre><code>## Error: Invalid OpenSearch description document
+</code></pre><ol>
+<li>Set the OpenSearch response type to use:</li>
+</ol>
+<pre><code class="lang-r">response.type &lt;- <span class="hljs-string">"application/rdf+xml"</span>
+</code></pre>
+<ol>
+<li>get the queryables dataframe from the OpenSearch description URL
+df.params &lt;- GetOSQueryables(osd.url, response.type)</li>
+</ol>
 <h1 id="define-the-values-for-the-queryables">define the values for the queryables</h1>
 <p>df.params$value[df.params$type == &quot;count&quot;] &lt;- 30 
 df.params$value[df.params$type == &quot;time:start&quot;] &lt;- &quot;2010-01-01&quot;
