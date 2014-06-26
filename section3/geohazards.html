@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403785806801">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403788630266">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -419,8 +419,27 @@ map$tileLayer(provider = <span class="hljs-string">"Stamen.Watercolor"</span>)
 map$marker(c(<span class="hljs-number">51.5</span>, -<span class="hljs-number">0.09</span>), bindPopup = <span class="hljs-string">"Hi. I am a popup"</span>)
 map
 </code></pre>
-<p><iframe src=' figure/unnamed-chunk-10.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart77acc3b67da ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
-
+<p><iframe src=' figure/unnamed-chunk-10.html ' scrolling='no' frameBorder='0' seamless class='rChart leaflet ' id=iframe- chart795112dc0942 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style></p>
+<h3 id="leaflet">leaflet</h3>
+<pre><code class="lang-r"><span class="hljs-keyword">library</span>(leafletR)
+</code></pre>
+<pre><code>##  
+## This is leafletR 0.2-0
+##  
+## Type changes(&quot;leafletR&quot;) to see changes/bug fixes, help(leafletR) for documentation
+## or citation(&quot;leafletR&quot;) for how to cite leafletR.
+##  
+## 
+## Attaching package: &#39;leafletR&#39;
+## 
+## The following object is masked from &#39;package:methods&#39;:
+## 
+##     getProperties
+</code></pre><pre><code class="lang-r">leafdat&lt;-<span class="hljs-string">"example1.geojson"</span>
+map&lt;-leafletR::leaflet(data=leafdat)
+</code></pre>
+<pre><code>## Error: cannot open the connection
+</code></pre>
                     
                     </section>
                 

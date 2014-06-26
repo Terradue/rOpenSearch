@@ -96,3 +96,12 @@ map$tileLayer(provider = "Stamen.Watercolor")
 map$marker(c(51.5, -0.09), bindPopup = "Hi. I am a popup")
 map
 ```
+
+
+### leaflet
+
+```{r results="asis"}
+library(leafletR)
+leafdat<-"example1.geojson"
+map<-leafletR::leaflet(data=leafdat)
+```
