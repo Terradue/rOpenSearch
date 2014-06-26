@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793084037">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793223399">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -494,10 +494,10 @@ dbscan.res &lt;- dbscan(occurrences, eps=eps, MinPts=minpts)
     <span class="hljs-keyword">if</span> (gArea(gEnvelope(SpatialPoints(coords)))&gt;<span class="hljs-number">0</span>) mbr[[length(mbr)+<span class="hljs-number">1</span>]] &lt;- gEnvelope(SpatialPoints(coords))
 
   }
-  plot(mbr)
+  plot(mbr[[<span class="hljs-number">1</span>]])
 </code></pre>
-<pre><code>## Error: &#39;x&#39; is a list, but does not have components &#39;x&#39; and &#39;y&#39;
-</code></pre>
+<p><img src="figure/unnamed-chunk-7.png" alt="plot of chunk unnamed-chunk-7"> </p>
+
                     
                     </section>
                 
