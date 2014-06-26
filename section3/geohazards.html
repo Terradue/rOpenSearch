@@ -32,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403790042124">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.2" data-basepath=".." data-revision="1403790163530">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -413,21 +413,11 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 </code></pre>
 <pre><code>## Error: Creation of output file failed
 </code></pre><p>The GeoJSON file can be see here: <a href="https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson" target="_blank">https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson</a></p>
-<h1 id="-r-results-asis-">```{r results=&quot;asis&quot;}</h1>
-<p>#</p>
-<h1 id="library-rmaps-">library(rMaps)</h1>
-<h1 id="library-knitr-">library(knitr)</h1>
-<h1 id="map-leaflet-new-">map &lt;- Leaflet$new()</h1>
-<h1 id="map-setview-c-51-505-0-09-zoom-13-">map$setView(c(51.505, -0.09), zoom = 13)</h1>
-<h1 id="map-tilelayer-provider-stamen-watercolor-">map$tileLayer(provider = &quot;Stamen.Watercolor&quot;)</h1>
-<h1 id="map-marker-c-51-5-0-09-bindpopup-hi-i-am-a-popup-">map$marker(c(51.5, -0.09), bindPopup = &quot;Hi. I am a popup&quot;)</h1>
-<h1 id="map">map</h1>
-<h1 id="-">```</h1>
 <h3 id="leaflet">leaflet</h3>
-<p><div id = 'chart7bf6571ee60e' class = 'rChart leaflet'></div></p>
+<p><div id = 'chart7c49674216b3' class = 'rChart leaflet'></div></p>
 <script>
   var spec = {
- "dom": "chart7bf6571ee60e",
+ "dom": "chart7c49674216b3",
 "width":            800,
 "height":            400,
 "urlTemplate": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -437,7 +427,7 @@ df.params$value[df.params$type == <span class="hljs-string">"time:end"</span>] &
 "provider": "Stamen.TonerLite",
 "center": [            -37,            145 ],
 "zoom":              6,
-"id": "chart7bf6571ee60e" 
+"id": "chart7c49674216b3" 
 }
 
   var map = L.map(spec.dom, spec.mapOpts)
