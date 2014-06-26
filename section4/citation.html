@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Geo and Time Extensions | rOpenSearch</title>
+        <title>Citation | rOpenSearch</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.6">
@@ -19,10 +19,8 @@
     <meta name="author" content="Terradue">
     
     
-    <link rel="next" href="../section2/installation.html" />
     
-    
-    <link rel="prev" href="../section1/osd.html" />
+    <link rel="prev" href="../section3/geohazards.html" />
     
 
         
@@ -34,7 +32,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="1.2" data-basepath=".." data-revision="1403797019783">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="4" data-basepath=".." data-revision="1403797019783">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -118,7 +116,7 @@
         
         
         <li>
-            <a href="https://github.com/Terradue/rOpenSearch/edit/master/section1/geotimeextensions.md" target="blank" class="contribute-link">Edit and Contribute</a>
+            <a href="https://github.com/Terradue/rOpenSearch/edit/master/section4/citation.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
 
@@ -336,7 +334,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 30%;min-width: 20%;"></div>
+        <div class="inner" style="width: 100%;min-width: 90%;"></div>
     </div>
     <div class="chapters">
     
@@ -348,60 +346,42 @@
     
         <a href="../section1/geotimeextensions.html" title="Geo and Time Extensions" class="chapter done " data-progress="1.2" style="left: 30%;"></a>
     
-        <a href="../section2/installation.html" title="Installation" class="chapter  new-chapter" data-progress="2" style="left: 40%;"></a>
+        <a href="../section2/installation.html" title="Installation" class="chapter done new-chapter" data-progress="2" style="left: 40%;"></a>
     
-        <a href="../section2/release.html" title="Installing a release" class="chapter  " data-progress="2.1" style="left: 50%;"></a>
+        <a href="../section2/release.html" title="Installing a release" class="chapter done " data-progress="2.1" style="left: 50%;"></a>
     
-        <a href="../section2/development.html" title="Installing the development version" class="chapter  " data-progress="2.2" style="left: 60%;"></a>
+        <a href="../section2/development.html" title="Installing the development version" class="chapter done " data-progress="2.2" style="left: 60%;"></a>
     
-        <a href="../section3/started.html" title="Getting started" class="chapter  new-chapter" data-progress="3" style="left: 70%;"></a>
+        <a href="../section3/started.html" title="Getting started" class="chapter done new-chapter" data-progress="3" style="left: 70%;"></a>
     
-        <a href="../section3/occurrences.html" title="EO &amp; GBIF occurrences" class="chapter  " data-progress="3.1" style="left: 80%;"></a>
+        <a href="../section3/occurrences.html" title="EO &amp; GBIF occurrences" class="chapter done " data-progress="3.1" style="left: 80%;"></a>
     
-        <a href="../section3/geohazards.html" title="Geo-hazards SAR data" class="chapter  " data-progress="3.2" style="left: 90%;"></a>
+        <a href="../section3/geohazards.html" title="Geo-hazards SAR data" class="chapter done " data-progress="3.2" style="left: 90%;"></a>
     
-        <a href="../section4/citation.html" title="Citation" class="chapter  new-chapter" data-progress="4" style="left: 100%;"></a>
+        <a href="../section4/citation.html" title="Citation" class="chapter done new-chapter" data-progress="4" style="left: 100%;"></a>
     
     </div>
 </div>
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_11">
                     
-                        <h1 id="opensearch-geo-and-time-extensions">OpenSearch Geo and Time Extensions</h1>
-<p>The Geo and Time Extensions specify a series of parameters that can be used to geographically constrain search results.</p>
-<p>In short, provision is made to filter results by:</p>
-<ul>
-<li>A bounding box</li>
-<li>An arbitrary geometry defined using Well Known Text</li>
-<li>Within a certain radius from a given latitude-longitude point</li>
-<li>Having a certain containment relation (intersects, contains, disjoint) with a geographic constraint</li>
-<li>Matching a geographic name</li>
-<li>Matching a given unique identifier in the context of the repository</li>
-<li>A start and end of a temporal extent</li>
-<li>Having a certain temporal relation (intersects, contains, during, disjoint, equals) with a temporal constraint</li>
-</ul>
-<p>All geographic information is assumed to be expressed using the EPSG 4326 (<a href="http://spatialreference.org/ref/epsg/4326/" target="_blank">WGS84 2d</a>) coordinate reference system (CRS), and any output listing the extents of the original query or containing further geographic information about the search results, will similarly be expressed in EPSG 4326.</p>
-<p>Below, a sample response to a request for an OpenSearch Description from a repository supporting the Geo Extension. Note that the response type is given in the type attribute and not implicitly on the URL path and the parameter names are not necessarily equal in all access points.</p>
-<pre><code class="lang-xml"><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">OpenSearchDescription</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://a9.com/-/spec/opensearch/1.1/"</span>
-<span class="hljs-attribute">xmlns:geo</span>=<span class="hljs-value">"http://a9.com/-/opensearch/extensions/geo/1.0/"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ShortName</span>&gt;</span>Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">ShortName</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Description</span>&gt;</span>Use Example.com to search the Web.<span class="hljs-tag">&lt;/<span class="hljs-title">Description</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Tags</span>&gt;</span>example web<span class="hljs-tag">&lt;/<span class="hljs-title">Tags</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Contact</span>&gt;</span>admin@example.com<span class="hljs-tag">&lt;/<span class="hljs-title">Contact</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/atom+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myatom/?q={searchTerms}&amp;amp;pw={startPage?}&amp;amp;box={geo:box?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/rdf+xml"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/myrdf/?q={searchTerms}&amp;amp;pp={startPage?}&amp;amp;bbx={geo:box?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"application/geojson"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/geojson/?q={searchTerms}&amp;amp;page={startPage?}&amp;amp;b={geo:box?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Url</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/html"</span> <span class="hljs-attribute">template</span>=<span class="hljs-value">"http://example.com/?q={searchTerms}&amp;amp;bbox={geo:box?}&amp;amp;pw={startPage?}"</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">LongName</span>&gt;</span>Example.com Web Search<span class="hljs-tag">&lt;/<span class="hljs-title">LongName</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Query</span> <span class="hljs-attribute">role</span>=<span class="hljs-value">"example"</span> <span class="hljs-attribute">searchTerms</span>=<span class="hljs-value">"cat"</span> <span class="hljs-attribute">geo:box</span>=<span class="hljs-value">"121,12,1,-23"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">Attribution</span>&gt;</span>Copyright 2005, Example.com, Inc.<span class="hljs-tag">&lt;/<span class="hljs-title">Attribution</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">SyndicationRight</span>&gt;</span>open<span class="hljs-tag">&lt;/<span class="hljs-title">SyndicationRight</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">OpenSearchDescription</span>&gt;</span>
+                        <h1 id="citation">Citation</h1>
+<p>The rOpenSearch package release have a DOI assigned: <a href="http://dx.doi.org/10.5281/zenodo.10642" target="_blank">http://dx.doi.org/10.5281/zenodo.10642</a></p>
+<p><a href="http://dx.doi.org/10.5281/zenodo.10642" target="_blank"><img src="https://zenodo.org/badge/3806/Terradue/rOpenSearch.png" alt="DOI"></a></p>
+<p>Cite this package as:</p>
+<p><em>Fabrice Brito et al (2014). rOpenSearch - R interface to OpenSearch v0.1. ZENODO. 10.5281/zenodo.10642</em></p>
+<p>As BibText Export:</p>
+<pre><code>@article{Fabrice:10642,
+      author        = &quot;Fabrice Brito and Emmanuel Mathot&quot;,
+      title         = &quot;{rOpenSearch - R interface to OpenSearch v0.1}&quot;,
+      month         = &quot;Jun&quot;,
+      year          = &quot;2014&quot;,
+      doi           = &quot;{10.5281/zenodo.10642}&quot;,
+      url           = &quot;{http://dx.doi.org/10.5281/zenodo.10642}&quot;,
+}
 </code></pre>
-
                     
                     </section>
                 
@@ -410,10 +390,8 @@
         </div>
 
         
-        <a href="../section1/osd.html" class="navigation navigation-prev " aria-label="Previous page: OpenSearch Description"><i class="fa fa-angle-left"></i></a>
+        <a href="../section3/geohazards.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Geo-hazards SAR data"><i class="fa fa-angle-left"></i></a>
         
-        
-        <a href="../section2/installation.html" class="navigation navigation-next " aria-label="Next page: Installation"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
