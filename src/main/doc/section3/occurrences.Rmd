@@ -54,7 +54,7 @@ minpts <- 20
 dbscan.res <- dbscan(occurrences, eps=eps, MinPts=minpts)
 ```
 
-The DBSCAN algorithm identified `r max(dbscan.res$cluster)`.
+The DBSCAN algorithm identified `r max(dbscan.res$cluster)` geographical clusters.
 
 The cluster can be plotted using the cluster id color:
 
@@ -83,5 +83,5 @@ plot(occurrences, col=dbscan.res$cluster)
     if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
 
   }
-  print(mbr)
+  plot(mbr)
 ```
