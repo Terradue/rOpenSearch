@@ -86,7 +86,7 @@ writeOGR(poly.sp, 'example1.geojson','dataMap', driver='GeoJSON')
 The GeoJSON file can be see here: https://github.com/Terradue/rOpenSearch/blob/master/src/main/R/examples/example1.geojson
 
 
-```{r}
+```{r echo=FALSE}
 
 library(rMaps)
 library(knitr)
@@ -94,5 +94,5 @@ map <- Leaflet$new()
 map$setView(c(51.505, -0.09), zoom = 13)
 map$tileLayer(provider = "Stamen.Watercolor")
 map$marker(c(51.5, -0.09), bindPopup = "Hi. I am a popup")
-cat(map)
+map
 ```
