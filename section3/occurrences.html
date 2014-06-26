@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403793932865">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403794637334">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -370,7 +370,7 @@
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"knitr"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rworldmap"</span>)
 </code></pre>
-<h4 id="getting-the-white-shark-occurrences-from-gbif-wit-rgbif">Getting the White Shark occurrences from GBIF wit rgbif</h4>
+<h4 id="getting-the-white-shark-occurrences-from-gbif-with-rgbif">Getting the White Shark occurrences from GBIF with rgbif</h4>
 <pre><code class="lang-r"><span class="hljs-comment"># get the occurrences from GBIF using rgbif</span>
 key &lt;- name_backbone(name=<span class="hljs-string">'Carcharodon carcharias'</span>, kingdom=<span class="hljs-string">'animalia'</span>)$speciesKey
 occurrences &lt;- occ_search(taxonKey=key, limit=<span class="hljs-number">1000</span>, <span class="hljs-keyword">return</span>=<span class="hljs-string">'data'</span>, hasCoordinate=<span class="hljs-literal">TRUE</span>)
@@ -430,10 +430,7 @@ minpts &lt;- <span class="hljs-number">20</span>
 dbscan.res &lt;- dbscan(occurrences, eps=eps, MinPts=minpts)
 </code></pre>
 <p>The DBSCAN algorithm identified 6 geographical clusters.</p>
-<p>The cluster can be plotted using the cluster id color:</p>
-<pre><code class="lang-r">plot(occurrences, col=dbscan.res$cluster)
-</code></pre>
-<p><img src="figure/unnamed-chunk-6.png" alt="plot of chunk unnamed-chunk-6"> </p>
+<p>For each cluster the minimum bounding box is identified and plot.</p>
 <pre><code class="lang-r">mbr &lt;- list()
 plot(getMap())
 
@@ -457,7 +454,7 @@ plot(getMap())
   plot(mbr[[length(mbr)]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"red"</span>)
 }
 </code></pre>
-<p><img src="figure/unnamed-chunk-71.png" alt="plot of chunk unnamed-chunk-7"> </p>
+<p><img src="figure/unnamed-chunk-61.png" alt="plot of chunk unnamed-chunk-6"> </p>
 <pre><code class="lang-r">plot(occurrences, add=<span class="hljs-literal">TRUE</span>, col=dbscan.res$cluster)
 </code></pre>
 <pre><code>## Warning: &quot;add&quot; is not a graphical parameter
@@ -466,7 +463,434 @@ plot(getMap())
 ## Warning: &quot;add&quot; is not a graphical parameter
 ## Warning: &quot;add&quot; is not a graphical parameter
 ## Warning: &quot;add&quot; is not a graphical parameter
-</code></pre><p><img src="figure/unnamed-chunk-72.png" alt="plot of chunk unnamed-chunk-7"> </p>
+</code></pre><p><img src="figure/unnamed-chunk-62.png" alt="plot of chunk unnamed-chunk-6"> </p>
+<h4 id="querying-envisat-meris-level-1-data-over-a-cluster">Querying Envisat MERIS Level 1 data over a cluster</h4>
+<p>ESA hosts an OpenSearch catalogue available at: <a href="http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/rdf" target="_blank">http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/rdf</a></p>
+<p>We will work with Envisat MERIS Full Resolution data and use the catalogue response type &quot;application/rdf+xml&quot;.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># set the catalogue and retrieve the queryables</span>
+osd.description &lt;- <span class="hljs-string">'http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description'</span>
+response.type &lt;- <span class="hljs-string">"application/rdf+xml"</span>
+q &lt;- GetOSQueryables(osd.description, response.type)
+</code></pre>
+<p>q is a data frame containing:</p>
+<table>
+ <thead>
+  <tr>
+   <th align="left"> type </th>
+   <th align="left"> param </th>
+   <th align="left"> value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td align="left"> ws:type </td>
+   <td align="left"> resourcetype </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> ws:protocol </td>
+   <td align="left"> protocol </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> ws:ce </td>
+   <td align="left"> ce </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> count </td>
+   <td align="left"> count </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> startPage </td>
+   <td align="left"> startPage </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> startIndex </td>
+   <td align="left"> startIndex </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> sru:sortKeys </td>
+   <td align="left"> sort </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> searchTerms </td>
+   <td align="left"> q </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> time:start </td>
+   <td align="left"> start </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> time:end </td>
+   <td align="left"> stop </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> dct:modified </td>
+   <td align="left"> ingested </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> geo:box </td>
+   <td align="left"> bbox </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> geo:geometry </td>
+   <td align="left"> geometry </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> geo:uid </td>
+   <td align="left"> uid </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:processingCenter </td>
+   <td align="left"> processingCenter </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:processorVersion </td>
+   <td align="left"> processorVersion </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:acquisitionStation </td>
+   <td align="left"> acquisitionStation </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:size </td>
+   <td align="left"> size </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:orbitNumber </td>
+   <td align="left"> orbitNumber </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:trackNumber </td>
+   <td align="left"> trackNumber </td>
+   <td align="left"> NA </td>
+  </tr>
+</tbody>
+</table>
+
+<p>Let&#39;s set the <strong>count</strong> field type value to 200:</p>
+<pre><code class="lang-r">q$value[q$type == <span class="hljs-string">"count"</span>] &lt;- count
+</code></pre>
+<p>and set out time of interest by setting the value of the field types <strong>time:start</strong>, <strong>time:end</strong> with:</p>
+<pre><code class="lang-r">q$value[q$type == <span class="hljs-string">"time:start"</span>] &lt;- <span class="hljs-string">"2006-01-01"</span>
+q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class="hljs-string">"2006-12-31"</span>
+</code></pre>
+<p>q is now updated with:</p>
+<table>
+ <thead>
+  <tr>
+   <th align="left"> type </th>
+   <th align="left"> param </th>
+   <th align="left"> value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td align="left"> ws:type </td>
+   <td align="left"> resourcetype </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> ws:protocol </td>
+   <td align="left"> protocol </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> ws:ce </td>
+   <td align="left"> ce </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> count </td>
+   <td align="left"> count </td>
+   <td align="left"> 200 </td>
+  </tr>
+  <tr>
+   <td align="left"> startPage </td>
+   <td align="left"> startPage </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> startIndex </td>
+   <td align="left"> startIndex </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> sru:sortKeys </td>
+   <td align="left"> sort </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> searchTerms </td>
+   <td align="left"> q </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> time:start </td>
+   <td align="left"> start </td>
+   <td align="left"> 2006-01-01 </td>
+  </tr>
+  <tr>
+   <td align="left"> time:end </td>
+   <td align="left"> stop </td>
+   <td align="left"> 2006-12-31 </td>
+  </tr>
+  <tr>
+   <td align="left"> dct:modified </td>
+   <td align="left"> ingested </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> geo:box </td>
+   <td align="left"> bbox </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> geo:geometry </td>
+   <td align="left"> geometry </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> geo:uid </td>
+   <td align="left"> uid </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:processingCenter </td>
+   <td align="left"> processingCenter </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:processorVersion </td>
+   <td align="left"> processorVersion </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:acquisitionStation </td>
+   <td align="left"> acquisitionStation </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:size </td>
+   <td align="left"> size </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:orbitNumber </td>
+   <td align="left"> orbitNumber </td>
+   <td align="left"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> eop:trackNumber </td>
+   <td align="left"> trackNumber </td>
+   <td align="left"> NA </td>
+  </tr>
+</tbody>
+</table>
+
+
+<pre><code class="lang-r">q$value[q$type == <span class="hljs-string">"geo:geometry"</span>] &lt;- writeWKT(mbr[[<span class="hljs-number">1</span>]])
+</code></pre>
+<p>q is now updated with (removing NAs for readability):</p>
+<table>
+ <thead>
+  <tr>
+   <th align="left">   </th>
+   <th align="left"> type </th>
+   <th align="left"> param </th>
+   <th align="left"> value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td align="left"> 4 </td>
+   <td align="left"> count </td>
+   <td align="left"> count </td>
+   <td align="left"> 200 </td>
+  </tr>
+  <tr>
+   <td align="left"> 9 </td>
+   <td align="left"> time:start </td>
+   <td align="left"> start </td>
+   <td align="left"> 2006-01-01 </td>
+  </tr>
+  <tr>
+   <td align="left"> 10 </td>
+   <td align="left"> time:end </td>
+   <td align="left"> stop </td>
+   <td align="left"> 2006-12-31 </td>
+  </tr>
+  <tr>
+   <td align="left"> 13 </td>
+   <td align="left"> geo:geometry </td>
+   <td align="left"> geometry </td>
+   <td align="left"> POLYGON ((18.4166999999999987 -34.6599999999999966, 18.4166999999999987 -28.3832999999999984, 32.4382999999999981 -28.3832999999999984, 32.4382999999999981 -34.6599999999999966, 18.4166999999999987 -34.6599999999999966)) </td>
+  </tr>
+</tbody>
+</table>
+
+<p>Let&#39;s query the catalogue and apply an xpath expression to retrieve the datasets as a data frame:</p>
+<pre><code class="lang-r">res &lt;- Query(osd.description, response.type, q)
+</code></pre>
+<pre><code>## Warning: closing unused connection 9 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+## Warning: closing unused connection 8 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+## Warning: closing unused connection 7 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+## Warning: closing unused connection 6 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+## Warning: closing unused connection 5 (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+</code></pre><p>From the result, get the Datasets</p>
+<pre><code class="lang-r">dataset &lt;- xmlToDataFrame(nodes = getNodeSet(xmlParse(res), <span class="hljs-string">"//dclite4g:DataSet"</span>), stringsAsFactors = <span class="hljs-literal">FALSE</span>)
+</code></pre>
+<pre><code>## Warning: closing unused connection 5
+## (http://grid-eo-catalog.esrin.esa.int/catalogue/gpod/MER_FRS_1P/description)
+</code></pre><p>Let&#39;s inspect the first datasets:</p>
+<table>
+ <thead>
+  <tr>
+   <th align="left"> identifier </th>
+   <th align="left"> series </th>
+   <th align="left"> onlineResource </th>
+   <th align="left"> processorVersion </th>
+   <th align="left"> orbitNumber </th>
+   <th align="left"> acquisitionStation </th>
+   <th align="left"> processingCenter </th>
+   <th align="left"> size </th>
+   <th align="left"> trackNumber </th>
+   <th align="left"> dtstart </th>
+   <th align="left"> dtend </th>
+   <th align="left"> processingDate </th>
+   <th align="left"> spatial </th>
+   <th align="left"> modified </th>
+   <th align="left"> created </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td align="left"> MER_FRS_1PPEPA20061230_081147_000003212054_00164_25268_6659.N1 </td>
+   <td align="left">  </td>
+   <td align="left">  </td>
+   <td align="left"> MERIS/6.04 </td>
+   <td align="left"> 25268 </td>
+   <td align="left"> PDHS-K </td>
+   <td align="left"> E-PAC </td>
+   <td align="left"> 1080968778 </td>
+   <td align="left"> 164 </td>
+   <td align="left"> 2006-12-30T08:11:47.000Z </td>
+   <td align="left"> 2006-12-30T08:17:08.000Z </td>
+   <td align="left"> 2013-08-08T07:50:02.000Z </td>
+   <td align="left"> MULTIPOLYGON(((30.0444 -16.5494,19.4531 -14.2528,18.0477 -19.5467,16.6223 -24.494,15.1727 -29.0941,13.8158 -33.0206,26.1201 -35.4757,30.0444 -16.5494))) </td>
+   <td align="left"> 2014-03-16T10:35:51.922Z </td>
+   <td align="left"> 2014-03-16T10:35:51.922Z </td>
+  </tr>
+  <tr>
+   <td align="left"> MER_FRS_1PPEPA20061230_081101_000003662054_00164_25268_6663.N1 </td>
+   <td align="left">  </td>
+   <td align="left">  </td>
+   <td align="left"> MERIS/6.04 </td>
+   <td align="left"> 25268 </td>
+   <td align="left"> PDHS-K </td>
+   <td align="left"> E-PAC </td>
+   <td align="left"> 1232660796 </td>
+   <td align="left"> 164 </td>
+   <td align="left"> 2006-12-30T08:11:01.000Z </td>
+   <td align="left"> 2006-12-30T08:17:08.000Z </td>
+   <td align="left"> 2013-08-08T07:59:09.000Z </td>
+   <td align="left"> MULTIPOLYGON(((30.591 -13.8876,20.1195 -11.6007,18.5871 -17.5634,17.014 -23.1766,15.3878 -28.4383,13.8157 -33.0207,26.12 -35.4758,30.591 -13.8876))) </td>
+   <td align="left"> 2014-03-16T10:35:39.238Z </td>
+   <td align="left"> 2014-03-16T10:35:39.238Z </td>
+  </tr>
+  <tr>
+   <td align="left"> MER_FRS_1PPEPA20061229_084555_000001292054_00150_25254_6620.N1 </td>
+   <td align="left">  </td>
+   <td align="left">  </td>
+   <td align="left"> MERIS/6.04 </td>
+   <td align="left"> 25254 </td>
+   <td align="left"> PDHS-K </td>
+   <td align="left"> E-PAC </td>
+   <td align="left"> 436277685 </td>
+   <td align="left"> 150 </td>
+   <td align="left"> 2006-12-29T08:45:55.000Z </td>
+   <td align="left"> 2006-12-29T08:48:05.000Z </td>
+   <td align="left"> 2013-08-08T05:53:26.000Z </td>
+   <td align="left"> MULTIPOLYGON(((20.3057 -25.5101,9.11382 -23.1617,6.72189 -30.7176,18.715 -33.1416,20.3057 -25.5101))) </td>
+   <td align="left"> 2014-03-16T10:25:09.926Z </td>
+   <td align="left"> 2014-03-16T10:25:09.926Z </td>
+  </tr>
+  <tr>
+   <td align="left"> MER_FRS_1PPEPA20061229_084136_000003882054_00150_25254_6622.N1 </td>
+   <td align="left">  </td>
+   <td align="left">  </td>
+   <td align="left"> MERIS/6.04 </td>
+   <td align="left"> 25254 </td>
+   <td align="left"> PDHS-K </td>
+   <td align="left"> E-PAC </td>
+   <td align="left"> 1308506805 </td>
+   <td align="left"> 150 </td>
+   <td align="left"> 2006-12-29T08:41:36.000Z </td>
+   <td align="left"> 2006-12-29T08:48:05.000Z </td>
+   <td align="left"> 2013-08-08T06:08:24.000Z </td>
+   <td align="left"> MULTIPOLYGON(((23.4465 -10.2163,13.1006 -7.93935,11.4662 -14.5743,9.91623 -20.3627,8.37012 -25.6361,6.72019 -30.7226,18.7139 -33.1467,23.4465 -10.2163))) </td>
+   <td align="left"> 2014-03-16T10:25:03.563Z </td>
+   <td align="left"> 2014-03-16T10:25:03.563Z </td>
+  </tr>
+  <tr>
+   <td align="left"> MER_FRS_1PPEPA20061228_073736_000001092054_00135_25239_6574.N1 </td>
+   <td align="left">  </td>
+   <td align="left">  </td>
+   <td align="left"> MERIS/6.04 </td>
+   <td align="left"> 25239 </td>
+   <td align="left"> PDHS-E </td>
+   <td align="left"> E-PAC </td>
+   <td align="left"> 369912423 </td>
+   <td align="left"> 135 </td>
+   <td align="left"> 2006-12-28T07:37:36.000Z </td>
+   <td align="left"> 2006-12-28T07:39:26.000Z </td>
+   <td align="left"> 2013-08-08T03:34:19.000Z </td>
+   <td align="left"> MULTIPOLYGON(((37.0679 -27.857,25.6615 -25.4893,23.5629 -31.8851,35.7094 -34.3241,37.0679 -27.857))) </td>
+   <td align="left"> 2014-03-16T10:12:33.494Z </td>
+   <td align="left"> 2014-03-16T10:12:33.494Z </td>
+  </tr>
+</tbody>
+</table>
+
+<p>We now create a SpatialPolygonsDataFrame:  </p>
+<pre><code class="lang-r">poly.sp &lt;- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[<span class="hljs-number">1</span>,]), dataset[<span class="hljs-number">1</span>,])
+
+<span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> <span class="hljs-number">2</span>:nrow(dataset)) {
+ poly.sp &lt;- rbind(poly.sp, SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))  
+}
+</code></pre>
+<p>And check the coverage index of the MERIS products wrt the cluster minimum bounding box:</p>
+<pre><code class="lang-r"><span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:nrow(dataset)) {
+ poly.sp[n,<span class="hljs-string">"coverage_index"</span>] &lt;- gArea(gIntersection(mbr[[<span class="hljs-number">1</span>]], poly.sp[n,])) / gArea(mbr[[<span class="hljs-number">1</span>]]) 
+}
+</code></pre>
+<p>Select those with a coverage over 80%:</p>
+<pre><code class="lang-r">sp &lt;- poly.sp[poly.sp$coverage_index &gt; <span class="hljs-number">0.8</span>,]
+</code></pre>
+<p>Let&#39;s plot it:</p>
+<pre><code class="lang-r">plot(getMap())
+plot(sp, add=<span class="hljs-literal">TRUE</span>, col=brewer.pal( <span class="hljs-number">8</span> , <span class="hljs-string">"RdBu"</span>)[<span class="hljs-number">1</span>])
+plot(mbr[[<span class="hljs-number">1</span>]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"blue"</span>)
+</code></pre>
+<p><img src="figure/unnamed-chunk-20.png" alt="plot of chunk unnamed-chunk-20"> </p>
+<p>Done!</p>
 
                     
                     </section>
