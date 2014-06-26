@@ -35,7 +35,7 @@ occurrences <- occurrences[complete.cases(occurrences),]
 This create the data frame occ with `r nrow(occurrences)` entries. The first five entries look like:
 
 ```{r results='asis', echo=FALSE}
-kable(head(occ, 5), format = "html")
+kable(head(occurrences, 5), format = "html")
 ```
 
 The occurrences can be plotted to create the map:
