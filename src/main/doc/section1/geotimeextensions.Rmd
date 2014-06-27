@@ -36,6 +36,6 @@ xmlns:geo="http://a9.com/-/opensearch/extensions/geo/1.0/">
 </OpenSearchDescription>
 ```
 
-Check the full specification available at the [OGC site](http://www.opengeospatial.org/standards/opensearchgeo).
+For more information please check the full specification available at the [OGC site](http://www.opengeospatial.org/standards/opensearchgeo).
 
 
