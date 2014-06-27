@@ -3,9 +3,11 @@
 This example:
 
 * Queries the [Global Biodiversity Information Facility](http://www.gbif.org/) using the [rOpenSci](http://ropensci.org/) [rgbif](http://ropensci.org/tutorials/rgbif_tutorial.html) package for the White Shark occurrences
-* Uses the [DBSCAN clustering algorithm](http://en.wikipedia.org/wiki/DBSCAN) to identify geospatial clusters 
-* Uses those clusters to query the [European Space Agency](http://www.esa.int/ESA) Envisat MERIS Full Resolution Level 1 OpenSearch catalogue to get [data](https://earth.esa.int/instruments/meris/data-app/dataprod.html#1b) about the Chlorophyll, suspended sediment and red tides of those clusters  
+* Uses the [DBSCAN clustering algorithm](http://en.wikipedia.org/wiki/DBSCAN) to identify geospatial clusters
+* Uses those clusters to query the [European Space Agency](http://www.esa.int/ESA) Envisat MERIS Full Resolution Level 1 OpenSearch catalogue to get [data](https://earth.esa.int/instruments/meris/data-app/dataprod.html#1b) about the Chlorophyll, suspended sediment and red tides of those clusters
 * Selects the MERIS products covering at least 80% of the first identified cluster
+
+![MERIS image: sediments flowing onto the Great Barrier reef in Australia](../assets/sediments.png) 
 
 #### Load the required packages with:
 
@@ -18,8 +20,8 @@ library("stringr")
 library("XML")
 library("RCurl")
 library("sp")
-library("rgeos") 
-library("maps") 
+library("rgeos")
+library("maps")
 library("RColorBrewer")
 library("rOpenSearch")
 library("rgbif")
@@ -50,15 +52,15 @@ gbifmap(occurrences)
 
 #### Identifying geographical cluster of the occurrences
 
-Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996. It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes. 
+Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996. It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes.
 DBSCAN is one of the most common clustering algorithms and also most cited in scientific literature.
 
-DBSCAN requires two parameters: ε (eps) and the minimum number of points required to form a dense region[a] (minPts). 
-It starts with an arbitrary starting point that has not been visited. 
+DBSCAN requires two parameters: ε (eps) and the minimum number of points required to form a dense region[a] (minPts).
+It starts with an arbitrary starting point that has not been visited.
 This point's ε-neighborhood is retrieved, and if it contains sufficiently many points, a cluster is started.
 Otherwise, the point is labeled as noise. Note that this point might later be found in a sufficiently sized ε-environment of a different point and hence be made part of a cluster.
-If a point is found to be a dense part of a cluster, its ε-neighborhood is also part of that cluster. 
-Hence, all points that are found within the ε-neighborhood are added, as is their own ε-neighborhood when they are also dense. 
+If a point is found to be a dense part of a cluster, its ε-neighborhood is also part of that cluster.
+Hence, all points that are found within the ε-neighborhood are added, as is their own ε-neighborhood when they are also dense.
 This process continues until the density-connected cluster is completely found. Then, a new unvisited point is retrieved and processed, leading to the discovery of a further cluster or noise.
 
 We will apply the DBSCAN clustering algorithm with ε value set to 5 and minPts to 20 to identify representative occurence geospatial clusters.
@@ -84,7 +86,7 @@ for(i in 1:max(dbscan.res$cluster)) {
 
  # get the cluster
  cl <- (occurrences[dbscan.res$cluster %in% i,])
-  
+
  # create the matrix with the cluster minimum bounding box
  coords <- matrix(nrow=5, ncol=2, byrow=TRUE, data=c(
   min(cl[,1]), min(cl[,2]),
@@ -92,7 +94,7 @@ for(i in 1:max(dbscan.res$cluster)) {
   max(cl[,1]), max(cl[,2]),
   min(cl[,1]), max(cl[,2]),
   min(cl[,1]), min(cl[,2])))
-  
+
   # get the cluster geospatial envelope
   if (gArea(gEnvelope(SpatialPoints(coords)))>0) mbr[[length(mbr)+1]] <- gEnvelope(SpatialPoints(coords))
 
@@ -162,20 +164,20 @@ Let's inspect the first datasets (showing only the **identifier** column):
 kable(head(dataset[,1], 5), format = "html")
 ```
 
-We now create a SpatialPolygonsDataFrame:  
+We now create a SpatialPolygonsDataFrame:
 ```{r warning=FALSE}
 poly.sp <- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[1,]), dataset[1,])
 
 for (n in 2:nrow(dataset)) {
- poly.sp <- rbind(poly.sp, SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))  
-} 
+ poly.sp <- rbind(poly.sp, SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
+}
 ```
 
 And check the coverage index of the MERIS products wrt the cluster minimum bounding box:
 
 ```{r warning=FALSE}
 for (n in 1:nrow(dataset)) {
- poly.sp[n,"coverage_index"] <- gArea(gIntersection(mbr[[1]], poly.sp[n,])) / gArea(mbr[[1]]) 
+ poly.sp[n,"coverage_index"] <- gArea(gIntersection(mbr[[1]], poly.sp[n,])) / gArea(mbr[[1]])
 }
 ```
 
@@ -193,7 +195,6 @@ plot(sp, add=TRUE, col=brewer.pal(8 , "RdBu")[1])
 plot(mbr[[1]], add=TRUE, col="blue")
 ```
 
-#### Going further 
+#### Going further
 
 The analysis could be repeated with the other clusters to identify what is the best cluster to work with MERIS data.
-
