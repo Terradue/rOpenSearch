@@ -33,7 +33,7 @@ library("rworldmap")
 
 ```{r}
 # get the occurrences from GBIF using rgbif
-key <- name_backbone(name='Carcharodon carcharias', kingdom='animalia')$speciesKey
+key <- name_backbone(name='Thunnus thynnus', kingdom='animalia')$speciesKey
 occurrences <- occ_search(taxonKey=key, limit=1000, return='data', hasCoordinate=TRUE)
 occurrences <- occurrences[complete.cases(occurrences),]
 ```

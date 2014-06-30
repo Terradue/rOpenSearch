@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1404121324704">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1404121496649">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -415,11 +415,11 @@
 </code></pre>
 <h4 id="getting-the-white-shark-occurrences-from-gbif-with-rgbif">Getting the White Shark occurrences from GBIF with rgbif</h4>
 <pre><code class="lang-r"><span class="hljs-comment"># get the occurrences from GBIF using rgbif</span>
-key &lt;- name_backbone(name=<span class="hljs-string">'Carcharodon carcharias'</span>, kingdom=<span class="hljs-string">'animalia'</span>)$speciesKey
+key &lt;- name_backbone(name=<span class="hljs-string">'Thunnus thynnus'</span>, kingdom=<span class="hljs-string">'animalia'</span>)$speciesKey
 occurrences &lt;- occ_search(taxonKey=key, limit=<span class="hljs-number">1000</span>, <span class="hljs-keyword">return</span>=<span class="hljs-string">'data'</span>, hasCoordinate=<span class="hljs-literal">TRUE</span>)
 occurrences &lt;- occurrences[complete.cases(occurrences),]
 </code></pre>
-<p>This create the data frame occ with 464 entries. The first five entries look like:</p>
+<p>This create the data frame occ with 592 entries. The first five entries look like:</p>
 <table>
  <thead>
   <tr>
@@ -431,34 +431,34 @@ occurrences &lt;- occurrences[complete.cases(occurrences),]
  </thead>
 <tbody>
   <tr>
-   <td align="left"> Carcharodon carcharias </td>
-   <td align="right"> 893351764 </td>
-   <td align="right"> -46.87 </td>
-   <td align="right"> 168.1 </td>
+   <td align="left"> Thunnus thynnus </td>
+   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 18.73 </td>
+   <td align="right"> -68.449 </td>
   </tr>
   <tr>
-   <td align="left"> Carcharodon carcharias </td>
-   <td align="right"> 893351688 </td>
-   <td align="right"> -46.87 </td>
-   <td align="right"> 168.1 </td>
+   <td align="left"> Thunnus thynnus </td>
+   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 36.02 </td>
+   <td align="right"> 14.280 </td>
   </tr>
   <tr>
-   <td align="left"> Carcharodon carcharias </td>
-   <td align="right"> 899977433 </td>
-   <td align="right"> 28.23 </td>
-   <td align="right"> -114.6 </td>
+   <td align="left"> Thunnus thynnus </td>
+   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 36.08 </td>
+   <td align="right"> 14.236 </td>
   </tr>
   <tr>
-   <td align="left"> Carcharodon carcharias </td>
-   <td align="right"> 899977433 </td>
-   <td align="right"> 28.23 </td>
-   <td align="right"> -114.6 </td>
+   <td align="left"> Thunnus thynnus </td>
+   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 41.88 </td>
+   <td align="right"> 3.198 </td>
   </tr>
   <tr>
-   <td align="left"> Carcharodon carcharias </td>
-   <td align="right"> 899977433 </td>
-   <td align="right"> 28.23 </td>
-   <td align="right"> -114.6 </td>
+   <td align="left"> Thunnus thynnus </td>
+   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 41.69 </td>
+   <td align="right"> 8.797 </td>
   </tr>
 </tbody>
 </table>
@@ -482,7 +482,7 @@ eps &lt;- <span class="hljs-number">5</span>
 minpts &lt;- <span class="hljs-number">20</span>
 dbscan.res &lt;- dbscan(occurrences, eps=eps, MinPts=minpts)
 </code></pre>
-<p>The DBSCAN algorithm identified 6 geographical clusters.</p>
+<p>The DBSCAN algorithm identified 3 geographical clusters.</p>
 <p>For each cluster the minimum bounding box is identified and plot.</p>
 <pre><code class="lang-r">mbr &lt;- list()
 plot(getMap())
@@ -672,7 +672,7 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
    <td align="left"> 13 </td>
    <td align="left"> geo:geometry </td>
    <td align="left"> geometry </td>
-   <td align="left"> POLYGON ((18.4166999999999987 -34.6599999999999966, 18.4166999999999987 -28.3832999999999984, 32.4382999999999981 -28.3832999999999984, 32.4382999999999981 -34.6599999999999966, 18.4166999999999987 -34.6599999999999966)) </td>
+   <td align="left"> POLYGON ((-8.7500000000000000 37.8689400000000020, -8.7500000000000000 43.7500000000000000, 8.7500000000000000 43.7500000000000000, 8.7500000000000000 37.8689400000000020, -8.7500000000000000 37.8689400000000020)) </td>
   </tr>
 </tbody>
 </table>
@@ -687,19 +687,19 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 <table>
 <tbody>
   <tr>
-   <td align="left"> MER_FRS_1PPEPA20061230_081147_000003212054_00164_25268_6659.N1 </td>
+   <td align="left"> MER_FRS_1PPEPA20061231_104209_000005122054_00180_25284_6705.N1 </td>
   </tr>
   <tr>
-   <td align="left"> MER_FRS_1PPEPA20061230_081101_000003662054_00164_25268_6663.N1 </td>
+   <td align="left"> MER_FRS_1PPEPA20061231_104158_000003352054_00180_25284_6703.N1 </td>
   </tr>
   <tr>
-   <td align="left"> MER_FRS_1PPEPA20061229_084555_000001292054_00150_25254_6620.N1 </td>
+   <td align="left"> MER_FRS_1PPEPA20061231_104146_000003602054_00180_25284_6708.N1 </td>
   </tr>
   <tr>
-   <td align="left"> MER_FRS_1PPEPA20061229_084136_000003882054_00150_25254_6622.N1 </td>
+   <td align="left"> MER_FRS_1PPEPA20061230_111346_000005122054_00166_25270_6672.N1 </td>
   </tr>
   <tr>
-   <td align="left"> MER_FRS_1PPEPA20061228_073736_000001092054_00135_25239_6574.N1 </td>
+   <td align="left"> MER_FRS_1PPEPA20061230_111336_000002592054_00166_25270_6671.N1 </td>
   </tr>
 </tbody>
 </table>
@@ -719,7 +719,7 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 <p>Select those with a coverage over 80%:</p>
 <pre><code class="lang-r">sp &lt;- poly.sp[poly.sp$coverage_index &gt; <span class="hljs-number">0.8</span>,]
 </code></pre>
-<p>Let&#39;s plot the 21 MERIS products that cover for at least 80% of the cluster area:</p>
+<p>Let&#39;s plot the 23 MERIS products that cover for at least 80% of the cluster area:</p>
 <pre><code class="lang-r">plot(getMap())
 plot(sp, add=<span class="hljs-literal">TRUE</span>, col=brewer.pal(<span class="hljs-number">8</span> , <span class="hljs-string">"RdBu"</span>)[<span class="hljs-number">1</span>])
 plot(mbr[[<span class="hljs-number">1</span>]], add=<span class="hljs-literal">TRUE</span>, col=<span class="hljs-string">"blue"</span>)
