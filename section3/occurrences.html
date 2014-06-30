@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1403798383656">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1404119090090">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -372,11 +372,12 @@
                         <h1 id="earth-observation-gbif-occurrences">Earth Observation &amp; GBIF occurrences</h1>
 <p>This example:</p>
 <ul>
-<li>Queries the <a href="http://www.gbif.org/dF" target="_blank">Global Biodiversity Information Facility</a> using the <a href="http://ropensci.org/" target="_blank">rOpenSci</a> <a href="http://ropensci.org/tutorials/rgbif_tutorial.html" target="_blank">rgbif</a> package for the White Shark occurrences</li>
-<li>Uses the <a href="http://en.wikipedia.org/wiki/DBSCAN" target="_blank">DBSCAN clustering algorithm</a> to identify geospatial clusters </li>
-<li>Uses those clusters to query the <a href="http://www.esa.int/ESA" target="_blank">European Space Agency</a> Envisat MERIS Full Resolution Level 1 OpenSearch catalogue</li>
+<li>Queries the <a href="http://www.gbif.org/" target="_blank">Global Biodiversity Information Facility</a> using the <a href="http://ropensci.org/" target="_blank">rOpenSci</a> <a href="http://ropensci.org/tutorials/rgbif_tutorial.html" target="_blank">rgbif</a> package for the White Shark occurrences</li>
+<li>Uses the <a href="http://en.wikipedia.org/wiki/DBSCAN" target="_blank">DBSCAN clustering algorithm</a> to identify geospatial clusters</li>
+<li>Uses those clusters to query the <a href="http://www.esa.int/ESA" target="_blank">European Space Agency</a> Envisat MERIS Full Resolution Level 1 OpenSearch catalogue to get <a href="https://earth.esa.int/instruments/meris/data-app/dataprod.html#1b" target="_blank">data</a> about the Chlorophyll, suspended sediment and red tides of those clusters</li>
 <li>Selects the MERIS products covering at least 80% of the first identified cluster</li>
 </ul>
+<p><img src="../assets/sediments.png" alt="MERIS image: sediments flowing onto the Great Barrier reef in Australia"> </p>
 <h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"devtools"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
@@ -386,8 +387,8 @@
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"XML"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"RCurl"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"sp"</span>)
-<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>) 
-<span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>) 
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"rgeos"</span>)
+<span class="hljs-keyword">library</span>(<span class="hljs-string">"maps"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"RColorBrewer"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rOpenSearch"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
@@ -447,14 +448,14 @@ occurrences &lt;- occurrences[complete.cases(occurrences),]
 <p>The occurrences can be plotted to create the map:</p>
 <p><img src="figure/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
 <h4 id="identifying-geographical-cluster-of-the-occurrences">Identifying geographical cluster of the occurrences</h4>
-<p>Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996. It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes. 
+<p>Density-based spatial clustering of applications with noise (DBSCAN) is a data clustering algorithm proposed by Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu in 1996. It is a density-based clustering algorithm because it finds a number of clusters starting from the estimated density distribution of corresponding nodes.
 DBSCAN is one of the most common clustering algorithms and also most cited in scientific literature.</p>
-<p>DBSCAN requires two parameters: ε (eps) and the minimum number of points required to form a dense region[a] (minPts). 
-It starts with an arbitrary starting point that has not been visited. 
+<p>DBSCAN requires two parameters: ε (eps) and the minimum number of points required to form a dense region[a] (minPts).
+It starts with an arbitrary starting point that has not been visited.
 This point&#39;s ε-neighborhood is retrieved, and if it contains sufficiently many points, a cluster is started.
 Otherwise, the point is labeled as noise. Note that this point might later be found in a sufficiently sized ε-environment of a different point and hence be made part of a cluster.
-If a point is found to be a dense part of a cluster, its ε-neighborhood is also part of that cluster. 
-Hence, all points that are found within the ε-neighborhood are added, as is their own ε-neighborhood when they are also dense. 
+If a point is found to be a dense part of a cluster, its ε-neighborhood is also part of that cluster.
+Hence, all points that are found within the ε-neighborhood are added, as is their own ε-neighborhood when they are also dense.
 This process continues until the density-connected cluster is completely found. Then, a new unvisited point is retrieved and processed, leading to the discovery of a further cluster or noise.</p>
 <p>We will apply the DBSCAN clustering algorithm with ε value set to 5 and minPts to 20 to identify representative occurence geospatial clusters.</p>
 <pre><code class="lang-r">occurrences &lt;- cbind(occurrences$decimalLongitude, occurrences$decimalLatitude)
@@ -685,16 +686,16 @@ q$value[q$type == <span class="hljs-string">"time:end"</span>] &lt;- <span class
 </tbody>
 </table>
 
-<p>We now create a SpatialPolygonsDataFrame:  </p>
+<p>We now create a SpatialPolygonsDataFrame:</p>
 <pre><code class="lang-r">poly.sp &lt;- SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[<span class="hljs-number">1</span>,]), dataset[<span class="hljs-number">1</span>,])
 
 <span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> <span class="hljs-number">2</span>:nrow(dataset)) {
- poly.sp &lt;- rbind(poly.sp, SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))  
+ poly.sp &lt;- rbind(poly.sp, SpatialPolygonsDataFrame(readWKT(data.frame(dataset$spatial)[n,],id=n), dataset[n,]))
 }
 </code></pre>
 <p>And check the coverage index of the MERIS products wrt the cluster minimum bounding box:</p>
 <pre><code class="lang-r"><span class="hljs-keyword">for</span> (n <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:nrow(dataset)) {
- poly.sp[n,<span class="hljs-string">"coverage_index"</span>] &lt;- gArea(gIntersection(mbr[[<span class="hljs-number">1</span>]], poly.sp[n,])) / gArea(mbr[[<span class="hljs-number">1</span>]]) 
+ poly.sp[n,<span class="hljs-string">"coverage_index"</span>] &lt;- gArea(gIntersection(mbr[[<span class="hljs-number">1</span>]], poly.sp[n,])) / gArea(mbr[[<span class="hljs-number">1</span>]])
 }
 </code></pre>
 <p>Select those with a coverage over 80%:</p>

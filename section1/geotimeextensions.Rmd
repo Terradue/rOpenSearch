@@ -35,3 +35,7 @@ xmlns:geo="http://a9.com/-/opensearch/extensions/geo/1.0/">
 <SyndicationRight>open</SyndicationRight>
 </OpenSearchDescription>
 ```
+
+For more information please check the full specification available at the [OGC site](http://www.opengeospatial.org/standards/opensearchgeo).
+
+
