@@ -17,7 +17,7 @@ As root, run the commands:
 ```bash
 yum install -y R libcurl-devel libxml2-devel npm
 npm install gitbook -g
-```bash
+```
 
 Then in an R console, run:
 
