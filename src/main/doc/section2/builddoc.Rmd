@@ -9,3 +9,49 @@ This means all examples provided in the documention use the rOpenSearch (and oth
 ## Install the dependencies
 
 The recipe provide here targets a CentOS 6.5 environment, adapt it to your environment.
+
+**For Rgitbook** 
+
+As root, run the commands: 
+
+```bash
+yum install -y R libcurl-devel libxml2-devel npm
+npm install gitbook -g
+```bash
+
+Then in an R console, run:
+
+```coffee
+install.packages("devtools", dependencies=TRUE)
+devtools::install_github("jbryer/Rgitbook")
+```
+
+**For rOpenSearch documentation**
+
+As root, run the commands: 
+
+```bash
+yum install -y proj-devel proj-epsg  gdal-devel  geos-devel netcdf-devel
+```
+
+Then in an R console, run:
+
+```coffee
+install.packages(“rgdal", dependencies=TRUE)
+install.packages("rgeos", dependencies=TRUE)
+install.packages("shiny", dependencies=TRUE)
+install.packages("rgbif", dependencies=TRUE)
+install.packages("fpc", dependencies=TRUE)
+install.packages("rworldmap", dependencies=TRUE)
+library(devtools)
+install_url("https://github.com/Terradue/rOpenSearch/releases/download/v0.1-SNAPSHOT/rOpenSearch_0.1.0.tar.gz")
+```
+
+## Build the documentation and upload to GitHub gh-pages branch
+
+> It is assumed the rOpenSearch repository has been cloned in ~/rOpenSearch
+
+```bash
+cd ~/rOpenSearch
+mvn site-deploy
+```
