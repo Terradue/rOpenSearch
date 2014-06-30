@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>OpenSearch Description | rOpenSearch - an R interface to OpenSearch</title>
+        <title>Building the documentation | rOpenSearch - an R interface to OpenSearch</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.6">
@@ -19,10 +19,10 @@
     <meta name="author" content="Terradue">
     
     
-    <link rel="next" href="../section1/geotimeextensions.html" />
+    <link rel="next" href="../section3/started.html" />
     
     
-    <link rel="prev" href="../section1/opensearch.html" />
+    <link rel="prev" href="../section2/development.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="1.1" data-basepath=".." data-revision="1404121244346">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="2.3" data-basepath=".." data-revision="1404121244346">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -118,7 +118,7 @@
         
         
         <li>
-            <a href="https://github.com/Terradue/rOpenSearch/edit/master/section1/osd.md" target="blank" class="contribute-link">Edit and Contribute</a>
+            <a href="https://github.com/Terradue/rOpenSearch/edit/master/section2/builddoc.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
 
@@ -352,7 +352,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 18.181818181818183%;min-width: 9.090909090909092%;"></div>
+        <div class="inner" style="width: 63.63636363636363%;min-width: 54.54545454545455%;"></div>
     </div>
     <div class="chapters">
     
@@ -362,15 +362,15 @@
     
         <a href="../section1/osd.html" title="OpenSearch Description" class="chapter done " data-progress="1.1" style="left: 18.181818181818183%;"></a>
     
-        <a href="../section1/geotimeextensions.html" title="Geo and Time Extensions" class="chapter  " data-progress="1.2" style="left: 27.272727272727273%;"></a>
+        <a href="../section1/geotimeextensions.html" title="Geo and Time Extensions" class="chapter done " data-progress="1.2" style="left: 27.272727272727273%;"></a>
     
-        <a href="../section2/installation.html" title="Installation" class="chapter  new-chapter" data-progress="2" style="left: 36.36363636363637%;"></a>
+        <a href="../section2/installation.html" title="Installation" class="chapter done new-chapter" data-progress="2" style="left: 36.36363636363637%;"></a>
     
-        <a href="../section2/release.html" title="Installing a release" class="chapter  " data-progress="2.1" style="left: 45.45454545454545%;"></a>
+        <a href="../section2/release.html" title="Installing a release" class="chapter done " data-progress="2.1" style="left: 45.45454545454545%;"></a>
     
-        <a href="../section2/development.html" title="Installing the development version" class="chapter  " data-progress="2.2" style="left: 54.54545454545455%;"></a>
+        <a href="../section2/development.html" title="Installing the development version" class="chapter done " data-progress="2.2" style="left: 54.54545454545455%;"></a>
     
-        <a href="../section2/builddoc.html" title="Building the documentation" class="chapter  " data-progress="2.3" style="left: 63.63636363636363%;"></a>
+        <a href="../section2/builddoc.html" title="Building the documentation" class="chapter done " data-progress="2.3" style="left: 63.63636363636363%;"></a>
     
         <a href="../section3/started.html" title="Getting started" class="chapter  new-chapter" data-progress="3" style="left: 72.72727272727273%;"></a>
     
@@ -385,14 +385,47 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_4">
+                    <section class="normal" id="section-gitbook_5">
                     
-                        <h1 id="opensearch-description">OpenSearch Description</h1>
-<p>The OpenSearch Description Document allows clients to retrieve service metadata from a server. The response to a request for a Description shall be an XML document in the form specified by the SWS OpenSearch bindings published by OASIS. A brief summary of the Description&#39;s requirements is offered here.</p>
-<p>The service metadata covered by the OpenSearch Description corresponds to the service metadata returned by e.g. a WMS GetCapabilities request. The request is not parameterised, but simply takes the form of an HTTP GET request to a URL (advertised on a web page or obtained from a repository of OpenSearch services which offer syndication of their result sets).</p>
-<p>The OpenSearch Description Document contains information on the maintainer of the service and their contact information. It includes a brief title and short abstract describing the contents of the service, along with a list of keywords and optionally a list of languages in which the contents may be returned.</p>
-<p>The key feature of the Description document is the URL template, which instructs a client application how to create queries to the service. The URL template represents a parameterized form of the URL by which a search engine is queried. Each response format supported by the service needs its own distinct URL template included in the Description differentiated by a type parameter that identifies the MIME type of response.</p>
-<p>The search client must replace every instance of a template parameter with a value before the search request is performed. A parameter name consists of an optional parameter name prefix followed by the local parameter name. If the parameter name prefix is present then it will be separated from the local parameter name with the &quot;:&quot; character. All parameter names are associated with a parameter namespace. In the case of unqualified parameter names, the local parameter name is implicitly associated with the OpenSearch 1.1 namespace. In the case of fully qualified parameter names, the local parameter name is explicitly associated with an external namespace via the parameter name prefix. A service can extend the basic parameters included in the template.</p>
+                        <h1 id="building-the-documentation">Building the documentation</h1>
+<p>This documentation is generated by <a href="http://jason.bryer.org/Rgitbook/" target="_blank">Rgitbook</a>.</p>
+<p>It allows inserting R chucnks in the documention and have these executed when building. </p>
+<p>This means all examples provided in the documention use the rOpenSearch (and other packages) to generate the content.</p>
+<h2 id="install-the-dependencies">Install the dependencies</h2>
+<p>The recipe provide here targets a CentOS 6.5 environment, adapt it to your environment.</p>
+<p><strong>For Rgitbook</strong> </p>
+<p>As root, run the commands: </p>
+<pre><code class="lang-bash">yum install -y R libcurl-devel libxml2-devel npm
+npm install gitbook -g
+```bash
+
+Then <span class="hljs-keyword">in</span> an R console, run:
+
+```coffee
+install.packages(<span class="hljs-string">"devtools"</span>, dependencies=TRUE)
+devtools::install_github(<span class="hljs-string">"jbryer/Rgitbook"</span>)
+</code></pre>
+<p><strong>For rOpenSearch documentation</strong></p>
+<p>As root, run the commands: </p>
+<pre><code class="lang-bash">yum install -y proj-devel proj-epsg  gdal-devel  geos-devel netcdf-devel
+</code></pre>
+<p>Then in an R console, run:</p>
+<pre><code class="lang-coffee">install.packages(“rgdal&quot;, dependencies=TRUE)
+install.packages(&quot;rgeos&quot;, dependencies=TRUE)
+install.packages(&quot;shiny&quot;, dependencies=TRUE)
+install.packages(&quot;rgbif&quot;, dependencies=TRUE)
+install.packages(&quot;fpc&quot;, dependencies=TRUE)
+install.packages(&quot;rworldmap&quot;, dependencies=TRUE)
+library(devtools)
+install_url(&quot;https://github.com/Terradue/rOpenSearch/releases/download/v0.1-SNAPSHOT/rOpenSearch_0.1.0.tar.gz&quot;)
+</code></pre>
+<h2 id="build-the-documentation-and-upload-to-github-gh-pages-branch">Build the documentation and upload to GitHub gh-pages branch</h2>
+<blockquote>
+<p>It is assumed the rOpenSearch repository has been cloned in ~/rOpenSearch</p>
+</blockquote>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/rOpenSearch
+mvn site-deploy
+</code></pre>
 
                     
                     </section>
@@ -402,10 +435,10 @@
         </div>
 
         
-        <a href="../section1/opensearch.html" class="navigation navigation-prev " aria-label="Previous page: What is OpenSearch"><i class="fa fa-angle-left"></i></a>
+        <a href="../section2/development.html" class="navigation navigation-prev " aria-label="Previous page: Installing the development version"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../section1/geotimeextensions.html" class="navigation navigation-next " aria-label="Next page: Geo and Time Extensions"><i class="fa fa-angle-right"></i></a>
+        <a href="../section3/started.html" class="navigation navigation-next " aria-label="Next page: Getting started"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

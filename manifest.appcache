@@ -1,11 +1,12 @@
 CACHE MANIFEST
-# Revision 1404120364855
+# Revision 1404121244346
 
 CACHE:
 index.html
 section1/geotimeextensions.html
 section1/opensearch.html
 section1/osd.html
+section2/builddoc.html
 section2/development.html
 section2/installation.html
 section2/release.html
