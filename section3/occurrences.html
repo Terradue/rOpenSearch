@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1404121496649">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1404122085256">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -413,7 +413,7 @@
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"knitr"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rworldmap"</span>)
 </code></pre>
-<h4 id="getting-the-white-shark-occurrences-from-gbif-with-rgbif">Getting the White Shark occurrences from GBIF with rgbif</h4>
+<h4 id="getting-the-atlantic-bluefin-tuna-thunnus-thynnus-occurrences-from-gbif-with-rgbif">Getting the Atlantic bluefin tuna (Thunnus thynnus) occurrences from GBIF with rgbif</h4>
 <pre><code class="lang-r"><span class="hljs-comment"># get the occurrences from GBIF using rgbif</span>
 key &lt;- name_backbone(name=<span class="hljs-string">'Thunnus thynnus'</span>, kingdom=<span class="hljs-string">'animalia'</span>)$speciesKey
 occurrences &lt;- occ_search(taxonKey=key, limit=<span class="hljs-number">1000</span>, <span class="hljs-keyword">return</span>=<span class="hljs-string">'data'</span>, hasCoordinate=<span class="hljs-literal">TRUE</span>)

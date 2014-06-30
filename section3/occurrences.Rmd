@@ -29,7 +29,7 @@ library("knitr")
 library("rworldmap")
 ```
 
-#### Getting the White Shark occurrences from GBIF with rgbif
+#### Getting the Atlantic bluefin tuna (Thunnus thynnus) occurrences from GBIF with rgbif
 
 ```{r}
 # get the occurrences from GBIF using rgbif
