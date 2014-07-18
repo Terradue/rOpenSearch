@@ -8,7 +8,7 @@ This means all examples provided in the documention use the rOpenSearch (and oth
 
 ## Install the dependencies
 
-The recipe provide here targets a CentOS 6.5 environment, adapt it to your environment.
+The recipe provided targets a CentOS 6.5 environment. You may have to adapt it to your environment.
 
 **For Rgitbook** 
 
