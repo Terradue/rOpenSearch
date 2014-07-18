@@ -2,7 +2,7 @@
 
 This example:
 
-* Queries the [Global Biodiversity Information Facility](http://www.gbif.org/) using the [rOpenSci](http://ropensci.org/) [rgbif](http://ropensci.org/tutorials/rgbif_tutorial.html) package for the White Shark occurrences
+* Queries the [Global Biodiversity Information Facility](http://www.gbif.org/) using the [rOpenSci](http://ropensci.org/) [rgbif](http://ropensci.org/tutorials/rgbif_tutorial.html) package for the Atlantic bluefin tuna (Thunnus thynnus) occurrences
 * Uses the [DBSCAN clustering algorithm](http://en.wikipedia.org/wiki/DBSCAN) to identify geospatial clusters
 * Uses those clusters to query the [European Space Agency](http://www.esa.int/ESA) Envisat MERIS Full Resolution Level 1 OpenSearch catalogue to get [data](https://earth.esa.int/instruments/meris/data-app/dataprod.html#1b) about the Chlorophyll, suspended sediment and red tides of those clusters
 * Selects the MERIS products covering at least 80% of the first identified cluster
