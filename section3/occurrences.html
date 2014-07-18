@@ -7,7 +7,7 @@
         <title>EO &amp; GBIF occurrences | rOpenSearch - an R interface to OpenSearch</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 0.5.6">
+        <meta name="generator" content="GitBook 0.6.0">
         <meta name="HandheldFriendly" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1404122085256">
+    <div class="book" data-github="Terradue/rOpenSearch" data-level="3.1" data-basepath=".." data-revision="1405693550433">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -121,6 +121,8 @@
             <a href="https://github.com/Terradue/rOpenSearch/edit/master/section3/occurrences.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
+
+	
 
         
         <li class="divider"></li>
@@ -284,7 +286,7 @@
                 
     
         
-        <li class="chapter " data-level="3.1" data-path="section3/occurrences.html">
+        <li class="chapter active" data-level="3.1" data-path="section3/occurrences.html">
             
                 
                     <a href="../section3/occurrences.html">
@@ -387,16 +389,16 @@
                 
                     <section class="normal" id="section-gitbook_10">
                     
-                        <h1 id="earth-observation-gbif-occurrences">Earth Observation &amp; GBIF occurrences</h1>
+                        <h1 id="earth-observation--gbif-occurrences">Earth Observation &amp; GBIF occurrences</h1>
 <p>This example:</p>
 <ul>
-<li>Queries the <a href="http://www.gbif.org/" target="_blank">Global Biodiversity Information Facility</a> using the <a href="http://ropensci.org/" target="_blank">rOpenSci</a> <a href="http://ropensci.org/tutorials/rgbif_tutorial.html" target="_blank">rgbif</a> package for the White Shark occurrences</li>
+<li>Queries the <a href="http://www.gbif.org/" target="_blank">Global Biodiversity Information Facility</a> using the <a href="http://ropensci.org/" target="_blank">rOpenSci</a> <a href="http://ropensci.org/tutorials/rgbif_tutorial.html" target="_blank">rgbif</a> package for the Atlantic bluefin tuna (Thunnus thynnus) occurrences</li>
 <li>Uses the <a href="http://en.wikipedia.org/wiki/DBSCAN" target="_blank">DBSCAN clustering algorithm</a> to identify geospatial clusters</li>
 <li>Uses those clusters to query the <a href="http://www.esa.int/ESA" target="_blank">European Space Agency</a> Envisat MERIS Full Resolution Level 1 OpenSearch catalogue to get <a href="https://earth.esa.int/instruments/meris/data-app/dataprod.html#1b" target="_blank">data</a> about the Chlorophyll, suspended sediment and red tides of those clusters</li>
 <li>Selects the MERIS products covering at least 80% of the first identified cluster</li>
 </ul>
 <p><img src="../assets/sediments.png" alt="MERIS image: sediments flowing onto the Great Barrier reef in Australia"> </p>
-<h4 id="load-the-required-packages-with-">Load the required packages with:</h4>
+<h4 id="load-the-required-packages-with">Load the required packages with:</h4>
 <pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">"devtools"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"rgbif"</span>)
 <span class="hljs-keyword">library</span>(<span class="hljs-string">"fpc"</span>)
@@ -432,33 +434,33 @@ occurrences &lt;- occurrences[complete.cases(occurrences),]
 <tbody>
   <tr>
    <td align="left"> Thunnus thynnus </td>
-   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 923568366 </td>
+   <td align="right"> 28.07 </td>
+   <td align="right"> -17.348 </td>
+  </tr>
+  <tr>
+   <td align="left"> Thunnus thynnus </td>
+   <td align="right"> 857013819 </td>
    <td align="right"> 18.73 </td>
    <td align="right"> -68.449 </td>
   </tr>
   <tr>
    <td align="left"> Thunnus thynnus </td>
-   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 857014199 </td>
    <td align="right"> 36.02 </td>
    <td align="right"> 14.280 </td>
   </tr>
   <tr>
    <td align="left"> Thunnus thynnus </td>
-   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 857014239 </td>
    <td align="right"> 36.08 </td>
    <td align="right"> 14.236 </td>
   </tr>
   <tr>
    <td align="left"> Thunnus thynnus </td>
-   <td align="right"> 8.57e+08 </td>
+   <td align="right"> 857007848 </td>
    <td align="right"> 41.88 </td>
    <td align="right"> 3.198 </td>
-  </tr>
-  <tr>
-   <td align="left"> Thunnus thynnus </td>
-   <td align="right"> 8.57e+08 </td>
-   <td align="right"> 41.69 </td>
-   <td align="right"> 8.797 </td>
   </tr>
 </tbody>
 </table>
