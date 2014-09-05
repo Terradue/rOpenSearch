@@ -1,6 +1,6 @@
 # rOpenSearch
 
-<a href='http://dx.doi.org/10.5281/zenodo.10642'><img style='float: left' src='https://zenodo.org/badge/3806/Terradue/rOpenSearch.png'></a>
+<a href='http://dx.doi.org/10.5281/zenodo.10642'><img align="left"  src='https://zenodo.org/badge/3806/Terradue/rOpenSearch.png'></a>
 
 
 R interface to OpenSearch
