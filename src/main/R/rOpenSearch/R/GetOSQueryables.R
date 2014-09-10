@@ -30,13 +30,16 @@ GetOSQueryables <- function(opensearch.description, response.type) {
   # e.g. ?}&loc={geo:name&}&startdate={time:start?}&
   df.full.template <- df.full.template[!(is.na(df.full.template[,1]) | df.full.template[,1]==""), ]
 
+  value <- df.full.template[ ,1]
+
   # remove the {, }, ? from the type
   df.template <- as.data.frame(sapply(df.full.template, function(x) {
     x <- str_replace_all(x, "([\\{\\}\\?])", "")
   }))
 
-  # add a third column with NAs, this column can be filled with query values
-  df.template[, 3] <- NA
+  df.template[, 3] <-  as.data.frame(t(t(sapply(value, function(x) {
+    x <- str_replace_all(x, "([\\{\\}\\?])", NA)
+  }))))
 
   # set the column names to type/value, it will be very useful for the Query function params argument
   colnames(df.template) <- c("type", "param", "value")
