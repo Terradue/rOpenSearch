@@ -47,6 +47,6 @@ Query <- function(opensearch.description, response.type, df.params) {
   
   url$query <- params
   
-  return(getURL(build_url(url)), ssl.verifypeer = FALSE)
+  return(getURL(build_url(url), ssl.verifypeer = FALSE))
 
 }
