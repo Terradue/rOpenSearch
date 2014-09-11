@@ -17,7 +17,9 @@ GetOSTemplate <- function(opensearch.description, response.type) {
   
   if(IsURLInvalid(opensearch.description)) { stop("Invalid OpenSearch description document") }
  
-  osd.xml <- xmlInternalTreeParse(opensearch.description)
+  
+  
+  osd.xml <- xmlInternalTreeParse(getURL(opensearch.description, ssl.verifypeer = FALSE))
   
   xslt.expression <- paste0("/*[local-name()='OpenSearchDescription']/*[local-name()='Url' and @type='",
       response.type ,"']/@template")
